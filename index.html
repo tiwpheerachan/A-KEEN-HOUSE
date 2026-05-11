@@ -16,6 +16,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet" />
 
+<!-- StPageFlip — realistic book/page-flip effect -->
+<script defer src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230E1116'/><path d='M16 48 L32 16 L48 48 M22 38 L42 38' stroke='%23F4EFE6' stroke-width='4' fill='none' stroke-linejoin='miter' stroke-linecap='square'/></svg>" />
 
 <!-- schema.org structured data -->
@@ -316,6 +319,355 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 }
 
 /* ====== Signature drinks ====== */
+/* =========================================================
+   THE MENU — Book / Page-Flip
+   ========================================================= */
+.book-section{
+  background: var(--ink-deep);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(80px, 11vw, 140px) 0 clamp(72px, 9vw, 120px);
+}
+.book-section::before{
+  content:""; position:absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 80px, rgba(244,239,230,.035) 80px 81px),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(200,146,59,.10), transparent 70%);
+  pointer-events:none;
+}
+.book-section h2{ color: var(--cream); }
+.book-section .eyebrow{ color: var(--gold-soft); }
+.book-section .eyebrow::before{ background: var(--gold-soft); opacity: .6; }
+
+.book-header{
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: clamp(40px, 6vw, 72px); flex-wrap: wrap;
+  position: relative; z-index: 2;
+}
+.book-header__copy{ max-width: 32ch; }
+.book-header p{ color: rgba(244,239,230,.7); font-size: 16px; line-height: 1.65; margin: 16px 0 0; max-width: 36ch; }
+
+.book-stage{
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 40px) 0 0;
+}
+
+/* The book itself — StPageFlip will size this */
+.book{
+  margin: 0 auto;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,.55)) drop-shadow(0 12px 24px rgba(0,0,0,.35));
+}
+
+/* ===== Pages (shared) ===== */
+.page{
+  background: var(--cream);
+  color: var(--ink);
+  overflow: hidden;
+  position: relative;
+}
+/* Subtle paper texture + warm vignette on every page */
+.page::before{
+  content:""; position:absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% 50%, transparent 60%, rgba(74,44,31,.06) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.29  0 0 0 0 0.17  0 0 0 0 0.12  0 0 0 .08 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+  background-blend-mode: multiply;
+  opacity: .9;
+  mix-blend-mode: multiply;
+}
+.page-inner{
+  position: relative; z-index: 2;
+  height: 100%; width: 100%;
+  padding: clamp(24px, 5%, 44px) clamp(20px, 5.5%, 48px);
+  display: flex; flex-direction: column;
+}
+/* Spine shadow: overlay above page content, on the inner (binding) edge */
+.page::after{
+  content:""; position: absolute; top: 0; bottom: 0; width: 8%;
+  pointer-events: none; z-index: 4;
+}
+.page[data-side="left"]::after{
+  right: 0;
+  background: linear-gradient(to right, transparent, rgba(40,28,18,.16));
+}
+.page[data-side="right"]::after{
+  left: 0;
+  background: linear-gradient(to left, transparent, rgba(40,28,18,.16));
+}
+.page--cover::after{ display: none; }
+
+/* Real menu pages — full-bleed PDF image on cream */
+.page--real{
+  background: #EFEAE0;
+  padding: 0;
+}
+.page--real::before{ opacity: .35; }
+.page--real .page-inner{ padding: 0; background: none; height: 100%; }
+.page--real img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+/* Cover variant that uses a PDF image (real menu cover/back) */
+.page--cover-real{
+  background: #EFEAE0;
+  padding: 0;
+}
+.page--cover-real::before{ display: none; }
+.page--cover-real img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+
+/* ===== Cover (front + back) ===== */
+.page--cover{
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 25%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(135deg, #1a1f28 0%, #0E1116 55%, #06080b 100%);
+  color: var(--cream);
+}
+.page--cover::before{
+  /* Slightly grainy leather feel */
+  opacity: .5;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23l)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.cover-inner{
+  position: relative; z-index: 3; height: 100%; width: 100%;
+  padding: clamp(28px, 6%, 56px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 18px;
+}
+.cover-frame{
+  border: 1px solid var(--gold-soft);
+  padding: clamp(28px, 7%, 60px) clamp(22px, 6%, 48px);
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+  position: relative; width: 100%; height: 100%;
+  justify-content: center;
+}
+.cover-frame::before, .cover-frame::after{
+  content:""; position: absolute; width: 22px; height: 22px;
+  border: 1px solid var(--gold-warm);
+}
+.cover-frame::before{ top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.cover-frame::after{ bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+.cover-monogram{
+  font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 4vw, 40px);
+  color: var(--gold-warm); letter-spacing: 0.06em;
+  background: linear-gradient(180deg, #E6C079, #C8923B 50%, #8E6219);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cover-eyebrow{
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(244,239,230,.65);
+}
+.cover-title{
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(40px, 6.4vw, 76px); line-height: 1; margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+.cover-tagline{
+  font-family: var(--serif); font-style: italic; font-size: clamp(13px, 1.4vw, 16px);
+  color: rgba(244,239,230,.7); margin: 0; letter-spacing: 0.02em;
+}
+.cover-rule{
+  width: 60%; max-width: 220px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-warm), transparent);
+}
+.cover-edition{
+  margin-top: auto; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(244,239,230,.55);
+}
+.cover-hint{
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(244,239,230,.55);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.cover-hint .dash{ width: 18px; height: 1px; background: rgba(244,239,230,.4); }
+
+/* ===== Inside pages — typographic menu ===== */
+.page-eyebrow{
+  font-size: 10.5px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--coffee); font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.page-eyebrow::before{ content:""; width: 22px; height: 1px; background: var(--coffee); opacity: .55; }
+.page-title{
+  font-family: var(--serif); font-weight: 500; font-style: italic;
+  font-size: clamp(28px, 4.2vw, 42px); line-height: 1.02; margin: 14px 0 8px;
+  letter-spacing: -0.015em; color: var(--ink-deep);
+}
+.page-lede{
+  font-family: var(--serif); font-style: italic; font-size: clamp(13px, 1.4vw, 15px);
+  color: rgba(74,44,31,.78); margin: 0 0 clamp(18px, 3%, 28px); max-width: 32ch;
+  line-height: 1.45;
+}
+.page-rule{
+  height: 1px; background: linear-gradient(90deg, var(--coffee), transparent 70%);
+  margin: 4px 0 clamp(14px, 2.4%, 22px); opacity: .35;
+}
+.page-number{
+  position: absolute; bottom: clamp(14px, 2.5%, 24px); z-index: 3;
+  font-family: var(--serif); font-style: italic; font-size: 12px;
+  color: rgba(74,44,31,.55); letter-spacing: 0.12em;
+}
+.page[data-side="left"]  .page-number{ left:  clamp(20px, 5.5%, 48px); }
+.page[data-side="right"] .page-number{ right: clamp(20px, 5.5%, 48px); }
+.page-folio{
+  position: absolute; top: clamp(14px, 2.5%, 22px);
+  font-size: 9.5px; letter-spacing: 0.36em; text-transform: uppercase;
+  color: rgba(74,44,31,.5); z-index: 3;
+}
+.page[data-side="left"]  .page-folio{ left:  clamp(20px, 5.5%, 48px); }
+.page[data-side="right"] .page-folio{ right: clamp(20px, 5.5%, 48px); }
+
+/* Menu items list */
+.menu-list{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: clamp(14px, 2.2%, 22px); }
+.menu-row{ display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 12px; }
+.menu-row__name{
+  font-family: var(--serif); font-size: clamp(15px, 1.8vw, 19px); font-weight: 500;
+  color: var(--ink-deep); line-height: 1.25;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.menu-row__name .sig{
+  font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold-warm); border: 1px solid var(--gold-warm); padding: 2px 6px;
+  font-family: var(--sans); border-radius: 2px;
+}
+.menu-row__leader{
+  flex: 1; border-bottom: 1px dotted rgba(74,44,31,.4);
+  align-self: end; margin: 0 6px 6px;
+  min-width: 16px;
+}
+.menu-row__desc{
+  grid-column: 1 / -1;
+  font-size: clamp(11px, 1.2vw, 13px); color: rgba(26,29,34,.65);
+  margin: 4px 0 0; line-height: 1.5; font-style: italic; max-width: 90%;
+}
+.menu-row__price{
+  font-family: var(--serif); font-style: italic; font-size: clamp(15px, 1.8vw, 19px);
+  color: var(--coffee); white-space: nowrap;
+}
+
+/* Photo plate page */
+.page--plate{ padding: 0; }
+.page--plate .page-inner{ padding: 0; }
+.plate-figure{
+  position: relative; height: 100%; width: 100%;
+  background: var(--sand);
+}
+.plate-figure img{ width: 100%; height: 100%; object-fit: cover; }
+.plate-figure::after{
+  content:""; position:absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(14,17,22,.55));
+  pointer-events: none;
+}
+.plate-caption{
+  position: absolute; bottom: 0; left: 0; right: 0; padding: clamp(20px, 4%, 36px);
+  color: var(--cream); z-index: 2;
+}
+.plate-caption .eyebrow-light{
+  font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(244,239,230,.7);
+}
+.plate-caption h4{
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(22px, 3vw, 30px); margin: 10px 0 0; line-height: 1.1;
+}
+
+/* Section opener pages (chapter intro) */
+.page--opener .page-inner{
+  justify-content: center; align-items: flex-start;
+  text-align: left;
+}
+.opener-num{
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(80px, 12vw, 140px); line-height: .9;
+  color: rgba(74,44,31,.18); margin: 0;
+}
+.opener-eyebrow{
+  font-size: 10.5px; letter-spacing: 0.36em; text-transform: uppercase;
+  color: var(--coffee); font-weight: 600; margin-top: -12px;
+}
+.opener-title{
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: clamp(34px, 5vw, 54px); line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink-deep); margin: 18px 0 0;
+}
+.opener-lede{
+  font-family: var(--serif); font-style: italic; font-size: clamp(14px, 1.5vw, 17px);
+  color: rgba(74,44,31,.75); margin: 18px 0 0; max-width: 28ch; line-height: 1.5;
+}
+
+/* Table of contents */
+.toc-list{ list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 16px; }
+.toc-list li{ display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 14px; }
+.toc-list .roman{ font-family: var(--serif); font-style: italic; color: var(--coffee); font-size: 14px; min-width: 28px; }
+.toc-list .label{ font-family: var(--serif); font-size: clamp(15px, 1.8vw, 18px); color: var(--ink-deep); }
+.toc-list .leader{ border-bottom: 1px dotted rgba(74,44,31,.35); margin: 0 4px 5px; align-self: end; }
+.toc-list .pg{ font-family: var(--serif); font-style: italic; color: var(--coffee); font-size: 14px; }
+
+/* Page back-cover */
+.page--back .cover-inner{ gap: 12px; }
+.page--back .cover-title{ font-size: clamp(22px, 3vw, 30px); }
+.page--back .cover-tagline{ max-width: 28ch; line-height: 1.55; }
+
+/* ===== Controls below book ===== */
+.book-controls{
+  display: flex; justify-content: center; align-items: center; gap: 18px;
+  margin-top: clamp(24px, 4vw, 40px);
+  position: relative; z-index: 5;
+}
+.book-btn{
+  width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid rgba(200,146,59,.45);
+  color: var(--gold-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.book-btn:hover{ background: var(--gold-warm); border-color: var(--gold-warm); color: var(--ink-deep); transform: translateY(-1px); }
+.book-btn:disabled{ opacity: .35; cursor: not-allowed; }
+.book-btn svg{ width: 18px; height: 18px; }
+.book-indicator{
+  font-family: var(--serif); font-style: italic; font-size: 14px;
+  color: rgba(244,239,230,.75); min-width: 80px; text-align: center;
+  letter-spacing: 0.06em;
+}
+.book-hint{
+  text-align: center; margin-top: 14px;
+  font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(244,239,230,.45);
+}
+
+/* ===== Fallback (no JS / lib not loaded): show pages stacked ===== */
+.book-fallback{ display: none; }
+.no-flip .book{ display: none; }
+.no-flip .book-controls{ display: none; }
+.no-flip .book-fallback{
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 980px; margin: 0 auto;
+}
+.no-flip .book-fallback .page{ height: auto; min-height: 460px; border-radius: 6px; box-shadow: var(--shadow); }
+@media (max-width: 720px){
+  .no-flip .book-fallback{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px){
+  .book-header{ flex-direction: column; align-items: flex-start; }
+  .book-stage{ padding-top: 12px; }
+  .book{ filter: drop-shadow(0 22px 40px rgba(0,0,0,.55)); }
+  .book-hint{ display: none; }
+}
+
 .drinks{
   background: var(--ink-deep);
   color: var(--cream);
@@ -802,176 +1154,132 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 </section>
 
 <!-- =========================================
-     SIGNATURE DRINKS
+     THE MENU — Book / Page-Flip
      ========================================= -->
-<section class="drinks" id="menu">
+<section class="book-section" id="menu">
   <div class="container">
-    <div class="drinks__head">
-      <div class="reveal">
-        <span class="eyebrow">Signature Coffee</span>
-        <h2 class="display-2" style="margin-top:18px;">Where the brand<br/><span class="serif-it">lives loudest.</span></h2>
-        <p>Seven espresso-based signatures. One that's been our calling card since the first cup, and six that have earned their place on the chalkboard.</p>
+    <div class="book-header">
+      <div class="reveal book-header__copy">
+        <span class="eyebrow">The Menu · 2026 Edition</span>
+        <h2 class="display-2" style="margin-top:18px;">Open the book.<br/><span class="serif-it">Bean to butter.</span></h2>
+        <p>The full A KEEN HOUSE menu — desserts, bread &amp; paste, salads, soups, open sandwiches, beverages, and treats. Drag a corner, swipe, or tap the arrows.</p>
       </div>
-      <a class="menu-link reveal reveal-delay-2" href="#order">Full menu via LineMan <span class="arrow">→</span></a>
+      <a class="menu-link reveal reveal-delay-2" href="#order" style="color: var(--gold-soft); border-color: var(--gold-soft);">Order the full menu via LineMan <span class="arrow">→</span></a>
     </div>
 
-    <div class="drinks__grid">
+    <div class="book-stage reveal reveal-delay-1">
+      <div id="book" class="book">
 
-      <!-- Hero drink: Burnt Caramel Latte (signature, featured wide) -->
-      <article class="drink-card feature reveal">
-        <div class="ribbon">Signature · #AKEENSIGNATURE</div>
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=1400&q=85&auto=format&fit=crop" alt="Burnt Caramel Latte close-up" loading="lazy" />
+        <!-- 1. FRONT COVER (real PDF page) -->
+        <div class="page page--cover-real" data-density="hard">
+          <img src="images/menu-pages/page-01.jpg" alt="A KEEN — Book Menu 2026, cover" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Burnt Caramel Latte</h3>
-            <span class="meta">The house calling card</span>
-          </div>
-          <div class="price">฿160</div>
-        </div>
-      </article>
 
-      <!-- Macadamia White Chocolate Hojicha Latte -->
-      <article class="drink-card feature reveal reveal-delay-1">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=1400&q=85&auto=format&fit=crop" alt="Hojicha latte with macadamia white chocolate" loading="lazy" />
+        <!-- 2. Dessert intro (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-02.jpg" alt="Homemade Dessert — chapter opener" loading="lazy" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Macadamia White Chocolate Hojicha</h3>
-            <span class="meta">Roasted green tea, white chocolate, macadamia</span>
-          </div>
-          <div class="price">—</div>
-        </div>
-      </article>
 
-      <article class="drink-card normal reveal">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=900&q=80&auto=format&fit=crop" alt="Pistachio Latte" loading="lazy" />
+        <!-- 3. Lemon Crème Brûlée (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-03.jpg" alt="Lemon Crème Brûlée — featured dessert" loading="lazy" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Pistachio Latte</h3>
-            <span class="meta">Pistachio cream on top</span>
-          </div>
-          <div class="price">—</div>
-        </div>
-      </article>
 
-      <article class="drink-card normal reveal reveal-delay-1">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1525252094149-c54f00f5d80b?w=900&q=80&auto=format&fit=crop" alt="Coconut Cream Matcha" loading="lazy" />
+        <!-- 4. Dessert jars grid (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-04.jpg" alt="Carrot Cake, Matcha Pistachio Tiramisu, Mocha Banoffee, Raspberry Mascarpone, Pistachio Raspberry" loading="lazy" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Coconut Cream Matcha</h3>
-            <span class="meta">Ceremonial matcha, coconut</span>
-          </div>
-          <div class="price">—</div>
-        </div>
-      </article>
 
-      <article class="drink-card normal reveal reveal-delay-2">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1521302200778-33500795e128?w=900&q=80&auto=format&fit=crop" alt="Coconut Cream Americano" loading="lazy" />
+        <!-- 5. Bread & Paste intro (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-05.jpg" alt="Bread & Paste — chapter opener" loading="lazy" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Coconut Cream Americano</h3>
-            <span class="meta">Black, with tropical edge</span>
-          </div>
-          <div class="price">—</div>
-        </div>
-      </article>
 
-      <article class="drink-card normal reveal reveal-delay-3">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1606791422814-b32c705fa101?w=900&q=80&auto=format&fit=crop" alt="Butterscotch Latte" loading="lazy" />
+        <!-- 6. Bread & Paste items (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-06.jpg" alt="Truffle Aioli Paste, Bacon Cheddar Paste, Sourdough, Bread & Paste Set" loading="lazy" />
         </div>
-        <div class="body">
-          <div>
-            <h3 class="name">Butterscotch Latte</h3>
-            <span class="meta">Deep butterscotch, espresso</span>
-          </div>
-          <div class="price">—</div>
+
+        <!-- 7. Salad intro (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-07.jpg" alt="Homemade Salad — chapter opener" loading="lazy" />
         </div>
-      </article>
 
-    </div>
-  </div>
-</section>
+        <!-- 8. Salads (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-08.jpg" alt="Grilled Bacon Caesar Salad, Kale & Pomegranate Salad" loading="lazy" />
+        </div>
 
-<!-- =========================================
-     OPEN SANDWICH
-     ========================================= -->
-<section class="sandwich tight">
-  <div class="container">
-    <div class="sandwich__intro reveal">
-      <div>
-        <span class="eyebrow">Open Sandwich</span>
-        <h2 class="display-2" style="margin-top:18px;">Open-faced.<br/>Fully considered.</h2>
+        <!-- 9. Soup intro (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-09.jpg" alt="Homemade Soup — chapter opener" loading="lazy" />
+        </div>
+
+        <!-- 10. Soups (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-10.jpg" alt="Roasted Pumpkin Soup, Truffle Mushroom Soup, Potato Leek Soup" loading="lazy" />
+        </div>
+
+        <!-- 11. Open Sandwish intro (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-11.jpg" alt="Open Sandwish — chapter opener" loading="lazy" />
+        </div>
+
+        <!-- 12. Open Sandwish grid 1 (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-12.jpg" alt="Classic Brekkie, Smoked Salmon, Spicy Shrimp Avocado, Grilled Cheese & Bacon" loading="lazy" />
+        </div>
+
+        <!-- 13. Open Sandwish grid 2 + Add On (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-13.jpg" alt="Portobello & Cauliflower, Roasted Pumpkin; Add On list" loading="lazy" />
+        </div>
+
+        <!-- 14. Beverage intro (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-14.jpg" alt="Coffee & Non-Coffee Beverage — chapter opener" loading="lazy" />
+        </div>
+
+        <!-- 15. Beverage details (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-15.jpg" alt="Classic Coffee, Bean Selection, Hot Tea, A Keen Signature Coffee & Non Coffee" loading="lazy" />
+        </div>
+
+        <!-- 16. Biscotti & Treats intro (left) -->
+        <div class="page page--real" data-side="left">
+          <img src="images/menu-pages/page-16.jpg" alt="Biscotti & Treats — chapter opener" loading="lazy" />
+        </div>
+
+        <!-- 17. Biscotti + Treats grid (right) -->
+        <div class="page page--real" data-side="right">
+          <img src="images/menu-pages/page-17.jpg" alt="A Keen Biscotti and A Keen Treats" loading="lazy" />
+        </div>
+
+        <!-- 18. BACK COVER — Snacks & Tea Tin (hard) -->
+        <div class="page page--cover-real" data-density="hard">
+          <img src="images/menu-pages/page-18.jpg" alt="A Keen Snack & Tea Tin — back cover" />
+        </div>
+
       </div>
-      <p>Refined open sandwiches on quality bread. The format gives the ingredient full attention — and the kitchen earns the prices it charges. Verified for Sukhumvit 40; mall locations vary slightly.</p>
+
+      <!-- Stacked fallback if JS / lib fails -->
+      <noscript>
+        <p style="text-align:center; color: var(--gold-soft); margin-top: 24px;">
+          Enable JavaScript to flip through the menu. The full menu is also available via LineMan and Grab below.
+        </p>
+      </noscript>
+
+      <div class="book-controls" id="bookControls" hidden>
+        <button class="book-btn" id="bookPrev" aria-label="Previous page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6 9 12l6 6"/></svg>
+        </button>
+        <span class="book-indicator" id="bookIndicator">— / —</span>
+        <button class="book-btn" id="bookNext" aria-label="Next page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+      <p class="book-hint" id="bookHint">Drag a page corner · or use arrows</p>
     </div>
-
-    <div class="sandwich__row reveal reveal-delay-1">
-      <article class="sandwich-card signature">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=1400&q=85&auto=format&fit=crop" alt="Classic Brekkie — signature open sandwich" loading="lazy" />
-        </div>
-        <div class="body">
-          <div class="row1">
-            <h3>Classic Brekkie</h3>
-            <span class="price">฿380</span>
-          </div>
-          <p>The breakfast hero. Premium proteins, soft eggs, on sourdough — the dish customers come back for.</p>
-        </div>
-      </article>
-
-      <article class="sandwich-card">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?w=1400&q=85&auto=format&fit=crop" alt="Sauté mushroom with garlic and herbs on sourdough" loading="lazy" />
-        </div>
-        <div class="body">
-          <div class="row1">
-            <h3>Sauté Mushroom · Garlic & Herbs</h3>
-            <span class="price">฿320</span>
-          </div>
-          <p>Slow-sautéed mushrooms, garlic, fresh herbs, finished with a generous slick of olive oil.</p>
-        </div>
-      </article>
-    </div>
-
-    <div class="sandwich__row reveal reveal-delay-2" style="margin-top: 24px;">
-      <article class="sandwich-card">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1400&q=85&auto=format&fit=crop" alt="Roasted pumpkin with spiced cream cheese" loading="lazy" />
-        </div>
-        <div class="body">
-          <div class="row1">
-            <h3>Roasted Pumpkin · Spiced Cream Cheese</h3>
-            <span class="price">฿320</span>
-          </div>
-          <p>Roasted Japanese pumpkin, warm-spice cream cheese, toasted seeds — comfort with a twist.</p>
-        </div>
-      </article>
-
-      <article class="sandwich-card">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1484980972926-edee96e0960d?w=1400&q=85&auto=format&fit=crop" alt="Fruit crème open sandwich" loading="lazy" />
-        </div>
-        <div class="body">
-          <div class="row1">
-            <h3>Fruit Crème</h3>
-            <span class="price">฿300</span>
-          </div>
-          <p>The crossover. Mascarpone, seasonal fruit, and a long pour of honey — savoury bread, dessert mood.</p>
-        </div>
-      </article>
-    </div>
-
-    <a class="menu-link" href="#order">See the full kitchen via delivery <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -1280,6 +1588,107 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* =========================================================
+     Book / page-flip menu
+     ========================================================= */
+  (function initBook(){
+    const bookEl = document.getElementById('book');
+    if(!bookEl) return;
+
+    // Wait for StPageFlip script (deferred in <head>) to be ready
+    function ready(){
+      if(typeof window.St === 'undefined' || !window.St.PageFlip){
+        // Library didn't load — leave HTML pages stacked as a graceful fallback
+        document.querySelector('.book-section')?.classList.add('no-flip');
+        return;
+      }
+
+      const pages = Array.from(bookEl.querySelectorAll('.page'));
+      const controls   = document.getElementById('bookControls');
+      const prevBtn    = document.getElementById('bookPrev');
+      const nextBtn    = document.getElementById('bookNext');
+      const indicator  = document.getElementById('bookIndicator');
+      const hint       = document.getElementById('bookHint');
+
+      // Aspect ~3:4 (book page). Width chosen so a 2-page spread fits inside container.
+      const pageFlip = new St.PageFlip(bookEl, {
+        width: 420,
+        height: 760,
+        size: 'stretch',
+        minWidth: 280,
+        maxWidth: 500,
+        minHeight: 500,
+        maxHeight: 900,
+        maxShadowOpacity: 0.55,
+        showCover: true,
+        usePortrait: true,           // single page on small screens
+        mobileScrollSupport: true,   // don't block vertical page scroll on mobile
+        flippingTime: 900,
+        drawShadow: true,
+        autoSize: true,
+        startZIndex: 1,
+        clickEventForward: true,
+        useMouseEvents: true,
+        swipeDistance: 30,
+        showPageCorners: true,
+      });
+
+      pageFlip.loadFromHTML(pages);
+
+      controls.hidden = false;
+
+      const total = pageFlip.getPageCount();
+      const fmt = (n) => String(n).padStart(2,'0');
+      const updateIndicator = (current) => {
+        // In portrait mode, single page; in landscape, show spread range.
+        if(pageFlip.getOrientation && pageFlip.getOrientation() === 'landscape' && current > 0 && current < total - 1){
+          // current is the leftmost visible page index (0-based)
+          const left = current;
+          const right = Math.min(current + 1, total - 1);
+          indicator.textContent = `${fmt(left + 1)}–${fmt(right + 1)} / ${fmt(total)}`;
+        } else {
+          indicator.textContent = `${fmt(current + 1)} / ${fmt(total)}`;
+        }
+        prevBtn.disabled = current <= 0;
+        nextBtn.disabled = current >= total - 1;
+      };
+      updateIndicator(0);
+
+      pageFlip.on('flip', (e) => updateIndicator(e.data));
+      pageFlip.on('changeOrientation', () => updateIndicator(pageFlip.getCurrentPageIndex()));
+
+      prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+      nextBtn.addEventListener('click', () => pageFlip.flipNext());
+
+      // Keyboard nav when book is in view
+      let bookInView = false;
+      const bookIO = new IntersectionObserver((entries) => {
+        entries.forEach(en => { bookInView = en.isIntersecting; });
+      }, { threshold: 0.3 });
+      bookIO.observe(document.querySelector('.book-section'));
+
+      window.addEventListener('keydown', (e) => {
+        if(!bookInView) return;
+        if(e.key === 'ArrowLeft')  { pageFlip.flipPrev(); }
+        if(e.key === 'ArrowRight') { pageFlip.flipNext(); }
+      });
+
+      // Update hint copy on mobile vs desktop
+      const setHint = () => {
+        if(window.matchMedia('(pointer:coarse)').matches){
+          hint.textContent = 'Swipe to turn the page';
+        } else {
+          hint.textContent = 'Drag a page corner · or use arrows';
+        }
+      };
+      setHint();
+      window.addEventListener('resize', setHint);
+    }
+
+    if(document.readyState === 'complete') ready();
+    else window.addEventListener('load', ready);
+  })();
 </script>
 
 </body>
