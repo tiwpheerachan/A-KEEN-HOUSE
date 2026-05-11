@@ -779,67 +779,502 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 }
 .menu-link:hover{ gap: 16px; }
 
-/* ====== Locations ====== */
-.locations{ background: var(--cream); }
+/* =========================================================
+   LOCATIONS — "Four Homes" Atlas (premium directory + map)
+   ========================================================= */
+.locations{
+  background: var(--cream);
+  position: relative; overflow: hidden;
+  padding: clamp(80px, 10vw, 140px) 0 clamp(72px, 9vw, 120px);
+}
+.locations::before{
+  /* subtle vertical hairlines for editorial feel */
+  content:""; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, transparent 0 120px, rgba(74,44,31,.025) 120px 121px);
+}
+
 .locations__head{
-  display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
-  margin-bottom: 64px;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: end;
+  margin-bottom: clamp(40px, 6vw, 72px); position: relative; z-index: 1;
 }
-.locations__head p{ max-width: 50ch; margin: 0; color: var(--ink); font-size: 17px; line-height: 1.65; }
-.locations__grid{
-  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+.locations__head p{ max-width: 46ch; margin: 0; color: rgba(26,29,34,.72); font-size: 16px; line-height: 1.65; }
+.locations__head .head-meta{
+  display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+  font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--coffee);
 }
-.loc-card{
+.locations__head .head-meta strong{
+  font-family: var(--sans); font-style: normal; font-weight: 600;
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(74,44,31,.6);
+}
+
+/* Layout: atlas (map) + directory side-by-side */
+.atlas{
+  display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 4.5vw, 72px);
+  align-items: start;
+  position: relative; z-index: 1;
+}
+
+/* ===== ATLAS GRAPHIC (custom SVG) ===== */
+.atlas-graphic{
   position: relative;
   background: var(--cream-2);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
+  padding: clamp(20px, 3vw, 36px);
+  aspect-ratio: 4/5;
   overflow: hidden;
-  display: flex; flex-direction: column;
-  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
 }
-.loc-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--clay); }
-.loc-card__map{ aspect-ratio: 16/9; overflow: hidden; position: relative; background: var(--sand); }
-.loc-card__map iframe{ width:100%; height:100%; border:0; filter: saturate(.85) contrast(.95); }
-.loc-card__map::after{
-  content:""; position:absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(244,239,230,0.3));
-  pointer-events: none;
+.atlas-graphic::before, .atlas-graphic::after{
+  content:""; position: absolute; width: 18px; height: 18px;
+  border: 1px solid var(--coffee); opacity: .35;
 }
-.loc-card__body{ padding: 28px 30px 30px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
-.loc-card__title{ display:flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.loc-card__title h3{ font-size: 26px; line-height: 1.18; }
-.loc-card__tag{ font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-deep); padding: 4px 8px; background: var(--gold-soft); border-radius: 2px; font-weight: 600; }
-.loc-card__tag.original{ background: transparent; color: var(--coffee); border: 1px solid var(--coffee); }
-.loc-card__addr{ font-size: 14.5px; color: rgba(26,29,34,.72); line-height: 1.55; margin: 0; }
-.loc-card__meta{
-  display:flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink);
-  padding-top: 4px;
+.atlas-graphic::before{ top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.atlas-graphic::after{ bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.atlas-graphic .atlas-frame-tr,
+.atlas-graphic .atlas-frame-bl{
+  position: absolute; width: 18px; height: 18px;
+  border: 1px solid var(--coffee); opacity: .35;
 }
-.loc-card__meta div{ display:flex; align-items:center; gap: 8px; }
-.loc-card__meta svg{ width: 15px; height: 15px; color: var(--coffee); }
-.loc-card__rating{ display:flex; align-items:center; gap: 8px; font-weight: 500; }
-.loc-card__rating .stars{ color: var(--gold-warm); letter-spacing: 1px; }
-.loc-card__rating span.count{ color: rgba(26,29,34,.55); font-size: 12.5px; }
-.loc-card__actions{
-  display: flex; gap: 12px; flex-wrap: wrap;
-  border-top: 1px solid var(--line); padding-top: 18px; margin-top: 6px;
-}
-.btn-sm{
-  display:inline-flex; align-items: center; gap: 8px;
-  padding: 9px 14px; border-radius: 999px;
-  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
-  border: 1px solid var(--coffee); color: var(--coffee);
-  transition: background .2s ease, color .2s ease;
-}
-.btn-sm:hover{ background: var(--coffee); color: var(--cream); }
-.btn-sm.fill{ background: var(--ink-deep); color: var(--cream); border-color: var(--ink-deep); }
-.btn-sm.fill:hover{ background: var(--coffee); border-color: var(--coffee) }
+.atlas-graphic .atlas-frame-tr{ top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.atlas-graphic .atlas-frame-bl{ bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
 
-@media (max-width: 1024px){
-  .locations__head{ grid-template-columns: 1fr; gap: 20px; }
-  .locations__grid{ grid-template-columns: 1fr; }
+.atlas-graphic__label{
+  position: absolute; top: 26px; left: 26px;
+  font-size: 9.5px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600;
+  color: rgba(74,44,31,.55);
 }
+.atlas-graphic__label .arrow{
+  display: inline-flex; width: 18px; height: 1px; background: var(--coffee);
+  margin: 0 8px 3px 0; opacity: .6; vertical-align: middle;
+}
+.atlas-graphic__compass{
+  position: absolute; top: 26px; right: 26px;
+  font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--coffee);
+  opacity: .55;
+}
+.atlas-graphic__compass::before{
+  content:"N"; display: block; text-align: center;
+  font-size: 11px; letter-spacing: 0.18em; color: var(--coffee);
+  margin-bottom: 4px;
+}
+.atlas-graphic__compass-arrow{
+  width: 22px; height: 22px; border: 1px solid var(--coffee); border-radius: 50%;
+  position: relative; opacity: .55;
+}
+.atlas-graphic__compass-arrow::after{
+  content:""; position: absolute; top: 2px; left: 50%;
+  width: 0; height: 0; transform: translateX(-50%);
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-bottom: 8px solid var(--coffee);
+}
+.atlas-graphic__caption{
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic; font-size: 12px;
+  color: rgba(74,44,31,.6); white-space: nowrap;
+}
+
+.atlas-svg{ width: 100%; height: 100%; display: block; }
+
+/* Pin styling */
+.atlas-svg .pin-ring{
+  fill: var(--cream); stroke: var(--coffee); stroke-width: 1.4;
+  transition: r .35s ease, stroke-width .35s ease, fill .35s ease;
+}
+.atlas-svg .pin-dot{
+  fill: var(--coffee);
+  transition: fill .35s ease, r .35s ease;
+}
+.atlas-svg .pin-num{
+  font-family: var(--serif); font-style: italic; font-size: 12px;
+  fill: var(--coffee); transition: fill .35s ease;
+  user-select: none;
+}
+.atlas-svg .pin-label{
+  font-family: var(--sans); font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  fill: rgba(26,29,34,.62);
+  transition: fill .35s ease, opacity .35s ease;
+}
+.atlas-svg .pin-pulse{
+  fill: var(--gold-warm); opacity: 0;
+  transition: opacity .4s ease, r .4s ease;
+}
+.atlas-svg .pin[data-active="true"] .pin-ring{
+  fill: var(--ink-deep); stroke: var(--gold-warm); stroke-width: 1.8;
+}
+.atlas-svg .pin[data-active="true"] .pin-dot{ fill: var(--gold-warm); }
+.atlas-svg .pin[data-active="true"] .pin-num{ fill: var(--gold-warm); }
+.atlas-svg .pin[data-active="true"] .pin-label{ fill: var(--ink-deep); }
+.atlas-svg .pin[data-active="true"] .pin-pulse{
+  opacity: .25; animation: pinPulse 2s ease-out infinite;
+}
+@keyframes pinPulse{
+  0%{ opacity: .35; r: 16; }
+  100%{ opacity: 0; r: 32; }
+}
+
+.atlas-svg .thread{
+  fill: none; stroke: var(--gold-warm); stroke-width: 1.1; opacity: .5;
+  stroke-dasharray: 4 5;
+}
+.atlas-svg .district{
+  fill: rgba(184,148,107,.08);
+  stroke: rgba(184,148,107,.28);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.atlas-svg .road{
+  fill: none; stroke: rgba(74,44,31,.18); stroke-width: 1; stroke-dasharray: 3 4;
+}
+.atlas-svg .road-major{
+  fill: none; stroke: rgba(74,44,31,.28); stroke-width: 1.2;
+}
+.atlas-svg .river{
+  fill: none; stroke: rgba(74,108,180,.18); stroke-width: 5; stroke-linecap: round;
+}
+.atlas-svg .river-label{
+  font-family: var(--serif); font-style: italic; font-size: 10px;
+  fill: rgba(74,108,180,.5); letter-spacing: 0.1em;
+}
+
+/* ===== DIRECTORY (location list) ===== */
+.directory{ position: relative; }
+/* binding thread on the left */
+.directory::before{
+  content:""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-warm) 8%, var(--gold-warm) 92%, transparent);
+  opacity: .35;
+}
+.dir-row{
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: start; gap: clamp(16px, 2vw, 28px);
+  padding: clamp(18px, 2.4vw, 28px) clamp(0px, 1vw, 12px) clamp(18px, 2.4vw, 28px) clamp(20px, 2.6vw, 32px);
+  border-bottom: 1px solid rgba(74,44,31,.12);
+  position: relative;
+  transition: background .35s ease, padding-left .35s ease;
+  cursor: pointer;
+}
+.dir-row:first-child{ border-top: 1px solid rgba(74,44,31,.12); }
+.dir-row::before{
+  /* The connecting dot on the thread */
+  content:""; position: absolute; left: -3.5px; top: 50%; transform: translateY(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cream); border: 1px solid var(--gold-warm);
+  transition: background .3s ease, transform .3s ease, border-color .3s ease;
+}
+.dir-row:hover,
+.dir-row[data-active="true"]{
+  background: rgba(244,239,230,.7);
+  padding-left: clamp(28px, 3vw, 40px);
+}
+.dir-row:hover::before,
+.dir-row[data-active="true"]::before{
+  background: var(--gold-warm);
+  transform: translateY(-50%) scale(1.4);
+}
+
+.dir-row__num{
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 44px); line-height: 1;
+  color: rgba(74,44,31,.4);
+  transition: color .35s ease;
+}
+.dir-row:hover .dir-row__num,
+.dir-row[data-active="true"] .dir-row__num{ color: var(--coffee); }
+
+.dir-row__body{ min-width: 0; }
+.dir-row__title{
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.dir-row__title h3{
+  font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15;
+  font-weight: 500; letter-spacing: -0.01em; color: var(--ink-deep);
+  margin: 0;
+}
+.dir-tag{
+  font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600;
+  color: var(--coffee);
+  padding: 3px 8px; border: 1px solid var(--coffee); border-radius: 2px;
+  white-space: nowrap;
+}
+.dir-tag.flagship{ background: var(--ink-deep); color: var(--gold-soft); border-color: var(--ink-deep); }
+.dir-tag.original{ background: transparent; }
+
+.dir-row__meta{
+  display: flex; gap: clamp(12px, 1.5vw, 22px); flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 13px; color: rgba(26,29,34,.72);
+}
+.dir-row__meta > span{ display: inline-flex; align-items: center; gap: 6px; }
+.dir-row__meta svg{ width: 13px; height: 13px; color: var(--coffee); flex: 0 0 auto; }
+.dir-row__meta .district{
+  font-family: var(--serif); font-style: italic; color: var(--coffee);
+}
+
+.dir-row__actions{
+  display: flex; gap: 8px; align-items: center;
+  align-self: center;
+}
+.dir-action{
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid rgba(74,44,31,.25); color: var(--coffee);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
+  flex: 0 0 auto;
+}
+.dir-action svg{ width: 14px; height: 14px; }
+.dir-action:hover{ background: var(--coffee); color: var(--cream); border-color: var(--coffee); transform: translateY(-1px); }
+.dir-action.fill{ background: var(--ink-deep); color: var(--gold-soft); border-color: var(--ink-deep); }
+.dir-action.fill:hover{ background: var(--coffee); border-color: var(--coffee); color: var(--cream); }
+
+/* Footer note under directory */
+.atlas-foot{
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  margin-top: clamp(24px, 3vw, 40px);
+  padding-top: clamp(20px, 2.4vw, 32px);
+  border-top: 1px solid rgba(74,44,31,.12);
+  font-size: 12.5px; color: rgba(26,29,34,.6);
+}
+.atlas-foot .stars{ color: var(--gold-warm); letter-spacing: 1.5px; margin-right: 6px; }
+.atlas-foot a{ color: var(--coffee); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+.atlas-foot a:hover{ color: var(--ink-deep); }
+
+/* ===== Action button label (visible on mobile only) ===== */
+.dir-action__label{ display: none; }
+
+/* ===== Open-now status indicator (added by JS) ===== */
+.dir-status-pill{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+  padding: 3px 8px 3px 7px;
+  border-radius: 999px;
+  background: rgba(74,107,58,.10);
+  color: var(--success);
+  border: 1px solid rgba(74,107,58,.25);
+}
+.dir-status-pill .dot{
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 rgba(74,107,58,.5);
+  animation: openPulse 2.2s ease-out infinite;
+}
+.dir-row[data-state="closed"] .dir-status-pill{
+  background: rgba(74,44,31,.06);
+  color: rgba(74,44,31,.65);
+  border-color: rgba(74,44,31,.18);
+}
+.dir-row[data-state="closed"] .dir-status-pill .dot{
+  background: rgba(74,44,31,.45); animation: none; box-shadow: none;
+}
+@keyframes openPulse{
+  0%{ box-shadow: 0 0 0 0 rgba(74,107,58,.5) }
+  70%{ box-shadow: 0 0 0 6px rgba(74,107,58,0) }
+  100%{ box-shadow: 0 0 0 0 rgba(74,107,58,0) }
+}
+
+/* =====================================================
+   MOBILE — premium card stack + compact atlas
+   ===================================================== */
+@media (max-width: 980px){
+  .locations{ padding: 64px 0 80px; }
+  .locations__head{
+    grid-template-columns: 1fr;
+    gap: 14px; align-items: start;
+    margin-bottom: 28px;
+  }
+  .locations__head h2{ font-size: clamp(34px, 9vw, 48px); }
+  .locations__head p{ font-size: 14px; max-width: 36ch; }
+  .locations__head .head-meta{
+    align-items: flex-start; flex-direction: row; gap: 10px; align-items: center;
+    font-size: 11px;
+  }
+  .locations__head .head-meta strong{ font-size: 10px; }
+  .locations__head .head-meta span{ font-size: 11.5px; line-height: 1.35; }
+
+  .atlas{ grid-template-columns: 1fr; gap: 22px; }
+
+  /* Compact, slightly landscape atlas — keep the REAL map, just smaller */
+  .atlas-graphic{
+    aspect-ratio: 1.05 / 1;
+    padding: 14px 12px 18px;
+    border-radius: 6px;
+    box-shadow: 0 8px 30px rgba(74,44,31,.06);
+  }
+  .atlas-graphic::before, .atlas-graphic::after,
+  .atlas-graphic .atlas-frame-tr, .atlas-graphic .atlas-frame-bl{ width: 12px; height: 12px; top: 7px; left: 7px; }
+  .atlas-graphic::after{ top: auto; left: auto; bottom: 7px; right: 7px; }
+  .atlas-graphic .atlas-frame-tr{ top: 7px; right: 7px; left: auto; }
+  .atlas-graphic .atlas-frame-bl{ bottom: 7px; left: 7px; top: auto; }
+
+  .atlas-graphic__compass{ display: none; }
+  .atlas-graphic__label{
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: 0.28em; white-space: nowrap;
+  }
+  .atlas-graphic__label .arrow{ display: none; }
+  .atlas-graphic__caption{
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    font-size: 10.5px; margin: 0; white-space: nowrap;
+  }
+  .atlas-svg .pin-label{ font-size: 8px; letter-spacing: 0.16em; }
+  .atlas-svg .pin-num{ font-size: 11px; }
+
+  /* Hide the transit line entirely — we're showing the real atlas */
+  .atlas-graphic .atlas-transit{ display: none !important; }
+
+  /* ===== Premium directory: 2-col grid of compact cards ===== */
+  .directory{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .directory::before{ display: none; }
+
+  .dir-row{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "head"
+      "body"
+      "actions";
+    gap: 8px;
+    padding: 14px 12px 12px;
+    background:
+      linear-gradient(135deg, rgba(244,239,230,.85), rgba(232,223,208,.55));
+    border: 1px solid rgba(74,44,31,.12);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(74,44,31,.04);
+    transition: box-shadow .35s ease, transform .25s ease, border-color .35s ease;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .dir-row:first-child{ border-top: 1px solid rgba(74,44,31,.12); }
+  .dir-row::before{
+    /* Gold accent rail at top, grows when active */
+    content:""; left: 14px; right: 14px; top: 0;
+    width: auto; bottom: auto;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold-warm), var(--gold-soft));
+    transform: scaleX(0); transform-origin: left center;
+    transition: transform .35s ease;
+    border: 0; border-radius: 0 0 2px 2px;
+  }
+  .dir-row:hover,
+  .dir-row[data-active="true"],
+  .dir-row:focus-visible{
+    background: linear-gradient(135deg, var(--cream-2), var(--cream) 60%, rgba(232,223,208,.6));
+    border-color: rgba(184,148,107,.4);
+    box-shadow: 0 6px 22px rgba(74,44,31,.10);
+    padding-left: 12px;
+    outline: none;
+  }
+  .dir-row:hover::before,
+  .dir-row[data-active="true"]::before,
+  .dir-row:focus-visible::before{ transform: scaleX(1); }
+  .dir-row:active{ transform: scale(.985); }
+
+  /* Number + tag in a header row */
+  .dir-row__num{
+    grid-area: head;
+    font-size: 22px; line-height: 1;
+    color: rgba(74,44,31,.45);
+    text-align: left;
+    align-self: start;
+    display: flex; align-items: center; justify-content: space-between;
+    /* Tag injection: we'll absolute-position the tag from inside title — see below */
+  }
+
+  .dir-row__body{
+    grid-area: body;
+    min-width: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  /* Stack title elements vertically inside narrow card */
+  .dir-row__title{
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 5px;
+  }
+  .dir-row__title h3{
+    font-size: 16px; line-height: 1.15;
+    word-break: break-word;
+  }
+
+  .dir-tag{
+    font-size: 7.5px; padding: 2px 5px; letter-spacing: 0.18em;
+  }
+
+  /* Status pill — flow naturally below name+tag */
+  .dir-row .dir-status-pill{
+    font-size: 8.5px; padding: 2px 6px 2px 5px;
+    letter-spacing: 0.12em;
+    gap: 4px;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+  .dir-row .dir-status-pill .dot{ width: 5px; height: 5px; }
+
+  .dir-row__meta{
+    font-size: 10.5px; gap: 6px; margin-top: 2px;
+    color: rgba(26,29,34,.65);
+    flex-wrap: wrap;
+  }
+  /* Keep only district on tight 2-col cards — phone/BTS hidden to save space */
+  .dir-row__meta > span:not(.district){ display: none; }
+  .dir-row__meta .district{ font-size: 11px; }
+
+  /* Two compact icon-with-label buttons */
+  .dir-row__actions{
+    grid-area: actions;
+    width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    margin-top: 8px; padding-top: 10px;
+    border-top: 1px dashed rgba(74,44,31,.18);
+  }
+  .dir-action{
+    width: auto; height: 34px;
+    border-radius: 999px;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+    min-width: 0;
+  }
+  .dir-action svg{ width: 11px; height: 11px; flex: 0 0 auto; }
+  .dir-action__label{ display: inline; line-height: 1; }
+  .dir-action.fill{ background: var(--ink-deep); color: var(--gold-soft); border-color: var(--ink-deep); }
+
+  .atlas-foot{ font-size: 11.5px; gap: 8px; flex-direction: column; align-items: flex-start; padding-top: 18px; margin-top: 14px; }
+  .atlas-foot a{ font-size: 11.5px; }
+}
+
+@media (max-width: 480px){
+  /* On narrow phones the 2-col cards get tighter — drop labels, keep icons */
+  .directory{ gap: 8px; }
+  .dir-row{
+    padding: 12px 10px 10px;
+    border-radius: 10px;
+  }
+  .dir-row__num{ font-size: 20px; }
+  .dir-row__title h3{ font-size: 14.5px; line-height: 1.15; }
+  .dir-tag{ font-size: 7px; padding: 1px 4px; letter-spacing: 0.14em; }
+  .dir-row .dir-status-pill{ font-size: 7.5px; padding: 1px 5px 1px 4px; letter-spacing: 0.1em; }
+  .dir-row__meta .district{ font-size: 10.5px; }
+  .dir-row__actions{ gap: 5px; padding-top: 8px; margin-top: 6px; }
+  /* Icon-only buttons on smallest screens */
+  .dir-action{
+    height: 32px; padding: 0; gap: 0;
+    justify-content: center;
+  }
+  .dir-action__label{ display: none; }
+  .dir-action svg{ width: 12px; height: 12px; }
+}
+
+/* Hide the transit line everywhere — atlas-svg is the primary map */
+.atlas-transit{ display: none; }
 
 /* ====== Quote / press band ====== */
 .press{
@@ -880,36 +1315,291 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 }
 .press__rating .gold{ color: var(--gold-warm); letter-spacing: 1px; font-size: 14px; }
 
-/* ====== Order / delivery ====== */
-.order{ background: var(--sand); }
-.order__grid{
-  display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(48px, 6vw, 96px); align-items: center;
+/* =========================================================
+   ORDER / DELIVERY — premium pair
+   ========================================================= */
+.order{
+  background: var(--sand);
+  position: relative; overflow: hidden;
+  padding: clamp(72px, 9vw, 120px) 0 clamp(64px, 8vw, 100px);
 }
-.order__copy h2{ max-width: 14ch; }
-.order__copy p{ max-width: 48ch; color: var(--ink); font-size: 17px; line-height: 1.65; margin: 0 0 32px; }
-.order__cards{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.order-card{
-  background: var(--cream); border: 1px solid var(--line); border-radius: 8px;
-  padding: 26px 26px; transition: transform .25s ease, box-shadow .3s ease, border-color .3s ease;
-  display: flex; flex-direction: column; gap: 6px;
+.order::before{
+  content:""; position:absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, transparent 0 120px, rgba(74,44,31,.025) 120px 121px);
 }
-.order-card:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--clay); }
-.order-card .label{ font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coffee); font-weight: 600; }
-.order-card .name{ font-family: var(--serif); font-size: 26px; line-height: 1.15; color: var(--ink-deep); margin: 4px 0 8px; }
-.order-card .note{ font-size: 13.5px; color: rgba(26,29,34,.7); line-height: 1.55; }
-.order-card .go{
-  display:inline-flex; align-items:center; gap: 8px; margin-top: 14px;
-  font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+
+.order__head{
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 4vw, 64px);
+  align-items: end; margin-bottom: clamp(36px, 5vw, 60px);
+  position: relative; z-index: 1;
+}
+.order__head h2{ max-width: 12ch; margin: 18px 0 0; }
+.order__head p{
+  max-width: 44ch; margin: 0;
+  color: rgba(26,29,34,.72); font-size: 16px; line-height: 1.6;
+}
+
+/* Hero card pair */
+.order-pair{
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px);
+  position: relative; z-index: 1;
+}
+.order-hero{
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(244,239,230,.7), transparent 60%),
+    linear-gradient(135deg, var(--cream), var(--cream-2) 70%);
+  border: 1px solid rgba(74,44,31,.14);
+  border-radius: 14px;
+  padding: clamp(28px, 3vw, 40px);
+  min-height: clamp(240px, 26vw, 320px);
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+  isolation: isolate;
+}
+.order-hero::before{
+  /* Vertical hairlines (brand motif) */
+  content:""; position:absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, transparent 0 28px, rgba(74,44,31,.025) 28px 29px);
+  z-index: 0;
+}
+.order-hero::after{
+  /* The huge watermark letter — set via --letter custom property */
+  content: attr(data-letter);
+  position: absolute; right: -8%; bottom: -22%;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(220px, 28vw, 360px); line-height: .85;
+  color: var(--gold-warm); opacity: .10;
+  letter-spacing: -0.04em;
+  pointer-events: none; z-index: 0;
+  transition: opacity .5s ease, transform .6s ease;
+}
+.order-hero:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(74,44,31,.10);
+  border-color: rgba(184,148,107,.55);
+}
+.order-hero:hover::after{
+  opacity: .18;
+  transform: translate(-12px, -8px) rotate(-2deg);
+}
+
+.order-hero__top{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  position: relative; z-index: 1;
+}
+.order-hero__num{
+  font-size: 10.5px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600;
+  color: var(--coffee);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.order-hero__num::before{
+  content:""; display: inline-block; width: 22px; height: 1px;
+  background: var(--coffee); opacity: .55;
+}
+.order-hero__badge{
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold-warm);
+  padding: 4px 9px;
+  border: 1px solid var(--gold-warm);
+  border-radius: 2px;
+  background: rgba(200,146,59,.05);
+}
+
+.order-hero__body{
+  position: relative; z-index: 1;
+  margin-top: clamp(20px, 2.4vw, 32px);
+}
+.order-hero__name{
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: clamp(42px, 5vw, 64px); line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--ink-deep);
+  margin: 0;
 }
-.order-card:hover .go .arrow{ transform: translateX(4px); }
+.order-hero__cover{
+  margin: 14px 0 0;
+  font-size: 14px; color: rgba(26,29,34,.72); line-height: 1.55;
+  max-width: 28ch;
+}
+
+.order-hero__foot{
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: clamp(20px, 2.4vw, 28px);
+  border-top: 1px solid rgba(74,44,31,.15);
+}
+.order-hero__cta{
+  font-family: var(--serif); font-style: italic; font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--coffee);
+}
+.order-hero__arrow{
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--coffee);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--coffee);
+  transition: background .25s ease, color .25s ease, transform .3s ease;
+}
+.order-hero__arrow svg{ width: 16px; height: 16px; }
+.order-hero:hover .order-hero__arrow{
+  background: var(--ink-deep); border-color: var(--ink-deep); color: var(--gold-soft);
+  transform: translate(3px, -1px);
+}
+
+/* Dark variant for second card (for visual contrast) */
+.order-hero--dark{
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 0%, rgba(200,146,59,.08), transparent 60%),
+    linear-gradient(135deg, #15191f 0%, var(--ink-deep) 100%);
+  border-color: rgba(244,239,230,.1);
+}
+.order-hero--dark::before{
+  background-image: repeating-linear-gradient(90deg, transparent 0 28px, rgba(244,239,230,.04) 28px 29px);
+}
+.order-hero--dark::after{ color: var(--gold-warm); opacity: .14; }
+.order-hero--dark:hover::after{ opacity: .22; }
+.order-hero--dark .order-hero__num{ color: var(--gold-soft); }
+.order-hero--dark .order-hero__num::before{ background: var(--gold-soft); }
+.order-hero--dark .order-hero__name{ color: var(--cream); }
+.order-hero--dark .order-hero__cover{ color: rgba(244,239,230,.65); }
+.order-hero--dark .order-hero__foot{ border-top-color: rgba(244,239,230,.12); }
+.order-hero--dark .order-hero__cta{ color: var(--gold-soft); }
+.order-hero--dark .order-hero__arrow{ border-color: var(--gold-soft); color: var(--gold-soft); }
+.order-hero--dark:hover .order-hero__arrow{
+  background: var(--gold-warm); border-color: var(--gold-warm); color: var(--ink-deep);
+}
+.order-hero--dark .order-hero__badge{
+  color: var(--gold-warm); border-color: var(--gold-warm); background: rgba(200,146,59,.08);
+}
+
+/* ===== Secondary platforms — 3 mini cards ===== */
+.order-secondary{
+  margin-top: clamp(20px, 2.6vw, 32px);
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative; z-index: 1;
+}
+.order-secondary__label{
+  font-family: var(--serif); font-style: italic;
+  color: var(--coffee); font-size: 13.5px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.order-secondary__label::after{
+  content:""; flex: 1; height: 1px; max-width: 80px;
+  background: linear-gradient(90deg, rgba(74,44,31,.3), transparent);
+}
+.order-mini-grid{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.order-mini{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 12px;
+  padding: 12px 14px;
+  background: var(--cream);
+  border: 1px solid rgba(74,44,31,.14);
+  border-radius: 10px;
+  color: var(--ink-deep);
+  transition: background .25s ease, border-color .25s ease, transform .2s ease, box-shadow .25s ease;
+}
+.order-mini:hover{
+  background: var(--cream-2);
+  border-color: rgba(184,148,107,.55);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(74,44,31,.07);
+}
+.order-mini__icon{
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(200,146,59,.10);
+  border: 1px solid rgba(200,146,59,.35);
+  color: var(--coffee);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+  transition: background .25s ease, color .25s ease;
+}
+.order-mini__icon svg{ width: 16px; height: 16px; }
+.order-mini:hover .order-mini__icon{
+  background: var(--ink-deep); border-color: var(--ink-deep); color: var(--gold-soft);
+}
+.order-mini__body{ display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.order-mini__label{
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;
+  color: var(--coffee);
+}
+.order-mini__name{
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: 18px; line-height: 1.1; color: var(--ink-deep);
+}
+.order-mini__arrow{
+  font-family: var(--serif); font-style: italic;
+  color: var(--coffee); font-size: 16px;
+  transition: transform .25s ease;
+}
+.order-mini:hover .order-mini__arrow{ transform: translate(2px, -2px); }
 
 @media (max-width: 880px){
-  .order__grid{ grid-template-columns: 1fr; }
-  .order__cards{ grid-template-columns: 1fr 1fr; }
+  .order__head{ grid-template-columns: 1fr; gap: 14px; align-items: start; margin-bottom: 24px; }
+  .order__head h2{ font-size: clamp(32px, 9vw, 46px); }
+  .order__head p{ font-size: 14px; max-width: 36ch; }
+
+  /* Hero pair: 2 columns side by side on mobile (compact) */
+  .order-pair{ grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .order-hero{
+    min-height: 0;
+    padding: 14px 13px 14px;
+    border-radius: 10px;
+    /* keep portrait, shorter content */
+  }
+  .order-hero::before{
+    background-image: repeating-linear-gradient(90deg, transparent 0 18px, rgba(74,44,31,.025) 18px 19px);
+  }
+  .order-hero::after{
+    font-size: 150px; right: -10%; bottom: -28%;
+    opacity: .12;
+  }
+  .order-hero--dark::after{ opacity: .16; }
+
+  .order-hero__top{ margin-bottom: 0; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .order-hero__num{ font-size: 8.5px; letter-spacing: 0.22em; }
+  .order-hero__num::before{ width: 14px; }
+  .order-hero__badge{ font-size: 8px; letter-spacing: 0.16em; padding: 3px 7px; }
+
+  .order-hero__body{ margin-top: 10px; }
+  .order-hero__name{ font-size: clamp(22px, 6.5vw, 30px); line-height: .95; }
+  .order-hero__cover{ display: none; }
+
+  .order-hero__foot{ padding-top: 12px; margin-top: 12px; gap: 8px; }
+  .order-hero__cta{ font-size: 12px; }
+  .order-hero__arrow{ width: 30px; height: 30px; }
+  .order-hero__arrow svg{ width: 12px; height: 12px; }
+
+  /* Mini cards stay 3-col, tighter */
+  .order-secondary{ margin-top: 18px; gap: 10px; }
+  .order-secondary__label{ font-size: 12px; }
+  .order-mini-grid{ grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .order-mini{
+    padding: 10px 8px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center; text-align: center;
+    gap: 6px;
+  }
+  .order-mini__icon{ width: 32px; height: 32px; }
+  .order-mini__icon svg{ width: 14px; height: 14px; }
+  .order-mini__body{ align-items: center; }
+  .order-mini__label{ font-size: 8.5px; letter-spacing: 0.18em; }
+  .order-mini__name{ font-size: 14px; }
+  .order-mini__arrow{ display: none; }
 }
-@media (max-width: 520px){
-  .order__cards{ grid-template-columns: 1fr; }
+
+@media (max-width: 380px){
+  .order-hero{ padding: 12px 11px; }
+  .order-hero__name{ font-size: 20px; }
+  .order-hero__num{ font-size: 8px; }
+  .order-hero__badge{ font-size: 7.5px; letter-spacing: 0.12em; padding: 2px 5px; }
+  .order-hero__cta{ font-size: 11px; }
+  .order-mini__name{ font-size: 13px; }
 }
 
 /* ====== Instagram-feed mosaic ====== */
@@ -1284,117 +1974,245 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 </section>
 
 <!-- =========================================
-     LOCATIONS
+     LOCATIONS — "Four Homes" Atlas
      ========================================= -->
 <section class="locations" id="locations">
   <div class="container">
     <div class="locations__head">
       <div class="reveal">
         <span class="eyebrow">Four homes in Bangkok</span>
-        <h2 class="display-2" style="margin-top:18px;">Find your nearest.</h2>
+        <h2 class="display-2" style="margin-top:18px;">Find your<br/><span class="serif-it">nearest.</span></h2>
+        <p style="margin-top: 20px;">The mall locations move faster; the Sukhumvit 40 original is where you slow down. Each carries the same DNA — dark wood, warm lighting, the counter you can sit at and watch coffee being made.</p>
       </div>
-      <p class="reveal reveal-delay-2">The mall locations move faster; the Sukhumvit 40 original is where you slow down. Each carries the same DNA — dark wood, warm lighting, the counter you can sit at and watch coffee being made.</p>
+      <div class="head-meta reveal reveal-delay-2">
+        <strong>Atlas · 2026</strong>
+        <span>Mapped to the half-degree.<br/>Live hours below.</span>
+      </div>
     </div>
 
-    <div class="locations__grid">
+    <div class="atlas reveal reveal-delay-1">
 
-      <!-- ONE BANGKOK (flagship) -->
-      <article class="loc-card reveal">
-        <div class="loc-card__map">
-          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-            src="https://www.google.com/maps?q=A+KEEN+HOUSE+One+Bangkok+Parade+Building&output=embed"
-            title="Map of A KEEN HOUSE — One Bangkok"></iframe>
+      <!-- ============ ATLAS GRAPHIC (custom SVG) ============ -->
+      <div class="atlas-graphic">
+        <span class="atlas-frame-tr"></span>
+        <span class="atlas-frame-bl"></span>
+        <span class="atlas-graphic__label"><span class="arrow"></span>Central Bangkok</span>
+        <div class="atlas-graphic__compass">
+          <div class="atlas-graphic__compass-arrow" aria-hidden="true"></div>
         </div>
-        <div class="loc-card__body">
-          <div class="loc-card__title">
-            <h3>One Bangkok</h3>
-            <span class="loc-card__tag">Flagship</span>
-          </div>
-          <p class="loc-card__addr">3rd Floor, Parade Building, 1877 Rama IV Rd, Lumphini, Pathum Wan, Bangkok 10330</p>
-          <div class="loc-card__meta">
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 20:00</div>
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+66859090770">085 909 0770</a></div>
-          </div>
-          <div class="loc-card__rating">
-            <span class="stars">★★★★★</span> 4.9 <span class="count">· 544 Google reviews</span>
-          </div>
-          <div class="loc-card__actions">
-            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=One+Bangkok+Parade+Building+1877+Rama+IV+Rd+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
-            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+One+Bangkok" target="_blank" rel="noopener">Order via LineMan</a>
-          </div>
-        </div>
-      </article>
 
-      <!-- PARAGON -->
-      <article class="loc-card reveal reveal-delay-1">
-        <div class="loc-card__map">
-          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Siam+Paragon+Nextopia&output=embed"
-            title="Map of A KEEN HOUSE — Paragon"></iframe>
-        </div>
-        <div class="loc-card__body">
-          <div class="loc-card__title">
-            <h3>Paragon</h3>
-          </div>
-          <p class="loc-card__addr">Nextopia, 5th Floor, Siam Paragon, 991 Rama I Rd, Pathum Wan, Bangkok 10330</p>
-          <div class="loc-card__meta">
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 21:00</div>
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Siam</div>
-          </div>
-          <div class="loc-card__actions">
-            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Siam+Paragon+Nextopia+5th+Floor+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
-            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Paragon" target="_blank" rel="noopener">Order via LineMan</a>
-          </div>
-        </div>
-      </article>
+        <!-- Desktop: full atlas -->
+        <svg class="atlas-svg" viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="atlasTitle atlasDesc">
+          <title id="atlasTitle">Bangkok map showing the four A KEEN HOUSE locations</title>
+          <desc id="atlasDesc">An abstract map of central Bangkok with pins marking One Bangkok, Paragon, Emsphere, and Sukhumvit 40.</desc>
 
-      <!-- EMSPHERE -->
-      <article class="loc-card reveal reveal-delay-2">
-        <div class="loc-card__map">
-          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Emsphere+628+Sukhumvit&output=embed"
-            title="Map of A KEEN HOUSE — Emsphere"></iframe>
-        </div>
-        <div class="loc-card__body">
-          <div class="loc-card__title">
-            <h3>Emsphere</h3>
-          </div>
-          <p class="loc-card__addr">Emsphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok</p>
-          <div class="loc-card__meta">
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 22:00</div>
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Phrom Phong</div>
-          </div>
-          <div class="loc-card__actions">
-            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Emsphere+628+Sukhumvit+Rd+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
-            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Emsphere" target="_blank" rel="noopener">Order via LineMan</a>
-          </div>
-        </div>
-      </article>
+          <!-- District blob -->
+          <path class="district"
+            d="M130 220 Q90 340 140 460 Q210 560 360 540 Q510 520 540 400 Q570 280 490 200 Q400 140 270 150 Q170 160 130 220 Z"/>
 
-      <!-- SUKHUMVIT 40 (original) -->
-      <article class="loc-card reveal reveal-delay-3">
-        <div class="loc-card__map">
-          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Sukhumvit+40+Soi+Sukjai&output=embed"
-            title="Map of A KEEN HOUSE — Sukhumvit 40"></iframe>
-        </div>
-        <div class="loc-card__body">
-          <div class="loc-card__title">
-            <h3>Sukhumvit 40</h3>
-            <span class="loc-card__tag original">The Original</span>
-          </div>
-          <p class="loc-card__addr">4 Soi Sukjai, Sukhumvit 40, Phra Khanong, Khlong Toei, Bangkok 10110</p>
-          <div class="loc-card__meta">
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 09:00 – 17:30</div>
-            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+66994366535">099 436 6535</a></div>
-          </div>
-          <div class="loc-card__actions">
-            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=4+Soi+Sukjai+Sukhumvit+40+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
-            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Sukhumvit40" target="_blank" rel="noopener">Order via LineMan</a>
-          </div>
-        </div>
-      </article>
+          <!-- Chao Phraya river suggestion -->
+          <path class="river" d="M80 130 Q70 250 95 380 Q115 510 95 640"/>
+          <text class="river-label" x="60" y="430" transform="rotate(-78, 60, 430)">CHAO PHRAYA</text>
 
+          <!-- Major roads (suggestive only) -->
+          <path class="road" d="M150 320 Q300 310 510 340"/>     <!-- Rama I -->
+          <path class="road" d="M170 380 Q320 370 520 400"/>     <!-- Rama IV -->
+          <path class="road" d="M250 430 Q360 450 540 470"/>     <!-- Sukhumvit -->
+
+          <!-- Gold thread connecting the four locations -->
+          <path class="thread"
+            d="M225 420 Q235 360 280 320 Q360 340 420 400 Q450 480 470 540"/>
+
+          <!-- ============ PINS ============ -->
+          <!-- 01 · One Bangkok (Rama IV, Pathum Wan) — central-west, lower -->
+          <g class="pin" data-pin="onebkk" data-active="false">
+            <circle class="pin-pulse" cx="225" cy="420" r="16"/>
+            <circle class="pin-ring" cx="225" cy="420" r="14"/>
+            <circle class="pin-dot" cx="225" cy="420" r="2.6"/>
+            <text class="pin-num" x="225" y="425" text-anchor="middle">01</text>
+            <text class="pin-label" x="225" y="448" text-anchor="middle">ONE BANGKOK</text>
+          </g>
+
+          <!-- 02 · Paragon (Siam) — north-central -->
+          <g class="pin" data-pin="paragon" data-active="false">
+            <circle class="pin-pulse" cx="280" cy="320" r="16"/>
+            <circle class="pin-ring" cx="280" cy="320" r="14"/>
+            <circle class="pin-dot" cx="280" cy="320" r="2.6"/>
+            <text class="pin-num" x="280" y="325" text-anchor="middle">02</text>
+            <text class="pin-label" x="280" y="298" text-anchor="middle">PARAGON · SIAM</text>
+          </g>
+
+          <!-- 03 · Emsphere (Phrom Phong) — east -->
+          <g class="pin" data-pin="emsphere" data-active="false">
+            <circle class="pin-pulse" cx="420" cy="400" r="16"/>
+            <circle class="pin-ring" cx="420" cy="400" r="14"/>
+            <circle class="pin-dot" cx="420" cy="400" r="2.6"/>
+            <text class="pin-num" x="420" y="405" text-anchor="middle">03</text>
+            <text class="pin-label" x="420" y="378" text-anchor="middle">EMSPHERE</text>
+          </g>
+
+          <!-- 04 · Sukhumvit 40 (Phra Khanong) — south-east -->
+          <g class="pin" data-pin="sukh40" data-active="false">
+            <circle class="pin-pulse" cx="470" cy="540" r="16"/>
+            <circle class="pin-ring" cx="470" cy="540" r="14"/>
+            <circle class="pin-dot" cx="470" cy="540" r="2.6"/>
+            <text class="pin-num" x="470" y="545" text-anchor="middle">04</text>
+            <text class="pin-label" x="470" y="568" text-anchor="middle">SUKHUMVIT 40</text>
+          </g>
+
+          <!-- Mile markers / faint dots for atmosphere -->
+          <g opacity="0.25">
+            <circle cx="180" cy="510" r="1.5" fill="var(--coffee)"/>
+            <circle cx="340" cy="220" r="1.5" fill="var(--coffee)"/>
+            <circle cx="500" cy="240" r="1.5" fill="var(--coffee)"/>
+            <circle cx="380" cy="540" r="1.5" fill="var(--coffee)"/>
+          </g>
+        </svg>
+
+        <!-- Mobile: ultra-compact horizontal transit line -->
+        <div class="atlas-transit">
+          <svg viewBox="0 0 320 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- transit line -->
+            <line x1="20" y1="32" x2="300" y2="32" stroke="rgba(74,44,31,.25)" stroke-width="1" stroke-dasharray="3 3"/>
+            <!-- gold thread overlay -->
+            <line x1="20" y1="32" x2="300" y2="32" stroke="var(--gold-warm)" stroke-width="1" opacity=".4"/>
+
+            <!-- 4 stations -->
+            <g class="pin" data-pin="onebkk">
+              <circle class="pin-ring" cx="50" cy="32" r="10"/>
+              <text class="pin-num" x="50" y="37" text-anchor="middle">01</text>
+            </g>
+            <g class="pin" data-pin="paragon">
+              <circle class="pin-ring" cx="130" cy="32" r="10"/>
+              <text class="pin-num" x="130" y="37" text-anchor="middle">02</text>
+            </g>
+            <g class="pin" data-pin="emsphere">
+              <circle class="pin-ring" cx="210" cy="32" r="10"/>
+              <text class="pin-num" x="210" y="37" text-anchor="middle">03</text>
+            </g>
+            <g class="pin" data-pin="sukh40">
+              <circle class="pin-ring" cx="290" cy="32" r="10"/>
+              <text class="pin-num" x="290" y="37" text-anchor="middle">04</text>
+            </g>
+          </svg>
+          <div class="atlas-transit-labels">
+            <span>One Bkk</span>
+            <span>Paragon</span>
+            <span>Emsphere</span>
+            <span>Sukh.40</span>
+          </div>
+        </div>
+
+        <p class="atlas-graphic__caption">Bangkok · four addresses, one DNA.</p>
+      </div>
+
+      <!-- ============ DIRECTORY (compact list) ============ -->
+      <div class="directory" id="directory">
+
+        <!-- 01 — ONE BANGKOK -->
+        <article class="dir-row" data-row="onebkk" data-href="https://www.google.com/maps/dir/?api=1&destination=One+Bangkok+Parade+Building+1877+Rama+IV+Rd+Bangkok" data-open="10:00" data-close="20:00" tabindex="0">
+          <span class="dir-row__num">01</span>
+          <div class="dir-row__body">
+            <div class="dir-row__title">
+              <h3>One Bangkok</h3>
+              <span class="dir-tag flagship">Flagship</span>
+            </div>
+            <div class="dir-row__meta">
+              <span class="district">Pathum Wan</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg>085 909 0770</span>
+            </div>
+          </div>
+          <div class="dir-row__actions" onclick="event.stopPropagation();">
+            <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=One+Bangkok+Parade+Building+1877+Rama+IV+Rd+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to One Bangkok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
+              <span class="dir-action__label">Directions</span>
+            </a>
+            <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+One+Bangkok" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from One Bangkok via LineMan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
+              <span class="dir-action__label">LineMan</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- 02 — PARAGON -->
+        <article class="dir-row" data-row="paragon" data-href="https://www.google.com/maps/dir/?api=1&destination=Siam+Paragon+Nextopia+5th+Floor+Bangkok" data-open="10:00" data-close="21:00" tabindex="0">
+          <span class="dir-row__num">02</span>
+          <div class="dir-row__body">
+            <div class="dir-row__title">
+              <h3>Paragon</h3>
+            </div>
+            <div class="dir-row__meta">
+              <span class="district">Siam · 5F Nextopia</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Siam</span>
+            </div>
+          </div>
+          <div class="dir-row__actions" onclick="event.stopPropagation();">
+            <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=Siam+Paragon+Nextopia+5th+Floor+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Paragon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
+              <span class="dir-action__label">Directions</span>
+            </a>
+            <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Paragon" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Paragon via LineMan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
+              <span class="dir-action__label">LineMan</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- 03 — EMSPHERE -->
+        <article class="dir-row" data-row="emsphere" data-href="https://www.google.com/maps/dir/?api=1&destination=Emsphere+628+Sukhumvit+Rd+Bangkok" data-open="10:00" data-close="22:00" tabindex="0">
+          <span class="dir-row__num">03</span>
+          <div class="dir-row__body">
+            <div class="dir-row__title">
+              <h3>Emsphere</h3>
+            </div>
+            <div class="dir-row__meta">
+              <span class="district">Phrom Phong</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Phrom Phong</span>
+            </div>
+          </div>
+          <div class="dir-row__actions" onclick="event.stopPropagation();">
+            <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=Emsphere+628+Sukhumvit+Rd+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Emsphere">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
+              <span class="dir-action__label">Directions</span>
+            </a>
+            <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Emsphere" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Emsphere via LineMan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
+              <span class="dir-action__label">LineMan</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- 04 — SUKHUMVIT 40 -->
+        <article class="dir-row" data-row="sukh40" data-href="https://www.google.com/maps/dir/?api=1&destination=4+Soi+Sukjai+Sukhumvit+40+Bangkok" data-open="09:00" data-close="17:30" tabindex="0">
+          <span class="dir-row__num">04</span>
+          <div class="dir-row__body">
+            <div class="dir-row__title">
+              <h3>Sukhumvit 40</h3>
+              <span class="dir-tag original">The Original</span>
+            </div>
+            <div class="dir-row__meta">
+              <span class="district">Phra Khanong</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg>099 436 6535</span>
+            </div>
+          </div>
+          <div class="dir-row__actions" onclick="event.stopPropagation();">
+            <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=4+Soi+Sukjai+Sukhumvit+40+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Sukhumvit 40">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
+              <span class="dir-action__label">Directions</span>
+            </a>
+            <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Sukhumvit40" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Sukhumvit 40 via LineMan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
+              <span class="dir-action__label">LineMan</span>
+            </a>
+          </div>
+        </article>
+
+        <div class="atlas-foot">
+          <span><span class="stars">★★★★★</span> 4.9 average · 544+ Google reviews</span>
+          <a href="#order">Order delivery via LineMan / Grab →</a>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1414,45 +2232,90 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 </section>
 
 <!-- =========================================
-     ORDER / DELIVERY
+     ORDER / DELIVERY — Two-hero pair
      ========================================= -->
 <section class="order" id="order">
   <div class="container">
-    <div class="order__grid">
-      <div class="order__copy reveal">
+    <div class="order__head">
+      <div class="reveal">
         <span class="eyebrow">Bring it home</span>
-        <h2 class="display-2" style="margin-top:18px; margin-bottom: 20px;">Can't make<br/>it out today?</h2>
-        <p>Order in. The full menu is available across LineMan and Grab at each location. Delivery hours follow the shop.</p>
-        <div style="display:flex; gap:14px; flex-wrap: wrap;">
-          <a class="btn btn--ghost" style="color:var(--ink-deep); border-color: var(--coffee);" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">Message us on LINE</a>
-          <a class="btn" style="background:var(--ink-deep); color: var(--cream); border-color: var(--ink-deep);" href="https://linktr.ee/akeenhouse" target="_blank" rel="noopener">All links →</a>
-        </div>
+        <h2 class="display-2">Can't make it<br/><span class="serif-it">out today?</span></h2>
       </div>
+      <p class="reveal reveal-delay-2">Order in. The full menu is on LineMan and Grab — delivery hours follow each shop.</p>
+    </div>
 
-      <div class="order__cards reveal reveal-delay-2">
-        <a class="order-card" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
-          <span class="label">Delivery partner</span>
-          <span class="name">LineMan</span>
-          <span class="note">All four locations · 10:00–close</span>
-          <span class="go">Open in LineMan <span class="arrow">→</span></span>
+    <div class="order-pair reveal reveal-delay-1">
+
+      <!-- 01 · LineMan (light card) -->
+      <a class="order-hero" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener" data-letter="L">
+        <div class="order-hero__top">
+          <span class="order-hero__num">Delivery · 01</span>
+          <span class="order-hero__badge">All 4 locations</span>
+        </div>
+        <div class="order-hero__body">
+          <h3 class="order-hero__name">LineMan</h3>
+          <p class="order-hero__cover">All four locations · live throughout shop hours.</p>
+        </div>
+        <div class="order-hero__foot">
+          <span class="order-hero__cta">Open in LineMan</span>
+          <span class="order-hero__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- 02 · Grab (dark card for contrast) -->
+      <a class="order-hero order-hero--dark" href="https://food.grab.com/th/en/restaurants?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener" data-letter="G">
+        <div class="order-hero__top">
+          <span class="order-hero__num">Delivery · 02</span>
+          <span class="order-hero__badge">Sukh.40 · One Bkk</span>
+        </div>
+        <div class="order-hero__body">
+          <h3 class="order-hero__name">Grab Food</h3>
+          <p class="order-hero__cover">Sukhumvit 40 + One Bangkok · same menu, faster pick-up.</p>
+        </div>
+        <div class="order-hero__foot">
+          <span class="order-hero__cta">Open in Grab</span>
+          <span class="order-hero__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="order-secondary reveal reveal-delay-3">
+      <span class="order-secondary__label">Or reach us —</span>
+      <div class="order-mini-grid">
+        <a class="order-mini" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">
+          <span class="order-mini__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </span>
+          <span class="order-mini__body">
+            <span class="order-mini__label">Direct chat</span>
+            <span class="order-mini__name">LINE</span>
+          </span>
+          <span class="order-mini__arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="order-card" href="https://food.grab.com/th/en/restaurants?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
-          <span class="label">Delivery partner</span>
-          <span class="name">Grab Food</span>
-          <span class="note">Sukhumvit 40 + One Bangkok</span>
-          <span class="go">Open in Grab <span class="arrow">→</span></span>
+        <a class="order-mini" href="https://www.wongnai.com/businesses?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
+          <span class="order-mini__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.1 8.8 22 9.7 17 14.7 18.2 21.6 12 18.3 5.8 21.6 7 14.7 2 9.7 8.9 8.8 12 2"/></svg>
+          </span>
+          <span class="order-mini__body">
+            <span class="order-mini__label">Reviews · Book</span>
+            <span class="order-mini__name">Wongnai</span>
+          </span>
+          <span class="order-mini__arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="order-card" href="https://www.wongnai.com/businesses?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
-          <span class="label">Reservations · Photos</span>
-          <span class="name">Wongnai</span>
-          <span class="note">Browse, book, review</span>
-          <span class="go">Open Wongnai <span class="arrow">→</span></span>
-        </a>
-        <a class="order-card" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">
-          <span class="label">Direct chat</span>
-          <span class="name">@AKEENHOUSE</span>
-          <span class="note">LINE official · orders & service</span>
-          <span class="go">Add on LINE <span class="arrow">→</span></span>
+        <a class="order-mini" href="https://linktr.ee/akeenhouse" target="_blank" rel="noopener">
+          <span class="order-mini__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+          </span>
+          <span class="order-mini__body">
+            <span class="order-mini__label">All links</span>
+            <span class="order-mini__name">Linktree</span>
+          </span>
+          <span class="order-mini__arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </div>
@@ -1588,6 +2451,74 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* =========================================================
+     Locations atlas — row ↔ pin cross-hover
+     ========================================================= */
+  (function initAtlas(){
+    const rows = document.querySelectorAll('.dir-row[data-row]');
+    const pins = document.querySelectorAll('.atlas-svg .pin[data-pin], .atlas-transit .pin[data-pin]');
+    if(!rows.length || !pins.length) return;
+
+    const setActive = (key, on) => {
+      rows.forEach(r => { if(r.dataset.row === key) r.dataset.active = on ? 'true' : 'false'; });
+      pins.forEach(p => { if(p.dataset.pin === key) p.setAttribute('data-active', on ? 'true' : 'false'); });
+    };
+
+    const openRow = (row) => {
+      const href = row.dataset.href;
+      if(href) window.open(href, '_blank', 'noopener');
+    };
+
+    // Inject open-now status pill into each row's title block
+    const toMinutes = (s) => {
+      const [h, m] = s.split(':').map(Number);
+      return h * 60 + m;
+    };
+    const fmtHrs = (s) => s.replace(/^0/, '');
+    const now = new Date();
+    const minutesNow = now.getHours() * 60 + now.getMinutes();
+    rows.forEach(row => {
+      const open  = row.dataset.open;
+      const close = row.dataset.close;
+      if(!open || !close) return;
+      const isOpen = minutesNow >= toMinutes(open) && minutesNow < toMinutes(close);
+      row.dataset.state = isOpen ? 'open' : 'closed';
+      const titleEl = row.querySelector('.dir-row__title');
+      if(titleEl && !titleEl.querySelector('.dir-status-pill')){
+        const pill = document.createElement('span');
+        pill.className = 'dir-status-pill';
+        pill.innerHTML = `<span class="dot" aria-hidden="true"></span>${isOpen ? 'Open · ' : 'Closed · '}${fmtHrs(open)}–${fmtHrs(close)}`;
+        titleEl.appendChild(pill);
+      }
+    });
+
+    rows.forEach(row => {
+      const key = row.dataset.row;
+      row.addEventListener('mouseenter', () => setActive(key, true));
+      row.addEventListener('mouseleave', () => setActive(key, false));
+      row.addEventListener('focus',  () => setActive(key, true));
+      row.addEventListener('blur',   () => setActive(key, false));
+      row.addEventListener('click', (e) => {
+        // Don't hijack clicks on the action buttons
+        if(e.target.closest('.dir-row__actions')) return;
+        openRow(row);
+      });
+      row.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openRow(row); }
+      });
+    });
+    pins.forEach(pin => {
+      const key = pin.dataset.pin;
+      pin.style.cursor = 'pointer';
+      pin.addEventListener('mouseenter', () => setActive(key, true));
+      pin.addEventListener('mouseleave', () => setActive(key, false));
+      pin.addEventListener('click', () => {
+        const row = document.querySelector(`.dir-row[data-row="${key}"]`);
+        if(row) openRow(row);
+      });
+    });
+  })();
 
   /* =========================================================
      Book / page-flip menu
