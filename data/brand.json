@@ -1,0 +1,78 @@
+{
+  "name": "A KEEN HOUSE",
+  "tagline": "Brewed to Perfection",
+  "campaign_hashtag": "#AKEENSIGNATURE",
+  "category": "Specialty coffee + open-sandwich café",
+  "city": "Bangkok",
+  "country": "Thailand",
+  "founded_estimate": "Pre-2024 (multiple locations established by 2026)",
+  "location_count": 4,
+  "is_chain": true,
+  "social": {
+    "instagram": {
+      "handle": "@akeenhouse",
+      "url": "https://www.instagram.com/akeenhouse/",
+      "followers": "47.1K"
+    },
+    "facebook": {
+      "name": "A KEEN HOUSE",
+      "url": "https://www.facebook.com/A-KEEN-HOUSE",
+      "followers": "4.8K+"
+    },
+    "line": {
+      "handle": "@AKEENHOUSE",
+      "url": "https://line.me/R/ti/p/@akeenhouse",
+      "note": "Official LINE chat for orders and customer service"
+    },
+    "linktree": "https://linktr.ee/akeenhouse",
+    "tiktok": {
+      "url_search": "https://www.tiktok.com/search?q=akeenhouse",
+      "note": "User-generated content abundant; no confirmed official handle"
+    }
+  },
+  "delivery_partners": [
+    {
+      "name": "LineMan",
+      "available_at": ["One Bangkok", "Paragon", "Emsphere", "Sukhumvit 40"],
+      "search_url": "https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE"
+    },
+    {
+      "name": "Grab",
+      "available_at": ["Sukhumvit 40", "likely all locations"],
+      "search_url": "https://food.grab.com/th/en/restaurants?keyword=A+KEEN+HOUSE"
+    },
+    {
+      "name": "Wongnai",
+      "url": "https://www.wongnai.com/delivery/businesses?keyword=A+KEEN+HOUSE"
+    }
+  ],
+  "price_tier": "Premium",
+  "price_range_thb": {
+    "drinks": "120-200",
+    "sandwiches": "300-380"
+  },
+  "primary_audience": [
+    "Urban professionals in Bangkok CBD",
+    "Premium mall foot traffic (One Bangkok, Paragon, Emsphere)",
+    "Coffee enthusiasts and brunch crowd",
+    "Tourists searching pre-visit",
+    "Digital natives (large IG following indicates this is the dominant channel)"
+  ],
+  "brand_personality": {
+    "primary_traits": ["Premium", "Warm", "Crafted", "Minimalist", "Confident"],
+    "avoid": ["Corporate", "Pretentious", "Loud", "Generic"]
+  },
+  "logo_description": "Stylized 'A KEEN' wordmark paired with a triangular/angular monogram resembling a stylized 'K'. Black or dark on light background. Sometimes appears with 'A KEEN HOUSE' fully spelled and 'One Bangkok' (or location name) as a smaller subtitle.",
+  "data_provenance": {
+    "scraped_on": "2026-05-11",
+    "sources": [
+      "Google Search knowledge panel",
+      "https://a-keen-house.menustic.com/menu",
+      "https://linktr.ee/akeenhouse",
+      "Google Image Search results",
+      "Wongnai listings"
+    ],
+    "verification_required": true,
+    "verify_before_launch": ["prices", "hours", "phone numbers", "menu items"]
+  }
+}

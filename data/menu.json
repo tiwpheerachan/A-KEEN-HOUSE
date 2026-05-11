@@ -1,0 +1,140 @@
+{
+  "currency": "THB",
+  "verified_source": "https://a-keen-house.menustic.com/menu (Sukhumvit 40 location)",
+  "verified_on": "2026-05-11",
+  "verification_required": true,
+  "note": "Prices and items verified for Sukhumvit 40. Menu may vary by location — verify before pitching the demo to A KEEN HOUSE.",
+  "categories": [
+    {
+      "id": "open-sandwich",
+      "name": "Open Sandwich",
+      "description": "Refined open-faced sandwiches on quality bread. Premium-priced. The signature savory category.",
+      "items": [
+        {
+          "name": "Classic Brekkie",
+          "price": 380,
+          "is_signature": true,
+          "description_hint": "Their breakfast hero — likely eggs, premium proteins, on sourdough. Cross-reference customer photos."
+        },
+        {
+          "name": "Sauté Mushroom with Garlic and Herbs",
+          "price": 320,
+          "description_hint": "Sautéed mushrooms with garlic + herbs on sourdough. Vegetarian-friendly."
+        },
+        {
+          "name": "Roasted Pumpkin with Spiced Cream Cheese",
+          "price": 320,
+          "description_hint": "Roasted pumpkin paired with spiced cream cheese — comfort with a twist."
+        },
+        {
+          "name": "Fruit Crème",
+          "price": 300,
+          "description_hint": "Light, refreshing — likely a sweet/savory crossover with seasonal fruit."
+        },
+        {
+          "name": "Fig Pistachio Honey Mascarpone",
+          "price": null,
+          "description_hint": "Featured highlight; price TBD. Likely 320-380 range. Premium ingredients suggest signature tier."
+        },
+        {
+          "name": "Sweetcorn Cream Cheese",
+          "price": null,
+          "description_hint": "Featured highlight; price TBD."
+        },
+        {
+          "name": "Miso Butter Spice Shrimp Avocado Toast",
+          "price": null,
+          "description_hint": "Featured highlight; Asian-fusion twist on avocado toast. Premium tier."
+        },
+        {
+          "name": "Sautéed Mushroom Sourdough",
+          "price": null,
+          "description_hint": "Featured highlight; possibly the same as Sauté Mushroom item with different naming."
+        }
+      ]
+    },
+    {
+      "id": "signature-coffee",
+      "name": "Signature Coffee",
+      "description": "Their creative espresso-based menu. Where the brand identity lives.",
+      "items": [
+        {
+          "name": "Burnt Caramel Latte",
+          "price": 160,
+          "is_signature": true,
+          "description_hint": "Their hero drink. Featured in Google AI overview as the signature."
+        },
+        {
+          "name": "Macadamia White Chocolate Hojicha Latte",
+          "price": null,
+          "description_hint": "Standout creative drink. Hojicha (roasted green tea) base with macadamia + white chocolate."
+        },
+        {
+          "name": "Coconut Cream Americano",
+          "price": null,
+          "description_hint": "Featured in customer videos. Tropical twist on americano."
+        },
+        {
+          "name": "Coconut Cream Matcha",
+          "price": null,
+          "description_hint": "Matcha with coconut cream — Instagram-friendly visual."
+        },
+        {
+          "name": "Butterscotch Latte",
+          "price": null,
+          "description_hint": "Featured highlight."
+        },
+        {
+          "name": "Pistachio Latte",
+          "price": null,
+          "description_hint": "Customer-praised drink — pistachio cream on top, well-loved per Wongnai reviews."
+        },
+        {
+          "name": "Latte Macchiato",
+          "price": null,
+          "description_hint": "Featured highlight."
+        }
+      ]
+    },
+    {
+      "id": "classic-coffee",
+      "name": "Classic Coffee",
+      "description": "Espresso-based standards and pour-overs.",
+      "items": [
+        {
+          "name": "Hot Cappuccino",
+          "price": null,
+          "description_hint": "Standard, featured highlight."
+        },
+        {
+          "name": "Espresso",
+          "price": null,
+          "description_hint": "Inferred — every specialty coffee shop has this."
+        },
+        {
+          "name": "Drip Coffee (Single Origin)",
+          "price": null,
+          "description_hint": "Reviews mention sourcing beans from multiple origins. Likely a rotating drip coffee selection."
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts & Sweets",
+      "description": "Refined patisserie-style desserts.",
+      "items": [
+        {
+          "name": "Lemon Crème Brûlée",
+          "price": null,
+          "description_hint": "Mentioned in menustic description — sophisticated sweet, light citrus."
+        },
+        {
+          "name": "Red Wine Poached Pear",
+          "price": null,
+          "description_hint": "Mentioned in menustic — elegant, seasonal."
+        }
+      ]
+    }
+  ],
+  "schema_recommendation": "Use schema.org Menu / MenuSection / MenuItem JSON-LD for SEO. Google likes this for restaurants/cafes."
+}

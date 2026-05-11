@@ -1,0 +1,115 @@
+{
+  "locations": [
+    {
+      "id": "one-bangkok",
+      "name": "A KEEN HOUSE — One Bangkok",
+      "is_flagship": true,
+      "address": {
+        "line1": "One Bangkok, 3rd Floor, Parade Building",
+        "line2": "1877 Rama IV Rd",
+        "district": "Lumphini, Pathum Wan",
+        "city": "Bangkok",
+        "postal_code": "10330",
+        "country": "Thailand",
+        "full": "One Bangkok, 3rd Floor, Parade Building, 1877 Rama IV Rd, Lumphini, Pathum Wan, Bangkok 10330"
+      },
+      "phone": "085 909 0770",
+      "phone_intl": "+66 85 909 0770",
+      "hours": {
+        "monday": "10:00 AM - 8:00 PM",
+        "tuesday": "10:00 AM - 8:00 PM",
+        "wednesday": "10:00 AM - 8:00 PM",
+        "thursday": "10:00 AM - 8:00 PM",
+        "friday": "10:00 AM - 8:00 PM",
+        "saturday": "10:00 AM - 8:00 PM",
+        "sunday": "10:00 AM - 8:00 PM"
+      },
+      "google_rating": 4.9,
+      "google_review_count": 544,
+      "map_embed_query": "A KEEN HOUSE One Bangkok Parade Building",
+      "delivery": {
+        "lineman": "LineMan - One Bangkok (link in Linktree)",
+        "grab": "Grab Food - search 'A KEEN HOUSE One Bangkok'"
+      }
+    },
+    {
+      "id": "paragon",
+      "name": "A KEEN HOUSE — Paragon",
+      "is_flagship": false,
+      "address": {
+        "line1": "Nextopia, 5th Floor",
+        "line2": "991 Rama I Rd",
+        "district": "Pathum Wan",
+        "city": "Bangkok",
+        "postal_code": "10330",
+        "country": "Thailand",
+        "full": "Nextopia, 5th Floor, 991 Rama I Rd, Pathum Wan, Bangkok 10330"
+      },
+      "phone": null,
+      "hours": "Verify before launch — likely matches mall hours (10 AM - 9 PM)",
+      "map_embed_query": "A KEEN HOUSE Siam Paragon Nextopia",
+      "delivery": {
+        "lineman": "LineMan - Paragon",
+        "grab": "Likely available — verify"
+      }
+    },
+    {
+      "id": "emsphere",
+      "name": "A KEEN HOUSE — Emsphere",
+      "is_flagship": false,
+      "address": {
+        "line1": "Emsphere",
+        "line2": "628 Sukhumvit Rd",
+        "district": "Khlong Tan, Khlong Toei",
+        "city": "Bangkok",
+        "country": "Thailand",
+        "full": "Emsphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok"
+      },
+      "phone": null,
+      "hours": "Verify before launch — likely matches mall hours (10 AM - 10 PM)",
+      "map_embed_query": "A KEEN HOUSE Emsphere Sukhumvit",
+      "delivery": {
+        "lineman": "LineMan - Emsphere",
+        "grab": "Likely available — verify"
+      }
+    },
+    {
+      "id": "sukhumvit40",
+      "name": "A KEEN HOUSE — Sukhumvit 40",
+      "is_flagship": false,
+      "is_original_location": true,
+      "address": {
+        "line1": "4 Soi Sukjai, Sukhumvit 40",
+        "line2": null,
+        "district": "Phra Khanong, Khlong Toei",
+        "city": "Bangkok",
+        "postal_code": "10110",
+        "country": "Thailand",
+        "full": "4 Soi Sukjai Sukhumvit 40, Phra Khanong, Khlong Toei, Bangkok 10110"
+      },
+      "phone": "+66 99 436 6535",
+      "hours": {
+        "monday": "9:00 AM - 5:30 PM",
+        "tuesday": "9:00 AM - 5:30 PM",
+        "wednesday": "9:00 AM - 5:30 PM",
+        "thursday": "9:00 AM - 5:30 PM",
+        "friday": "9:00 AM - 5:30 PM",
+        "saturday": "9:00 AM - 5:30 PM",
+        "sunday": "9:00 AM - 5:30 PM"
+      },
+      "google_review_count": "1006 (per Menustic)",
+      "map_embed_query": "A KEEN HOUSE Sukhumvit 40 Soi Sukjai",
+      "delivery": {
+        "lineman": "LineMan - Sukhumvit40",
+        "grab": "Grab - Sukhumvit40 (confirmed available)"
+      },
+      "notes": "Original/standalone shop. Different vibe vs the mall locations — more 'home café' aesthetic per Trip.com reviews."
+    }
+  ],
+  "implementation_notes": {
+    "map_embed_pattern": "Use Google Maps iframe embed: `https://www.google.com/maps/embed?pb=...` or simpler: `https://www.google.com/maps?q=<URL_ENCODED_FULL_ADDRESS>&output=embed`",
+    "click_to_call": "Use `tel:` links for phone numbers — important for mobile UX",
+    "directions_link": "Link to `https://www.google.com/maps/dir/?api=1&destination=<encoded_address>` for one-tap directions",
+    "hours_data_format": "Consider adding schema.org `LocalBusiness` JSON-LD with `openingHours` for SEO"
+  }
+}

@@ -1,0 +1,23 @@
+# This directory holds image assets for the A KEEN HOUSE site build.
+# See ../design/image-references.md for sourcing instructions.
+# Recommended structure:
+#
+# images/
+# ├── hero/
+# │   ├── home-hero.jpg
+# │   └── about-hero.jpg
+# ├── locations/
+# │   ├── one-bangkok.jpg
+# │   ├── paragon.jpg
+# │   ├── emsphere.jpg
+# │   └── sukhumvit40.jpg
+# ├── menu/
+# │   ├── burnt-caramel-latte.jpg
+# │   ├── classic-brekkie.jpg
+# │   └── ...
+# ├── logo/
+# │   ├── monogram.svg
+# │   ├── wordmark.svg
+# │   └── favicon-512.png
+# └── og/
+#     └── og-default.jpg (1200x630)

@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0E1116" />
+<title>A KEEN HOUSE — Brewed to Perfection · Specialty Coffee, Bangkok</title>
+<meta name="description" content="A KEEN HOUSE — specialty coffee, open sandwiches, and quiet luxury across four homes in Bangkok: One Bangkok, Paragon, Emsphere, and Sukhumvit 40." />
+<meta property="og:title" content="A KEEN HOUSE — Brewed to Perfection" />
+<meta property="og:description" content="Specialty coffee, open sandwiches, and quiet luxury — four locations in Bangkok." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=1200&h=630&fit=crop&q=80" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230E1116'/><path d='M16 48 L32 16 L48 48 M22 38 L42 38' stroke='%23F4EFE6' stroke-width='4' fill='none' stroke-linejoin='miter' stroke-linecap='square'/></svg>" />
+
+<!-- schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CafeOrCoffeeShop",
+  "name":"A KEEN HOUSE",
+  "url":"https://akeenhouse.com",
+  "image":"https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=1200&q=80",
+  "priceRange":"฿฿฿",
+  "servesCuisine":["Specialty Coffee","Open Sandwich","Brunch"],
+  "sameAs":["https://www.instagram.com/akeenhouse/","https://www.facebook.com/A-KEEN-HOUSE","https://linktr.ee/akeenhouse"],
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"544"},
+  "department":[
+    {"@type":"CafeOrCoffeeShop","name":"A KEEN HOUSE — One Bangkok","address":{"@type":"PostalAddress","streetAddress":"3rd Floor, Parade Building, 1877 Rama IV Rd","addressLocality":"Pathum Wan","addressRegion":"Bangkok","postalCode":"10330","addressCountry":"TH"},"telephone":"+66859090770","openingHours":"Mo-Su 10:00-20:00"},
+    {"@type":"CafeOrCoffeeShop","name":"A KEEN HOUSE — Paragon","address":{"@type":"PostalAddress","streetAddress":"Nextopia, 5th Floor, 991 Rama I Rd","addressLocality":"Pathum Wan","addressRegion":"Bangkok","postalCode":"10330","addressCountry":"TH"},"openingHours":"Mo-Su 10:00-21:00"},
+    {"@type":"CafeOrCoffeeShop","name":"A KEEN HOUSE — Emsphere","address":{"@type":"PostalAddress","streetAddress":"Emsphere, 628 Sukhumvit Rd","addressLocality":"Khlong Tan, Khlong Toei","addressRegion":"Bangkok","addressCountry":"TH"},"openingHours":"Mo-Su 10:00-22:00"},
+    {"@type":"CafeOrCoffeeShop","name":"A KEEN HOUSE — Sukhumvit 40","address":{"@type":"PostalAddress","streetAddress":"4 Soi Sukjai, Sukhumvit 40","addressLocality":"Phra Khanong, Khlong Toei","addressRegion":"Bangkok","postalCode":"10110","addressCountry":"TH"},"telephone":"+66994366535","openingHours":"Mo-Su 09:00-17:30"}
+  ]
+}
+</script>
+
+<style>
+/* =========================================================
+   A KEEN HOUSE — Demo Site
+   Design system per /design/design-system.md
+   ========================================================= */
+
+:root{
+  /* Palette — derived directly from brand guide */
+  --ink-deep:   #0E1116;
+  --ink:        #1A1D22;
+  --cream:      #F4EFE6;
+  --cream-2:    #EFE9DE;
+  --sand:       #E8DFD0;
+  --clay:       #B8946B;
+  --coffee:     #4A2C1F;
+  --gold-warm:  #C8923B;
+  --gold-soft:  #D9B073;
+  --success:    #4A6B3A;
+  --line:       #D9CFC0;
+  --line-dark:  rgba(244,239,230,0.14);
+  --shadow:     0 12px 40px rgba(20,16,10,0.10);
+  --shadow-lg:  0 24px 80px rgba(20,16,10,0.18);
+
+  /* Type */
+  --serif: "Fraunces", "Noto Serif Thai", Georgia, serif;
+  --sans:  "Inter", "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+
+  /* Layout */
+  --container: 1280px;
+  --gutter: clamp(20px, 4vw, 48px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img{max-width:100%; height:auto; display:block}
+a{color:inherit; text-decoration:none}
+button{font: inherit; color: inherit; background:none; border:0; cursor:pointer}
+
+/* Selection */
+::selection{ background: var(--gold-warm); color: var(--ink-deep) }
+
+/* Subtle film-grain (very low opacity) */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index: 1000; pointer-events:none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+
+/* ====== Type system ====== */
+h1,h2,h3,h4{ font-family: var(--serif); font-weight: 600; color: var(--ink-deep); margin: 0; letter-spacing: -0.01em; }
+.display-1{ font-size: clamp(48px, 8.5vw, 104px); line-height: 1.02; letter-spacing: -0.025em; font-weight: 500; }
+.display-2{ font-size: clamp(36px, 5.6vw, 64px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 500; }
+.h1{ font-size: clamp(32px, 4vw, 44px); line-height: 1.15; }
+.h2{ font-size: clamp(26px, 2.6vw, 34px); line-height: 1.22; }
+.h3{ font-size: 22px; line-height: 1.3; }
+.eyebrow{
+  font-family: var(--sans); font-weight: 500;
+  font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--coffee);
+  display: inline-flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:""; display:inline-block; width:28px; height:1px; background:var(--coffee); opacity:.55 }
+.lede{ font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(20px, 2vw, 26px); line-height:1.45; color: var(--ink); }
+.serif-it{ font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+/* Container */
+.container{ width:100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+section{ padding: clamp(72px, 10vw, 128px) 0; position: relative; }
+section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
+
+/* Vertical striated divider motif */
+.striate{
+  background-image: repeating-linear-gradient(90deg, transparent 0 23px, rgba(74,44,31,.06) 23px 24px);
+}
+.striate-dark{
+  background-image: repeating-linear-gradient(90deg, transparent 0 23px, rgba(244,239,230,.06) 23px 24px);
+}
+
+/* ====== Navigation ====== */
+.nav{
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  display:flex; align-items:center; justify-content: space-between;
+  padding: 18px var(--gutter);
+  transition: background 0.5s ease, backdrop-filter 0.5s ease, padding 0.4s ease, border 0.4s ease;
+  border-bottom: 1px solid transparent;
+  color: var(--cream);
+}
+.nav.scrolled{
+  background: rgba(14,17,22,0.78);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  padding: 12px var(--gutter);
+  border-bottom: 1px solid var(--line-dark);
+}
+.nav .brand{ display:flex; align-items:center; gap: 12px; font-family: var(--sans); font-weight: 600; letter-spacing: 0.18em; font-size: 13px; }
+.nav .brand .mono{ width: 30px; height: 30px; }
+.nav .links{ display:flex; gap: 28px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; }
+.nav .links a{ position: relative; padding: 4px 0; opacity:.85; transition: opacity .2s ease; }
+.nav .links a:hover{ opacity: 1; }
+.nav .links a::after{ content:""; position: absolute; left:0; bottom:-2px; width:0; height:1px; background: currentColor; transition: width .3s ease; }
+.nav .links a:hover::after{ width: 100%; }
+.nav .cta{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--cream); color: var(--ink-deep);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: transform .25s ease, background .25s ease;
+}
+.nav .cta:hover{ transform: translateY(-1px); background: var(--gold-soft); }
+.nav-burger{ display:none; }
+
+@media (max-width: 880px){
+  .nav .links{ display:none; }
+  .nav .cta{ display:none; }
+  .nav-burger{ display:block; }
+}
+
+/* ====== HERO ====== */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--ink-deep);
+  color: var(--cream);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gutter) clamp(56px, 8vw, 112px);
+}
+.hero__photo{
+  position:absolute; inset: 0;
+  background-image:
+    linear-gradient( to bottom, rgba(14,17,22,.40) 0%, rgba(14,17,22,.55) 40%, rgba(14,17,22,.92) 100% ),
+    url("https://images.unsplash.com/photo-1525610553991-2bede1a236e2?w=2400&q=85&auto=format&fit=crop");
+  background-size: cover; background-position: center;
+  transform: scale(1.06);
+  filter: saturate(1.05) contrast(1.02);
+  animation: heroZoom 18s ease-out forwards;
+}
+@keyframes heroZoom{ from{ transform: scale(1.12) } to{ transform: scale(1.02) } }
+.hero__warmth{
+  position:absolute; inset: 0;
+  background: radial-gradient( ellipse at 80% 15%, rgba(200,146,59,0.35) 0%, transparent 55% );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.hero__lines{
+  position:absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 60px, rgba(244,239,230,.05) 60px 61px);
+  pointer-events: none;
+}
+
+.hero__inner{ position:relative; z-index: 2; max-width: 1280px; margin: 0 auto; width: 100%; }
+.hero__top{
+  display:flex; justify-content: space-between; align-items: center;
+  margin-bottom: clamp(36px, 8vw, 96px);
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(244,239,230,0.7);
+}
+.hero h1.display-1{
+  color: var(--cream);
+  max-width: 18ch;
+  margin-bottom: 28px;
+}
+.hero h1 em{ font-style: italic; font-weight: 300; color: var(--gold-soft); }
+.hero__sub{
+  max-width: 50ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  color: rgba(244,239,230,0.85);
+  margin-bottom: 36px;
+}
+.hero__sub-th{
+  display:block; font-family: "Noto Serif Thai", var(--serif); font-style: italic;
+  margin-top: 8px; opacity: 0.65; font-size: 0.95em;
+}
+.hero__ctas{ display:flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.btn{
+  display:inline-flex; align-items:center; gap: 10px;
+  padding: 16px 26px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  border: 1px solid transparent;
+}
+.btn--primary{ background: var(--cream); color: var(--ink-deep); }
+.btn--primary:hover{ background: var(--gold-soft); transform: translateY(-1px); }
+.btn--ghost{ background: transparent; color: var(--cream); border-color: rgba(244,239,230,0.35); }
+.btn--ghost:hover{ border-color: var(--cream); }
+.btn .arrow{ transition: transform .25s ease; }
+.btn:hover .arrow{ transform: translateX(4px); }
+
+.hero__meta{
+  position:absolute; left: var(--gutter); right: var(--gutter); bottom: 22px;
+  display:flex; justify-content: space-between; align-items: flex-end;
+  font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(244,239,230,0.55);
+  z-index: 3;
+}
+.hero__meta a{ color: rgba(244,239,230,0.85); transition: color .2s ease }
+.hero__meta a:hover{ color: var(--gold-soft) }
+
+.scroll-cue{
+  display:inline-flex; align-items:center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+}
+.scroll-cue .line{ display:inline-block; width:1px; height: 36px; background: var(--cream); position: relative; overflow: hidden; }
+.scroll-cue .line::after{
+  content:""; position:absolute; left:0; top: -100%; width:1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--gold-warm), transparent);
+  animation: scrollLine 2.4s ease-in-out infinite;
+}
+@keyframes scrollLine{ 0%{ top: -100% } 100%{ top: 100% } }
+
+/* ====== Marquee strip ====== */
+.marquee{
+  background: var(--ink-deep); color: var(--cream);
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  overflow: hidden; padding: 22px 0;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  letter-spacing: -0.01em;
+}
+.marquee__track{
+  display:flex; gap: 64px; white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  width: max-content;
+}
+.marquee span{ opacity:.92 }
+.marquee .dot{ color: var(--gold-warm); margin: 0 8px; }
+@keyframes marquee{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+
+/* ====== Story section ====== */
+.story{ background: var(--cream); }
+.story__grid{
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.story__copy{ max-width: 56ch; }
+.story__copy p{ margin: 0 0 1.1em; font-size: clamp(16px, 1.1vw, 17.5px); }
+.story__copy p.lede{ margin-bottom: 26px; }
+.story__sign{ display:inline-flex; align-items:center; gap: 12px; margin-top: 18px; font-family: var(--serif); font-style: italic; color: var(--coffee); }
+.story__art{
+  position: relative; aspect-ratio: 4/5; border-radius: 6px; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.story__art img{ width:100%; height:100%; object-fit: cover; transition: transform 1.8s ease; }
+.story__art:hover img{ transform: scale(1.04) }
+.story__art .badge{
+  position:absolute; bottom: 18px; left: 18px;
+  background: rgba(14,17,22,.78); color: var(--cream);
+  padding: 10px 14px; border-radius: 4px;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 880px){
+  .story__grid{ grid-template-columns: 1fr; }
+  .story__art{ aspect-ratio: 5/6; order: -1; }
+}
+
+/* ====== Signature drinks ====== */
+.drinks{
+  background: var(--ink-deep);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.drinks::before{
+  content:""; position:absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 80px, rgba(244,239,230,.04) 80px 81px);
+  pointer-events:none;
+}
+.drinks h2{ color: var(--cream) }
+.drinks .eyebrow{ color: var(--gold-soft) }
+.drinks .eyebrow::before{ background: var(--gold-soft); opacity: .6 }
+.drinks__head{
+  display:flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 64px; flex-wrap: wrap;
+}
+.drinks__head p{ max-width: 46ch; color: rgba(244,239,230,.7); font-size: 16px; line-height: 1.65; margin: 14px 0 0 }
+.drinks__grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+.drink-card{
+  position: relative; border-radius: 8px; overflow: hidden;
+  background: #14181f;
+  border: 1px solid var(--line-dark);
+  transition: transform .5s ease, border-color .4s ease;
+  isolation: isolate;
+}
+.drink-card:hover{ transform: translateY(-4px); border-color: rgba(200,146,59,.45); }
+.drink-card .photo{
+  aspect-ratio: 4/5; overflow: hidden; background: #0b0d11; position: relative;
+}
+.drink-card .photo img{
+  width:100%; height: 100%; object-fit: cover;
+  transition: transform 1.4s ease, filter .5s ease;
+  filter: brightness(.95) saturate(1.05);
+}
+.drink-card:hover .photo img{ transform: scale(1.05); filter: brightness(1.05) saturate(1.1); }
+.drink-card .body{
+  padding: 22px 22px 26px;
+  display:flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+}
+.drink-card .name{ font-family: var(--serif); font-size: 22px; line-height: 1.2; margin: 0; color: var(--cream); }
+.drink-card .meta{ font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,239,230,.55); margin-top: 6px; display:block; }
+.drink-card .price{ font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--gold-soft); white-space: nowrap; }
+.drink-card .ribbon{
+  position:absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--gold-warm); color: var(--ink-deep);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+  padding: 6px 10px; border-radius: 2px;
+}
+
+/* Featured spans wider */
+.drink-card.feature{ grid-column: span 6; }
+.drink-card.normal{ grid-column: span 3; }
+
+@media (max-width: 1024px){
+  .drink-card.feature{ grid-column: span 12; }
+  .drink-card.normal{ grid-column: span 6; }
+}
+@media (max-width: 560px){
+  .drink-card.normal{ grid-column: span 12; }
+}
+
+/* ====== Sandwich showcase ====== */
+.sandwich{ background: var(--cream-2); position: relative; }
+.sandwich__intro{
+  display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: end;
+  margin-bottom: 64px;
+}
+.sandwich__intro h2{ max-width: 16ch; }
+.sandwich__intro p{ max-width: 52ch; font-size: 17px; line-height: 1.65; color: var(--ink); margin: 0; }
+
+.sandwich__row{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  align-items: stretch;
+}
+.sandwich-card{
+  background: var(--cream); border: 1px solid var(--line);
+  border-radius: 8px; overflow: hidden;
+  transition: box-shadow .35s ease, transform .35s ease;
+}
+.sandwich-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px) }
+.sandwich-card .photo{ aspect-ratio: 16/10; overflow: hidden; background: var(--sand); }
+.sandwich-card .photo img{ width:100%; height:100%; object-fit: cover; transition: transform 1.5s ease; }
+.sandwich-card:hover .photo img{ transform: scale(1.04) }
+.sandwich-card .body{ padding: 26px 28px 30px; }
+.sandwich-card .row1{ display:flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.sandwich-card h3{ font-size: 24px; line-height: 1.18; }
+.sandwich-card .price{ font-family: var(--serif); font-style: italic; color: var(--coffee); font-size: 19px; white-space: nowrap; }
+.sandwich-card p{ margin: 10px 0 0; color: rgba(26,29,34,.72); font-size: 14.5px; line-height: 1.6; }
+.sandwich-card.signature{ border-color: var(--gold-soft); position: relative; }
+.sandwich-card.signature::before{
+  content:"Signature"; position:absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--gold-warm); color: var(--ink-deep);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+  padding: 6px 10px; border-radius: 2px;
+}
+
+@media (max-width: 800px){
+  .sandwich__intro{ grid-template-columns: 1fr; gap: 20px; }
+  .sandwich__row{ grid-template-columns: 1fr; }
+}
+
+.menu-link{
+  display:inline-flex; align-items:center; gap: 10px; margin-top: 48px;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;
+  color: var(--coffee); padding-bottom: 4px; border-bottom: 1px solid var(--coffee);
+  transition: gap .25s ease;
+}
+.menu-link:hover{ gap: 16px; }
+
+/* ====== Locations ====== */
+.locations{ background: var(--cream); }
+.locations__head{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+  margin-bottom: 64px;
+}
+.locations__head p{ max-width: 50ch; margin: 0; color: var(--ink); font-size: 17px; line-height: 1.65; }
+.locations__grid{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+}
+.loc-card{
+  position: relative;
+  background: var(--cream-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+}
+.loc-card:hover{ box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--clay); }
+.loc-card__map{ aspect-ratio: 16/9; overflow: hidden; position: relative; background: var(--sand); }
+.loc-card__map iframe{ width:100%; height:100%; border:0; filter: saturate(.85) contrast(.95); }
+.loc-card__map::after{
+  content:""; position:absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(244,239,230,0.3));
+  pointer-events: none;
+}
+.loc-card__body{ padding: 28px 30px 30px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.loc-card__title{ display:flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.loc-card__title h3{ font-size: 26px; line-height: 1.18; }
+.loc-card__tag{ font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-deep); padding: 4px 8px; background: var(--gold-soft); border-radius: 2px; font-weight: 600; }
+.loc-card__tag.original{ background: transparent; color: var(--coffee); border: 1px solid var(--coffee); }
+.loc-card__addr{ font-size: 14.5px; color: rgba(26,29,34,.72); line-height: 1.55; margin: 0; }
+.loc-card__meta{
+  display:flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink);
+  padding-top: 4px;
+}
+.loc-card__meta div{ display:flex; align-items:center; gap: 8px; }
+.loc-card__meta svg{ width: 15px; height: 15px; color: var(--coffee); }
+.loc-card__rating{ display:flex; align-items:center; gap: 8px; font-weight: 500; }
+.loc-card__rating .stars{ color: var(--gold-warm); letter-spacing: 1px; }
+.loc-card__rating span.count{ color: rgba(26,29,34,.55); font-size: 12.5px; }
+.loc-card__actions{
+  display: flex; gap: 12px; flex-wrap: wrap;
+  border-top: 1px solid var(--line); padding-top: 18px; margin-top: 6px;
+}
+.btn-sm{
+  display:inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px; border-radius: 999px;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  border: 1px solid var(--coffee); color: var(--coffee);
+  transition: background .2s ease, color .2s ease;
+}
+.btn-sm:hover{ background: var(--coffee); color: var(--cream); }
+.btn-sm.fill{ background: var(--ink-deep); color: var(--cream); border-color: var(--ink-deep); }
+.btn-sm.fill:hover{ background: var(--coffee); border-color: var(--coffee) }
+
+@media (max-width: 1024px){
+  .locations__head{ grid-template-columns: 1fr; gap: 20px; }
+  .locations__grid{ grid-template-columns: 1fr; }
+}
+
+/* ====== Quote / press band ====== */
+.press{
+  background: var(--ink-deep); color: var(--cream);
+  text-align: center; padding: clamp(80px, 10vw, 140px) var(--gutter);
+  position: relative; overflow: hidden;
+}
+.press::before{
+  content:""; position:absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(200,146,59,0.18), transparent 55%);
+  pointer-events: none;
+}
+.press blockquote{
+  margin: 0 auto; max-width: 28ch;
+  font-family: var(--serif); font-weight: 400; font-style: italic;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.18; letter-spacing: -0.015em;
+  color: var(--cream);
+  position: relative; z-index: 2;
+}
+.press blockquote::before, .press blockquote::after{
+  font-family: var(--serif); color: var(--gold-soft); opacity: .5;
+}
+.press .cite{
+  display: block; margin-top: 32px;
+  font-family: var(--sans); font-style: normal;
+  font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244,239,230,0.6);
+}
+.press__rating{
+  display:inline-flex; align-items:center; gap: 12px;
+  margin-top: 48px; padding: 14px 22px;
+  border: 1px solid var(--line-dark); border-radius: 999px;
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(244,239,230,0.82);
+  background: rgba(244,239,230,0.04);
+  position: relative; z-index: 2;
+}
+.press__rating .gold{ color: var(--gold-warm); letter-spacing: 1px; font-size: 14px; }
+
+/* ====== Order / delivery ====== */
+.order{ background: var(--sand); }
+.order__grid{
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(48px, 6vw, 96px); align-items: center;
+}
+.order__copy h2{ max-width: 14ch; }
+.order__copy p{ max-width: 48ch; color: var(--ink); font-size: 17px; line-height: 1.65; margin: 0 0 32px; }
+.order__cards{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.order-card{
+  background: var(--cream); border: 1px solid var(--line); border-radius: 8px;
+  padding: 26px 26px; transition: transform .25s ease, box-shadow .3s ease, border-color .3s ease;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.order-card:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--clay); }
+.order-card .label{ font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coffee); font-weight: 600; }
+.order-card .name{ font-family: var(--serif); font-size: 26px; line-height: 1.15; color: var(--ink-deep); margin: 4px 0 8px; }
+.order-card .note{ font-size: 13.5px; color: rgba(26,29,34,.7); line-height: 1.55; }
+.order-card .go{
+  display:inline-flex; align-items:center; gap: 8px; margin-top: 14px;
+  font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+  color: var(--ink-deep);
+}
+.order-card:hover .go .arrow{ transform: translateX(4px); }
+
+@media (max-width: 880px){
+  .order__grid{ grid-template-columns: 1fr; }
+  .order__cards{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .order__cards{ grid-template-columns: 1fr; }
+}
+
+/* ====== Instagram-feed mosaic ====== */
+.feed{ background: var(--cream); }
+.feed__head{
+  display:flex; justify-content: space-between; align-items: end; gap: 24px;
+  margin-bottom: 56px; flex-wrap: wrap;
+}
+.feed__head p{ max-width: 38ch; margin: 14px 0 0; color: rgba(26,29,34,.72); }
+.feed__handle{
+  display:inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--ink-deep); color: var(--cream);
+  font-size: 13px; letter-spacing: 0.08em; font-weight: 500;
+}
+.feed__grid{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.feed-tile{ aspect-ratio: 1/1; overflow:hidden; position: relative; border-radius: 4px; background: var(--sand); }
+.feed-tile img{ width:100%; height:100%; object-fit: cover; transition: transform 1.4s ease, filter .4s ease; }
+.feed-tile:hover img{ transform: scale(1.06); }
+.feed-tile::after{
+  content:""; position: absolute; inset:0;
+  background: rgba(14,17,22,0); transition: background .25s ease;
+}
+.feed-tile:hover::after{ background: rgba(14,17,22,0.28) }
+.feed-tile .heart{
+  position:absolute; left: 12px; bottom: 12px;
+  font-size: 11px; letter-spacing: 0.1em; color: var(--cream); opacity: 0;
+  transition: opacity .25s ease;
+  display:inline-flex; align-items:center; gap: 6px;
+}
+.feed-tile:hover .heart{ opacity: 1; }
+@media (max-width: 1024px){ .feed__grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px){ .feed__grid{ grid-template-columns: repeat(2, 1fr); } }
+
+/* ====== Footer ====== */
+.foot{
+  background: var(--ink-deep); color: var(--cream);
+  padding: 80px var(--gutter) 36px;
+  position: relative; overflow: hidden;
+}
+.foot::before{
+  content:""; position:absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, transparent 0 80px, rgba(244,239,230,.04) 80px 81px);
+  pointer-events:none;
+}
+.foot__inner{ max-width: var(--container); margin: 0 auto; position: relative; }
+.foot__grid{
+  display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 64px; border-bottom: 1px solid var(--line-dark);
+}
+.foot__brand .mono{ width: 56px; height: 56px; margin-bottom: 20px; }
+.foot__brand h3{ color: var(--cream); font-size: 26px; line-height: 1.2; max-width: 14ch; margin-bottom: 14px; }
+.foot__brand p{ color: rgba(244,239,230,0.65); max-width: 36ch; font-size: 14.5px; line-height: 1.6; margin: 0 0 22px; }
+.foot__brand .socials{ display:flex; gap: 12px; }
+.foot__brand .socials a{
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--line-dark);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.foot__brand .socials a:hover{ background: rgba(244,239,230,.08); border-color: var(--gold-soft); transform: translateY(-2px); }
+.foot__brand .socials svg{ width: 16px; height: 16px; }
+
+.foot__col h4{
+  color: var(--cream); font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 18px; font-weight: 600;
+}
+.foot__col ul{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot__col ul a{ color: rgba(244,239,230,0.7); font-size: 14px; transition: color .2s ease; }
+.foot__col ul a:hover{ color: var(--gold-soft); }
+
+.foot__base{
+  display:flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-top: 26px; flex-wrap: wrap;
+  font-size: 12px; color: rgba(244,239,230,0.5);
+}
+.foot__base .legal a{ color: rgba(244,239,230,0.65); margin-left: 18px; }
+.foot__base .legal a:hover{ color: var(--gold-soft); }
+
+@media (max-width: 880px){
+  .foot__grid{ grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 540px){
+  .foot__grid{ grid-template-columns: 1fr; }
+}
+
+/* ====== Reveal-on-scroll ====== */
+.reveal{ opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.is-in{ opacity: 1; transform: none; }
+.reveal-delay-1{ transition-delay: .08s }
+.reveal-delay-2{ transition-delay: .16s }
+.reveal-delay-3{ transition-delay: .24s }
+.reveal-delay-4{ transition-delay: .32s }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal{ opacity: 1; transform: none; }
+}
+
+/* No-JS fallback — always show content if JS is disabled or blocked */
+.no-js .reveal{ opacity: 1; transform: none; }
+
+/* ====== Demo notice ribbon ====== */
+.demo-flag{
+  position: fixed; bottom: 18px; left: 18px; z-index: 200;
+  background: rgba(14,17,22,0.92); color: var(--cream); backdrop-filter: blur(10px);
+  padding: 10px 14px; border-radius: 999px; font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; font-weight: 600;
+  border: 1px solid var(--line-dark);
+  display: inline-flex; align-items: center; gap: 8px;
+  opacity: 0.92; transition: opacity .2s ease;
+}
+.demo-flag:hover{ opacity: 1; }
+.demo-flag .dot{ width:8px; height:8px; border-radius: 50%; background: var(--gold-warm); animation: pulse 2.2s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:.5} 50%{opacity:1} }
+
+</style>
+</head>
+<body>
+
+<!-- Demo flag (small, discreet — flags this is a pitch demo, not a live site) -->
+<div class="demo-flag" title="This is a demo built for A KEEN HOUSE">
+  <span class="dot"></span>
+  <span>Demo preview · v1</span>
+</div>
+
+<!-- =========================================
+     NAV
+     ========================================= -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="A KEEN HOUSE — Home">
+    <svg class="mono" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M14 50 L32 12 L50 50 M22 38 L42 38" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+    </svg>
+    <span>A KEEN HOUSE</span>
+  </a>
+  <nav class="links" aria-label="Primary">
+    <a href="#story">Our Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#locations">Locations</a>
+    <a href="#order">Order</a>
+    <a href="#feed">Instagram</a>
+  </nav>
+  <a class="cta" href="#locations">Find your nearest →</a>
+  <button class="nav-burger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').showModal()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+  </button>
+</header>
+
+<dialog id="mobileMenu" style="border:0; padding:0; background: rgba(14,17,22,0.98); color: var(--cream); width: 100%; height: 100vh; max-width:100%; max-height:100vh; backdrop-filter: blur(8px); margin:0;">
+  <div style="padding: 24px; display:flex; justify-content: space-between; align-items: center;">
+    <span style="font-weight:600; letter-spacing:0.18em; font-size:13px">A KEEN HOUSE</span>
+    <button onclick="document.getElementById('mobileMenu').close()" style="color: var(--cream); font-size: 32px; line-height: 1;">×</button>
+  </div>
+  <nav style="display:flex; flex-direction:column; gap: 18px; padding: 32px 24px; font-family: var(--serif); font-size: 32px;">
+    <a href="#story" onclick="document.getElementById('mobileMenu').close()">Our Story</a>
+    <a href="#menu" onclick="document.getElementById('mobileMenu').close()">Menu</a>
+    <a href="#locations" onclick="document.getElementById('mobileMenu').close()">Locations</a>
+    <a href="#order" onclick="document.getElementById('mobileMenu').close()">Order</a>
+    <a href="#feed" onclick="document.getElementById('mobileMenu').close()">Instagram</a>
+  </nav>
+</dialog>
+
+<!-- =========================================
+     HERO
+     ========================================= -->
+<section class="hero" id="top">
+  <div class="hero__photo" aria-hidden="true"></div>
+  <div class="hero__warmth" aria-hidden="true"></div>
+  <div class="hero__lines" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__top reveal">
+      <span>Est. Bangkok</span>
+      <span>Four homes · One philosophy</span>
+    </div>
+    <h1 class="display-1 reveal reveal-delay-1">
+      Brewed<br/><em>to Perfection.</em>
+    </h1>
+    <p class="hero__sub reveal reveal-delay-2">
+      Specialty coffee, open sandwiches, and quiet luxury — across four locations in Bangkok.
+      <span class="hero__sub-th">กาแฟพิเศษ ขนมปังหน้าเปิด และพื้นที่สำหรับช่วงเวลาที่ดีของวัน</span>
+    </p>
+    <div class="hero__ctas reveal reveal-delay-3">
+      <a class="btn btn--primary" href="#locations">Find your nearest <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="#menu">See the menu</a>
+    </div>
+  </div>
+
+  <div class="hero__meta">
+    <a class="scroll-cue" href="#story" aria-label="Scroll down">
+      <span class="line"></span>
+      <span>Scroll</span>
+    </a>
+    <span>#AKEENSIGNATURE · @akeenhouse</span>
+  </div>
+</section>
+
+<!-- =========================================
+     MARQUEE — IG-style mantras
+     ========================================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Brewed to Perfection</span><span class="dot">✦</span>
+    <span>Burnt Caramel Latte</span><span class="dot">✦</span>
+    <span>Open Sandwich, Open Hours</span><span class="dot">✦</span>
+    <span>Four Homes in Bangkok</span><span class="dot">✦</span>
+    <span>#AKEENSIGNATURE</span><span class="dot">✦</span>
+    <span>Summer — poured, plated, served</span><span class="dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Brewed to Perfection</span><span class="dot">✦</span>
+    <span>Burnt Caramel Latte</span><span class="dot">✦</span>
+    <span>Open Sandwich, Open Hours</span><span class="dot">✦</span>
+    <span>Four Homes in Bangkok</span><span class="dot">✦</span>
+    <span>#AKEENSIGNATURE</span><span class="dot">✦</span>
+    <span>Summer — poured, plated, served</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- =========================================
+     STORY / ABOUT
+     ========================================= -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="story__grid">
+      <div class="story__copy reveal">
+        <span class="eyebrow">Our House</span>
+        <h2 class="display-2" style="margin-top:18px; margin-bottom:24px;">A coffee house, four homes.</h2>
+        <p class="lede">A KEEN HOUSE began as a single café on Soi Sukjai, tucked into Sukhumvit 40.</p>
+        <p>What started with a few hand-picked beans and an open kitchen has grown into four homes across Bangkok — One Bangkok, Paragon, Emsphere, and the original — but the philosophy hasn't shifted: <span class="serif-it">thoughtful coffee, thoughtful food, thoughtful spaces.</span></p>
+        <p>The Burnt Caramel Latte became the signature drink almost by accident. The Macadamia White Chocolate Hojicha Latte and the Coconut Cream Matcha keep the curious coming back. On the food side, the open sandwich format gives full attention to the ingredient — sautéed mushroom, roasted pumpkin, the Classic Brekkie. Desserts lean refined: Lemon Crème Brûlée, Red Wine Poached Pear.</p>
+        <p>Each location carries the same DNA — dark wood, warm lighting, vertical lines, a counter you can sit at and watch coffee being made — but adapts to its setting. The mall locations move faster; the Sukhumvit 40 original is where you slow down.</p>
+        <div class="story__sign">— A KEEN HOUSE</div>
+      </div>
+
+      <div class="story__art reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=85&auto=format&fit=crop" alt="A warm-lit café interior with wood paneling — placeholder photo for A KEEN HOUSE" loading="lazy" />
+        <div class="badge">Sukhumvit 40 · the original</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     SIGNATURE DRINKS
+     ========================================= -->
+<section class="drinks" id="menu">
+  <div class="container">
+    <div class="drinks__head">
+      <div class="reveal">
+        <span class="eyebrow">Signature Coffee</span>
+        <h2 class="display-2" style="margin-top:18px;">Where the brand<br/><span class="serif-it">lives loudest.</span></h2>
+        <p>Seven espresso-based signatures. One that's been our calling card since the first cup, and six that have earned their place on the chalkboard.</p>
+      </div>
+      <a class="menu-link reveal reveal-delay-2" href="#order">Full menu via LineMan <span class="arrow">→</span></a>
+    </div>
+
+    <div class="drinks__grid">
+
+      <!-- Hero drink: Burnt Caramel Latte (signature, featured wide) -->
+      <article class="drink-card feature reveal">
+        <div class="ribbon">Signature · #AKEENSIGNATURE</div>
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=1400&q=85&auto=format&fit=crop" alt="Burnt Caramel Latte close-up" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Burnt Caramel Latte</h3>
+            <span class="meta">The house calling card</span>
+          </div>
+          <div class="price">฿160</div>
+        </div>
+      </article>
+
+      <!-- Macadamia White Chocolate Hojicha Latte -->
+      <article class="drink-card feature reveal reveal-delay-1">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=1400&q=85&auto=format&fit=crop" alt="Hojicha latte with macadamia white chocolate" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Macadamia White Chocolate Hojicha</h3>
+            <span class="meta">Roasted green tea, white chocolate, macadamia</span>
+          </div>
+          <div class="price">—</div>
+        </div>
+      </article>
+
+      <article class="drink-card normal reveal">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=900&q=80&auto=format&fit=crop" alt="Pistachio Latte" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Pistachio Latte</h3>
+            <span class="meta">Pistachio cream on top</span>
+          </div>
+          <div class="price">—</div>
+        </div>
+      </article>
+
+      <article class="drink-card normal reveal reveal-delay-1">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1525252094149-c54f00f5d80b?w=900&q=80&auto=format&fit=crop" alt="Coconut Cream Matcha" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Coconut Cream Matcha</h3>
+            <span class="meta">Ceremonial matcha, coconut</span>
+          </div>
+          <div class="price">—</div>
+        </div>
+      </article>
+
+      <article class="drink-card normal reveal reveal-delay-2">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1521302200778-33500795e128?w=900&q=80&auto=format&fit=crop" alt="Coconut Cream Americano" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Coconut Cream Americano</h3>
+            <span class="meta">Black, with tropical edge</span>
+          </div>
+          <div class="price">—</div>
+        </div>
+      </article>
+
+      <article class="drink-card normal reveal reveal-delay-3">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1606791422814-b32c705fa101?w=900&q=80&auto=format&fit=crop" alt="Butterscotch Latte" loading="lazy" />
+        </div>
+        <div class="body">
+          <div>
+            <h3 class="name">Butterscotch Latte</h3>
+            <span class="meta">Deep butterscotch, espresso</span>
+          </div>
+          <div class="price">—</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     OPEN SANDWICH
+     ========================================= -->
+<section class="sandwich tight">
+  <div class="container">
+    <div class="sandwich__intro reveal">
+      <div>
+        <span class="eyebrow">Open Sandwich</span>
+        <h2 class="display-2" style="margin-top:18px;">Open-faced.<br/>Fully considered.</h2>
+      </div>
+      <p>Refined open sandwiches on quality bread. The format gives the ingredient full attention — and the kitchen earns the prices it charges. Verified for Sukhumvit 40; mall locations vary slightly.</p>
+    </div>
+
+    <div class="sandwich__row reveal reveal-delay-1">
+      <article class="sandwich-card signature">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=1400&q=85&auto=format&fit=crop" alt="Classic Brekkie — signature open sandwich" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row1">
+            <h3>Classic Brekkie</h3>
+            <span class="price">฿380</span>
+          </div>
+          <p>The breakfast hero. Premium proteins, soft eggs, on sourdough — the dish customers come back for.</p>
+        </div>
+      </article>
+
+      <article class="sandwich-card">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1481070555726-e2fe8357725c?w=1400&q=85&auto=format&fit=crop" alt="Sauté mushroom with garlic and herbs on sourdough" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row1">
+            <h3>Sauté Mushroom · Garlic & Herbs</h3>
+            <span class="price">฿320</span>
+          </div>
+          <p>Slow-sautéed mushrooms, garlic, fresh herbs, finished with a generous slick of olive oil.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="sandwich__row reveal reveal-delay-2" style="margin-top: 24px;">
+      <article class="sandwich-card">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1400&q=85&auto=format&fit=crop" alt="Roasted pumpkin with spiced cream cheese" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row1">
+            <h3>Roasted Pumpkin · Spiced Cream Cheese</h3>
+            <span class="price">฿320</span>
+          </div>
+          <p>Roasted Japanese pumpkin, warm-spice cream cheese, toasted seeds — comfort with a twist.</p>
+        </div>
+      </article>
+
+      <article class="sandwich-card">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1484980972926-edee96e0960d?w=1400&q=85&auto=format&fit=crop" alt="Fruit crème open sandwich" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row1">
+            <h3>Fruit Crème</h3>
+            <span class="price">฿300</span>
+          </div>
+          <p>The crossover. Mascarpone, seasonal fruit, and a long pour of honey — savoury bread, dessert mood.</p>
+        </div>
+      </article>
+    </div>
+
+    <a class="menu-link" href="#order">See the full kitchen via delivery <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- =========================================
+     LOCATIONS
+     ========================================= -->
+<section class="locations" id="locations">
+  <div class="container">
+    <div class="locations__head">
+      <div class="reveal">
+        <span class="eyebrow">Four homes in Bangkok</span>
+        <h2 class="display-2" style="margin-top:18px;">Find your nearest.</h2>
+      </div>
+      <p class="reveal reveal-delay-2">The mall locations move faster; the Sukhumvit 40 original is where you slow down. Each carries the same DNA — dark wood, warm lighting, the counter you can sit at and watch coffee being made.</p>
+    </div>
+
+    <div class="locations__grid">
+
+      <!-- ONE BANGKOK (flagship) -->
+      <article class="loc-card reveal">
+        <div class="loc-card__map">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+            src="https://www.google.com/maps?q=A+KEEN+HOUSE+One+Bangkok+Parade+Building&output=embed"
+            title="Map of A KEEN HOUSE — One Bangkok"></iframe>
+        </div>
+        <div class="loc-card__body">
+          <div class="loc-card__title">
+            <h3>One Bangkok</h3>
+            <span class="loc-card__tag">Flagship</span>
+          </div>
+          <p class="loc-card__addr">3rd Floor, Parade Building, 1877 Rama IV Rd, Lumphini, Pathum Wan, Bangkok 10330</p>
+          <div class="loc-card__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 20:00</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+66859090770">085 909 0770</a></div>
+          </div>
+          <div class="loc-card__rating">
+            <span class="stars">★★★★★</span> 4.9 <span class="count">· 544 Google reviews</span>
+          </div>
+          <div class="loc-card__actions">
+            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=One+Bangkok+Parade+Building+1877+Rama+IV+Rd+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
+            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+One+Bangkok" target="_blank" rel="noopener">Order via LineMan</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PARAGON -->
+      <article class="loc-card reveal reveal-delay-1">
+        <div class="loc-card__map">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Siam+Paragon+Nextopia&output=embed"
+            title="Map of A KEEN HOUSE — Paragon"></iframe>
+        </div>
+        <div class="loc-card__body">
+          <div class="loc-card__title">
+            <h3>Paragon</h3>
+          </div>
+          <p class="loc-card__addr">Nextopia, 5th Floor, Siam Paragon, 991 Rama I Rd, Pathum Wan, Bangkok 10330</p>
+          <div class="loc-card__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 21:00</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Siam</div>
+          </div>
+          <div class="loc-card__actions">
+            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Siam+Paragon+Nextopia+5th+Floor+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
+            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Paragon" target="_blank" rel="noopener">Order via LineMan</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- EMSPHERE -->
+      <article class="loc-card reveal reveal-delay-2">
+        <div class="loc-card__map">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Emsphere+628+Sukhumvit&output=embed"
+            title="Map of A KEEN HOUSE — Emsphere"></iframe>
+        </div>
+        <div class="loc-card__body">
+          <div class="loc-card__title">
+            <h3>Emsphere</h3>
+          </div>
+          <p class="loc-card__addr">Emsphere, 628 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok</p>
+          <div class="loc-card__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 10:00 – 22:00</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>BTS Phrom Phong</div>
+          </div>
+          <div class="loc-card__actions">
+            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=Emsphere+628+Sukhumvit+Rd+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
+            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Emsphere" target="_blank" rel="noopener">Order via LineMan</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SUKHUMVIT 40 (original) -->
+      <article class="loc-card reveal reveal-delay-3">
+        <div class="loc-card__map">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+            src="https://www.google.com/maps?q=A+KEEN+HOUSE+Sukhumvit+40+Soi+Sukjai&output=embed"
+            title="Map of A KEEN HOUSE — Sukhumvit 40"></iframe>
+        </div>
+        <div class="loc-card__body">
+          <div class="loc-card__title">
+            <h3>Sukhumvit 40</h3>
+            <span class="loc-card__tag original">The Original</span>
+          </div>
+          <p class="loc-card__addr">4 Soi Sukjai, Sukhumvit 40, Phra Khanong, Khlong Toei, Bangkok 10110</p>
+          <div class="loc-card__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>Daily · 09:00 – 17:30</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.93.35 1.9.59 2.9.72a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+66994366535">099 436 6535</a></div>
+          </div>
+          <div class="loc-card__actions">
+            <a class="btn-sm" href="https://www.google.com/maps/dir/?api=1&destination=4+Soi+Sukjai+Sukhumvit+40+Bangkok" target="_blank" rel="noopener">Directions <span class="arrow">→</span></a>
+            <a class="btn-sm fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Sukhumvit40" target="_blank" rel="noopener">Order via LineMan</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     PRESS / SOCIAL PROOF BAND
+     ========================================= -->
+<section class="press">
+  <blockquote class="reveal">
+    Warm, inviting, comfortable — <span class="serif-it">and a place to slow down.</span>
+  </blockquote>
+  <span class="cite reveal reveal-delay-1">Customer reviews · Google · Wanderlog · Trip.com</span>
+  <div class="press__rating reveal reveal-delay-2">
+    <span class="gold">★★★★★</span>
+    <span>4.9 on Google · 544 reviews · One Bangkok</span>
+  </div>
+</section>
+
+<!-- =========================================
+     ORDER / DELIVERY
+     ========================================= -->
+<section class="order" id="order">
+  <div class="container">
+    <div class="order__grid">
+      <div class="order__copy reveal">
+        <span class="eyebrow">Bring it home</span>
+        <h2 class="display-2" style="margin-top:18px; margin-bottom: 20px;">Can't make<br/>it out today?</h2>
+        <p>Order in. The full menu is available across LineMan and Grab at each location. Delivery hours follow the shop.</p>
+        <div style="display:flex; gap:14px; flex-wrap: wrap;">
+          <a class="btn btn--ghost" style="color:var(--ink-deep); border-color: var(--coffee);" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">Message us on LINE</a>
+          <a class="btn" style="background:var(--ink-deep); color: var(--cream); border-color: var(--ink-deep);" href="https://linktr.ee/akeenhouse" target="_blank" rel="noopener">All links →</a>
+        </div>
+      </div>
+
+      <div class="order__cards reveal reveal-delay-2">
+        <a class="order-card" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
+          <span class="label">Delivery partner</span>
+          <span class="name">LineMan</span>
+          <span class="note">All four locations · 10:00–close</span>
+          <span class="go">Open in LineMan <span class="arrow">→</span></span>
+        </a>
+        <a class="order-card" href="https://food.grab.com/th/en/restaurants?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
+          <span class="label">Delivery partner</span>
+          <span class="name">Grab Food</span>
+          <span class="note">Sukhumvit 40 + One Bangkok</span>
+          <span class="go">Open in Grab <span class="arrow">→</span></span>
+        </a>
+        <a class="order-card" href="https://www.wongnai.com/businesses?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener">
+          <span class="label">Reservations · Photos</span>
+          <span class="name">Wongnai</span>
+          <span class="note">Browse, book, review</span>
+          <span class="go">Open Wongnai <span class="arrow">→</span></span>
+        </a>
+        <a class="order-card" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">
+          <span class="label">Direct chat</span>
+          <span class="name">@AKEENHOUSE</span>
+          <span class="note">LINE official · orders & service</span>
+          <span class="go">Add on LINE <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     INSTAGRAM MOSAIC
+     ========================================= -->
+<section class="feed" id="feed">
+  <div class="container">
+    <div class="feed__head">
+      <div class="reveal">
+        <span class="eyebrow">Latest from the counter</span>
+        <h2 class="display-2" style="margin-top:18px;">Follow along.</h2>
+        <p>The IG feed is the design system — pours, plates, and the spaces in between. 47K and growing.</p>
+      </div>
+      <a class="feed__handle reveal reveal-delay-1" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @akeenhouse
+      </a>
+    </div>
+
+    <div class="feed__grid reveal">
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ #AKEENSIGNATURE</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Burnt Caramel</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Open Sandwich</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Brewed to Perfection</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1518057111178-44a106bad636?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Pistachio Latte</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Counter view</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Sukhumvit 40</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Drip</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1517488629431-6427e0ee1e5f?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ One Bangkok</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1551539441-7f987ca1a52d?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Hojicha</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Dessert</span></a>
+      <a class="feed-tile" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80&auto=format&fit=crop" alt="" loading="lazy"/><span class="heart">♡ Cup of the day</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================
+     FOOTER
+     ========================================= -->
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__grid">
+
+      <div class="foot__brand">
+        <svg class="mono" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M14 50 L32 12 L50 50 M22 38 L42 38" stroke="var(--cream)" stroke-width="3.5" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+        </svg>
+        <h3>A KEEN HOUSE</h3>
+        <p>Specialty coffee, open sandwiches, and a quieter way to spend the afternoon — across four homes in Bangkok.</p>
+
+        <div class="socials">
+          <a href="https://instagram.com/akeenhouse" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/A-KEEN-HOUSE" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46H15.2c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.75 8.44-4.91 8.44-9.93z"/></svg>
+          </a>
+          <a href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener" aria-label="LINE">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.89c.50 0 .906-.41.906-.92s-.405-.92-.906-.92h-2.527c-.5 0-.906.41-.906.92v4.79c0 .51.405.92.906.92h2.527c.5 0 .906-.41.906-.92s-.405-.92-.906-.92h-1.62v-.95h1.62c.5 0 .906-.41.906-.92s-.405-.92-.906-.92h-1.62v-.95h1.62zM15.31 8.05c-.5 0-.906.41-.906.92v4.79c0 .51.406.92.906.92.501 0 .907-.41.907-.92V8.97c0-.51-.406-.92-.907-.92zm-2.184 0c-.5 0-.906.41-.906.92v2.62l-2.05-2.96a.91.91 0 0 0-.749-.388c-.07 0-.137.008-.2.022-.408.094-.69.464-.69.886v4.6c0 .51.406.92.907.92.5 0 .906-.41.906-.92v-2.62l2.05 2.96a.91.91 0 0 0 .749.388.92.92 0 0 0 .2-.022c.408-.094.69-.464.69-.886V8.97c0-.51-.406-.92-.907-.92zM6.974 8.05c-.501 0-.907.41-.907.92v4.79c0 .51.406.92.907.92h2.527c.5 0 .906-.41.906-.92s-.406-.92-.906-.92H7.881V8.97c0-.51-.406-.92-.907-.92zM12 2C6.486 2 2 5.626 2 10.105c0 4.011 3.594 7.371 8.45 8.005.329.071.776.218.889.5.103.255.067.654.033.913 0 0-.118.715-.144.867-.044.255-.203.999.875.545 1.078-.454 5.819-3.426 7.939-5.866C21.49 13.385 22 11.806 22 10.105 22 5.626 17.514 2 12 2z"/></svg>
+          </a>
+          <a href="https://linktr.ee/akeenhouse" target="_blank" rel="noopener" aria-label="Linktree">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h4M15 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-4M8 12h8"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="foot__col">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#locations">One Bangkok</a></li>
+          <li><a href="#locations">Paragon</a></li>
+          <li><a href="#locations">Emsphere</a></li>
+          <li><a href="#locations">Sukhumvit 40</a></li>
+        </ul>
+      </div>
+
+      <div class="foot__col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#order">Order delivery</a></li>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#feed">Instagram feed</a></li>
+        </ul>
+      </div>
+
+      <div class="foot__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+66859090770">+66 85 909 0770</a></li>
+          <li><a href="tel:+66994366535">+66 99 436 6535</a></li>
+          <li><a href="https://line.me/R/ti/p/@akeenhouse" target="_blank">LINE · @AKEENHOUSE</a></li>
+          <li><a href="mailto:hello@akeenhouse.com">hello@akeenhouse.com</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="foot__base">
+      <div>© <span id="year">2026</span> A KEEN HOUSE. All rights reserved. · <span class="serif-it">Brewed to Perfection.</span></div>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Press</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================
+     SCRIPTS
+     ========================================= -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const setNavState = () => {
+    if(window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', setNavState, { passive: true });
+  setNavState();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }),
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
