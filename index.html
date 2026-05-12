@@ -1276,44 +1276,294 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 /* Hide the transit line everywhere — atlas-svg is the primary map */
 .atlas-transit{ display: none; }
 
-/* ====== Quote / press band ====== */
+/* =========================================================
+   REVIEWS — Award + 3 quote cards (premium dark band)
+   ========================================================= */
 .press{
   background: var(--ink-deep); color: var(--cream);
-  text-align: center; padding: clamp(80px, 10vw, 140px) var(--gutter);
   position: relative; overflow: hidden;
+  padding: clamp(72px, 9vw, 120px) var(--gutter);
 }
 .press::before{
-  content:""; position:absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(200,146,59,0.18), transparent 55%);
+  content:""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,146,59,.14), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(200,146,59,.08), transparent 70%);
   pointer-events: none;
 }
-.press blockquote{
-  margin: 0 auto; max-width: 28ch;
-  font-family: var(--serif); font-weight: 400; font-style: italic;
-  font-size: clamp(32px, 4.4vw, 56px);
-  line-height: 1.18; letter-spacing: -0.015em;
+.press::after{
+  /* Subtle vertical hairlines (brand motif) */
+  content:""; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, transparent 0 120px, rgba(244,239,230,.025) 120px 121px);
+}
+.press__inner{
+  max-width: 1080px; margin: 0 auto;
+  position: relative; z-index: 2;
+  text-align: center;
+}
+
+.press__eyebrow{
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 10.5px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold-soft);
+}
+.press__eyebrow::before, .press__eyebrow::after{
+  content:""; width: 28px; height: 1px; background: var(--gold-soft); opacity: .55;
+}
+.press__heading{
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(36px, 5.4vw, 60px); line-height: 1.05; letter-spacing: -0.02em;
   color: var(--cream);
-  position: relative; z-index: 2;
+  margin: 18px 0 clamp(36px, 5vw, 56px);
 }
-.press blockquote::before, .press blockquote::after{
-  font-family: var(--serif); color: var(--gold-soft); opacity: .5;
+
+/* ====== The Award (Google rating hero) ====== */
+.press__award{
+  display: inline-flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: clamp(28px, 4vw, 44px) clamp(40px, 5vw, 72px);
+  border: 1px solid rgba(200,146,59,.4);
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse 120% 100% at 50% 0%, rgba(200,146,59,.08), transparent 70%);
+  position: relative;
+  margin-bottom: clamp(40px, 5vw, 64px);
 }
-.press .cite{
-  display: block; margin-top: 32px;
-  font-family: var(--sans); font-style: normal;
-  font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(244,239,230,0.6);
+.press__award::before, .press__award::after{
+  content:""; position: absolute; width: 16px; height: 16px;
+  border: 1px solid var(--gold-warm); opacity: .55;
 }
-.press__rating{
-  display:inline-flex; align-items:center; gap: 12px;
-  margin-top: 48px; padding: 14px 22px;
-  border: 1px solid var(--line-dark); border-radius: 999px;
-  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(244,239,230,0.82);
-  background: rgba(244,239,230,0.04);
-  position: relative; z-index: 2;
+.press__award::before{ top: 7px; left: 7px; border-right: 0; border-bottom: 0; }
+.press__award::after{ bottom: 7px; right: 7px; border-left: 0; border-top: 0; }
+.press__award-tl, .press__award-br{
+  position: absolute; width: 16px; height: 16px;
+  border: 1px solid var(--gold-warm); opacity: .55;
 }
-.press__rating .gold{ color: var(--gold-warm); letter-spacing: 1px; font-size: 14px; }
+.press__award-tl{ top: 7px; right: 7px; border-left: 0; border-bottom: 0; }
+.press__award-br{ bottom: 7px; left: 7px; border-right: 0; border-top: 0; }
+
+.google-badge{
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 600;
+  color: rgba(244,239,230,.7);
+}
+.google-badge__g{
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.google-badge__g svg{ width: 100%; height: 100%; }
+
+.press__award-score{
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--serif); font-style: italic; line-height: 1;
+}
+.press__award-score .num{
+  font-size: clamp(64px, 8.5vw, 100px); font-weight: 400;
+  color: var(--gold-warm);
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #E6C079, #C8923B 55%, #8E6219);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.press__award-score .out{
+  font-size: clamp(20px, 2.2vw, 28px);
+  color: rgba(244,239,230,.45);
+}
+
+.press__award-stars{
+  color: var(--gold-warm); font-size: clamp(18px, 1.8vw, 22px); letter-spacing: 8px;
+  padding-left: 8px;
+}
+
+.press__award-meta{
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(244,239,230,.7);
+  flex-wrap: wrap; justify-content: center;
+}
+.press__award-meta strong{ color: var(--cream); font-weight: 600; }
+.press__award-meta .dot{ width: 3px; height: 3px; border-radius: 50%; background: rgba(244,239,230,.4); }
+.press__award-meta em{
+  font-style: italic; color: var(--gold-soft);
+  letter-spacing: 0.04em; text-transform: none;
+  font-family: var(--serif); font-size: 13.5px;
+}
+
+/* ====== Review quote cards ====== */
+.press__quotes{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+  text-align: left;
+}
+.quote-card{
+  background: rgba(244,239,230,.035);
+  border: 1px solid rgba(244,239,230,.10);
+  border-radius: 10px;
+  padding: clamp(20px, 2.4vw, 28px) clamp(20px, 2.4vw, 26px);
+  display: flex; flex-direction: column; gap: 14px;
+  transition: background .35s ease, border-color .35s ease, transform .25s ease;
+  position: relative;
+}
+.quote-card::before{
+  /* Gold corner ornament */
+  content:""; position: absolute; top: 12px; right: 12px;
+  width: 10px; height: 10px;
+  border: 1px solid rgba(200,146,59,.4);
+  border-left: 0; border-bottom: 0;
+}
+.quote-card:hover{
+  background: rgba(244,239,230,.06);
+  border-color: rgba(200,146,59,.35);
+  transform: translateY(-3px);
+}
+.quote-card__top{
+  display: flex; justify-content: space-between; align-items: center;
+}
+.quote-card__stars{ color: var(--gold-warm); letter-spacing: 3px; font-size: 14px; }
+.quote-card__when{
+  font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(244,239,230,.5);
+}
+
+.quote-card blockquote{
+  margin: 0;
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(16px, 1.7vw, 19px); line-height: 1.5;
+  color: rgba(244,239,230,.92);
+  position: relative;
+  padding-left: 14px;
+}
+.quote-card blockquote::before{
+  content: "“"; position: absolute; left: -4px; top: -10px;
+  font-family: var(--serif); font-size: 36px; line-height: 1;
+  color: var(--gold-warm); opacity: .55;
+}
+
+.quote-card__attr{
+  display: flex; align-items: center; gap: 10px;
+  margin-top: auto;
+  padding-top: 12px; border-top: 1px solid rgba(244,239,230,.08);
+}
+.quote-card__avatar{
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-warm), var(--clay));
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-style: italic; font-size: 12px;
+  color: var(--ink-deep); font-weight: 600;
+  flex: 0 0 auto;
+}
+.quote-card__attr-body{ display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.quote-card__attr-name{
+  font-size: 12.5px; font-weight: 500; color: var(--cream);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.quote-card__local-guide{
+  font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-warm); border: 1px solid var(--gold-warm);
+  padding: 1px 5px; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.quote-card__local-guide svg{ width: 8px; height: 8px; }
+.quote-card__attr-meta{
+  font-size: 11px; color: rgba(244,239,230,.5);
+  font-family: var(--serif); font-style: italic;
+}
+
+/* CTA to Google */
+.press__cta{
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold-soft);
+  padding: 12px 22px;
+  border: 1px solid rgba(200,146,59,.4);
+  border-radius: 999px;
+  transition: background .25s, color .25s, border-color .25s, gap .25s;
+}
+.press__cta:hover{
+  background: var(--gold-warm); color: var(--ink-deep); border-color: var(--gold-warm); gap: 14px;
+}
+.press__cta svg{ width: 14px; height: 14px; }
+
+@media (max-width: 980px){
+  .press{ padding: 48px var(--gutter) 56px; }
+  .press__eyebrow{ font-size: 9.5px; gap: 10px; }
+  .press__eyebrow::before, .press__eyebrow::after{ width: 18px; }
+  .press__heading{ font-size: clamp(26px, 7vw, 36px); margin: 12px 0 22px; line-height: 1.1; max-width: 22ch; margin-left: auto; margin-right: auto; }
+
+  /* Compact award */
+  .press__award{ padding: 18px 24px; margin-bottom: 24px; gap: 8px; border-radius: 4px; }
+  .press__award::before, .press__award::after,
+  .press__award-tl, .press__award-br{ width: 10px; height: 10px; top: 4px; left: 4px; }
+  .press__award::after, .press__award-tl{ top: auto; left: auto; }
+  .press__award::after{ bottom: 4px; right: 4px; }
+  .press__award-tl{ top: 4px; right: 4px; }
+  .press__award-br{ bottom: 4px; left: 4px; top: auto; right: auto; }
+
+  .google-badge{ font-size: 8.5px; letter-spacing: 0.2em; gap: 6px; }
+  .google-badge__g{ width: 16px; height: 16px; }
+  .press__award-score .num{ font-size: clamp(48px, 14vw, 64px); }
+  .press__award-score .out{ font-size: 18px; }
+  .press__award-stars{ font-size: 13px; letter-spacing: 4px; padding-left: 4px; }
+  .press__award-meta{ font-size: 9.5px; gap: 6px; letter-spacing: 0.12em; }
+  .press__award-meta em{ font-size: 11px; }
+  .press__award-meta .dot{ width: 2.5px; height: 2.5px; }
+
+  /* Horizontal carousel of quote cards */
+  .press__quotes{
+    display: flex; grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 10px;
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    padding: 4px var(--gutter) 8px;
+    margin-bottom: 8px;
+  }
+  .press__quotes::-webkit-scrollbar{ display: none; }
+  .quote-card{
+    flex: 0 0 80%;
+    max-width: 320px;
+    scroll-snap-align: start;
+    padding: 16px 16px 14px;
+    gap: 10px;
+    min-height: 0;
+  }
+  .quote-card::before{ width: 8px; height: 8px; top: 10px; right: 10px; }
+  .quote-card blockquote{ font-size: 13.5px; line-height: 1.5; padding-left: 8px; }
+  .quote-card blockquote::before{ font-size: 22px; top: -4px; left: -2px; }
+  .quote-card__stars{ font-size: 10.5px; letter-spacing: 1.5px; }
+  .quote-card__when{ font-size: 8px; letter-spacing: 0.1em; }
+  .quote-card__attr{ padding-top: 8px; gap: 8px; }
+  .quote-card__avatar{ width: 22px; height: 22px; font-size: 9.5px; }
+  .quote-card__attr-name{ font-size: 11px; gap: 4px; flex-wrap: wrap; }
+  .quote-card__attr-meta{ font-size: 9.5px; }
+  .quote-card__local-guide{ font-size: 7px; padding: 1px 3px; letter-spacing: 0.14em; gap: 3px; }
+  .quote-card__local-guide svg{ width: 7px; height: 7px; }
+
+  /* Swipe hint dots — created by JS, but allow CSS placeholder */
+  .press__hint{
+    display: flex; justify-content: center; gap: 6px;
+    margin: 8px 0 18px;
+    font-size: 8.5px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(244,239,230,.4);
+    align-items: center;
+  }
+  .press__hint .dash{ width: 14px; height: 1px; background: rgba(244,239,230,.25); }
+
+  .press__cta{ padding: 10px 18px; font-size: 10.5px; letter-spacing: 0.18em; }
+  .press__cta svg{ width: 12px; height: 12px; }
+}
+@media (min-width: 981px){
+  .press__hint{ display: none; }
+}
+@media (max-width: 380px){
+  .press__heading{ font-size: 24px; }
+  .press__award-score .num{ font-size: 44px; }
+  .press__award-meta{ flex-direction: column; gap: 4px; }
+  .press__award-meta .dot{ display: none; }
+  .quote-card{ flex-basis: 85%; }
+}
 
 /* =========================================================
    ORDER / DELIVERY — premium pair
@@ -1836,8 +2086,8 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       </div>
 
       <div class="story__art reveal reveal-delay-2">
-        <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=85&auto=format&fit=crop" alt="A warm-lit café interior with wood paneling — placeholder photo for A KEEN HOUSE" loading="lazy" />
-        <div class="badge">Sukhumvit 40 · the original</div>
+        <img src="images/story-counter.jpg" alt="Two A KEEN HOUSE baristas behind the brick-tiled counter — espresso machine, pour-over station, pastry case in view" loading="lazy" />
+        <div class="badge">Behind the counter · A KEEN HOUSE</div>
       </div>
     </div>
   </div>
@@ -2218,16 +2468,117 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 </section>
 
 <!-- =========================================
-     PRESS / SOCIAL PROOF BAND
+     REVIEWS — Award + 3 review cards
      ========================================= -->
-<section class="press">
-  <blockquote class="reveal">
-    Warm, inviting, comfortable — <span class="serif-it">and a place to slow down.</span>
-  </blockquote>
-  <span class="cite reveal reveal-delay-1">Customer reviews · Google · Wanderlog · Trip.com</span>
-  <div class="press__rating reveal reveal-delay-2">
-    <span class="gold">★★★★★</span>
-    <span>4.9 on Google · 544 reviews · One Bangkok</span>
+<section class="press" id="reviews">
+  <div class="press__inner">
+
+    <span class="press__eyebrow reveal">What guests say</span>
+    <h2 class="press__heading reveal reveal-delay-1">Warm, inviting, comfortable —<br/><span class="serif-it">and a place to slow down.</span></h2>
+
+    <!-- The Award — Google rating hero -->
+    <div class="press__award reveal reveal-delay-2">
+      <span class="press__award-tl"></span>
+      <span class="press__award-br"></span>
+
+      <span class="google-badge">
+        <span class="google-badge__g" aria-hidden="true">
+          <!-- Official Google G mark -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+        </span>
+        <span>Verified on Google</span>
+      </span>
+
+      <div class="press__award-score">
+        <span class="num">4.9</span>
+        <span class="out">/ 5.0</span>
+      </div>
+
+      <div class="press__award-stars" aria-label="5 out of 5 stars">★★★★★</div>
+
+      <div class="press__award-meta">
+        <span><strong>544</strong> Google reviews</span>
+        <span class="dot"></span>
+        <em>One Bangkok flagship</em>
+      </div>
+    </div>
+
+    <!-- Real review cards (paraphrased per content/reviews.md to respect IP) -->
+    <div class="press__quotes reveal reveal-delay-3">
+
+      <article class="quote-card">
+        <div class="quote-card__top">
+          <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
+          <span class="quote-card__when">3 weeks ago</span>
+        </div>
+        <blockquote>Great coffee, many options, cozy and comfortable atmosphere — and great hospitality.</blockquote>
+        <div class="quote-card__attr">
+          <span class="quote-card__avatar" aria-hidden="true">A</span>
+          <div class="quote-card__attr-body">
+            <span class="quote-card__attr-name">
+              A. K.
+              <span class="quote-card__local-guide" title="Google Local Guide">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 17 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+                Local Guide
+              </span>
+            </span>
+            <span class="quote-card__attr-meta">One Bangkok · 47 reviews</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card">
+        <div class="quote-card__top">
+          <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
+          <span class="quote-card__when">A month ago</span>
+        </div>
+        <blockquote>Service is extraordinary, with real product knowledge from the staff. The drip pours are unhurried.</blockquote>
+        <div class="quote-card__attr">
+          <span class="quote-card__avatar" aria-hidden="true">S</span>
+          <div class="quote-card__attr-body">
+            <span class="quote-card__attr-name">
+              S. P.
+              <span class="quote-card__local-guide" title="Google Local Guide">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 17 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+                Local Guide
+              </span>
+            </span>
+            <span class="quote-card__attr-meta">Sukhumvit 40 · 8 reviews</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card">
+        <div class="quote-card__top">
+          <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
+          <span class="quote-card__when">Editorial</span>
+        </div>
+        <blockquote>A delightful coffee shop in the heart of Bangkok. Minimalist home-style design — warm, inviting, comfortable.</blockquote>
+        <div class="quote-card__attr">
+          <span class="quote-card__avatar" aria-hidden="true">W</span>
+          <div class="quote-card__attr-body">
+            <span class="quote-card__attr-name">Wanderlog</span>
+            <span class="quote-card__attr-meta">Bangkok travel guide · 2025</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="press__hint" aria-hidden="true">
+      <span class="dash"></span>Swipe for more reviews<span class="dash"></span>
+    </p>
+
+    <a class="press__cta reveal reveal-delay-4" href="https://www.google.com/maps/place/A+KEEN+HOUSE+One+Bangkok/" target="_blank" rel="noopener">
+      Read all 544 reviews on Google
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M9 7h8v8"/></svg>
+    </a>
+
   </div>
 </section>
 
