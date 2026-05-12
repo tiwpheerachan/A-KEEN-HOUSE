@@ -229,9 +229,80 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   color: rgba(244,239,230,0.85);
   margin-bottom: 36px;
 }
-.hero__sub-th{
-  display:block; font-family: "Noto Serif Thai", var(--serif); font-style: italic;
-  margin-top: 8px; opacity: 0.65; font-size: 0.95em;
+.hero__sub-th{ display: none; /* legacy — replaced by i18n toggle */ }
+
+/* =========================================================
+   LANG SWITCHER (EN / TH)
+   ========================================================= */
+.lang-switch{
+  display: inline-flex; align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border: 1px solid rgba(244,239,230,0.18);
+  border-radius: 999px;
+  font-size: 10.5px; letter-spacing: 0.2em; font-weight: 600;
+  background: rgba(20,16,10,.35);
+  transition: border-color .25s ease, background .25s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.nav.scrolled .lang-switch{
+  border-color: rgba(14,17,22,.18);
+  background: rgba(244,239,230,.6);
+}
+.lang-switch:hover{ border-color: rgba(244,239,230,0.4); }
+.nav.scrolled .lang-switch:hover{ border-color: rgba(14,17,22,.4); }
+.lang-switch__opt{
+  padding: 3px 6px;
+  color: rgba(244,239,230,0.6);
+  border-radius: 999px;
+  transition: color .2s ease, background .2s ease;
+}
+.nav.scrolled .lang-switch__opt{ color: rgba(14,17,22,.55); }
+.lang-switch__opt:hover{ color: var(--cream); }
+.nav.scrolled .lang-switch__opt:hover{ color: var(--ink-deep); }
+.lang-switch__opt.is-active{
+  color: var(--ink-deep);
+  background: var(--gold-soft);
+}
+.lang-switch__sep{ color: rgba(244,239,230,0.2); padding: 0 1px; }
+.nav.scrolled .lang-switch__sep{ color: rgba(14,17,22,.2); }
+
+@media (max-width: 980px){
+  .nav .lang-switch{ display: none; }
+}
+
+/* Mobile menu lang switch */
+.mobile-lang{
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid rgba(244,239,230,0.25);
+  border-radius: 999px;
+  font-size: 11px; letter-spacing: 0.2em; font-weight: 600;
+  margin-top: 24px;
+  background: rgba(244,239,230,.04);
+  cursor: pointer;
+  align-self: flex-start;
+}
+.mobile-lang__opt{
+  padding: 4px 8px;
+  color: rgba(244,239,230,0.6);
+  border-radius: 999px;
+}
+.mobile-lang__opt.is-active{
+  color: var(--ink-deep); background: var(--gold-soft);
+}
+
+/* Thai content typography polish */
+html[lang="th"] body{
+  font-family: "IBM Plex Sans Thai", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+html[lang="th"] :is(.display-1, .display-2, h2, h3, blockquote, .serif-it, em){
+  font-family: "Noto Serif Thai", "Fraunces", Georgia, serif;
+}
+html[lang="th"] .hero h1 em{
+  font-family: "Noto Serif Thai", serif;
+  font-style: normal;
 }
 .hero__ctas{ display:flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .btn{
@@ -1987,13 +2058,18 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
     <span>A KEEN HOUSE</span>
   </a>
   <nav class="links" aria-label="Primary">
-    <a href="#story">Our Story</a>
-    <a href="#menu">Menu</a>
-    <a href="#locations">Locations</a>
-    <a href="#order">Order</a>
-    <a href="#feed">Instagram</a>
+    <a href="#story" data-i18n="nav.story">Our Story</a>
+    <a href="#menu" data-i18n="nav.menu">Menu</a>
+    <a href="#locations" data-i18n="nav.locations">Locations</a>
+    <a href="#order" data-i18n="nav.order">Order</a>
+    <a href="#feed" data-i18n="nav.feed">Instagram</a>
   </nav>
-  <a class="cta" href="#locations">Find your nearest →</a>
+  <div class="lang-switch" role="group" aria-label="Language switcher">
+    <span class="lang-switch__opt" data-lang="en">EN</span>
+    <span class="lang-switch__sep">·</span>
+    <span class="lang-switch__opt" data-lang="th">TH</span>
+  </div>
+  <a class="cta" href="#locations" data-i18n="nav.cta">Find your nearest →</a>
   <button class="nav-burger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').showModal()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
   </button>
@@ -2005,11 +2081,16 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
     <button onclick="document.getElementById('mobileMenu').close()" style="color: var(--cream); font-size: 32px; line-height: 1;">×</button>
   </div>
   <nav style="display:flex; flex-direction:column; gap: 18px; padding: 32px 24px; font-family: var(--serif); font-size: 32px;">
-    <a href="#story" onclick="document.getElementById('mobileMenu').close()">Our Story</a>
-    <a href="#menu" onclick="document.getElementById('mobileMenu').close()">Menu</a>
-    <a href="#locations" onclick="document.getElementById('mobileMenu').close()">Locations</a>
-    <a href="#order" onclick="document.getElementById('mobileMenu').close()">Order</a>
-    <a href="#feed" onclick="document.getElementById('mobileMenu').close()">Instagram</a>
+    <a href="#story" onclick="document.getElementById('mobileMenu').close()" data-i18n="nav.story">Our Story</a>
+    <a href="#menu" onclick="document.getElementById('mobileMenu').close()" data-i18n="nav.menu">Menu</a>
+    <a href="#locations" onclick="document.getElementById('mobileMenu').close()" data-i18n="nav.locations">Locations</a>
+    <a href="#order" onclick="document.getElementById('mobileMenu').close()" data-i18n="nav.order">Order</a>
+    <a href="#feed" onclick="document.getElementById('mobileMenu').close()" data-i18n="nav.feed">Instagram</a>
+    <div class="mobile-lang" role="group" aria-label="Language">
+      <span class="mobile-lang__opt" data-lang="en">EN</span>
+      <span class="lang-switch__sep">·</span>
+      <span class="mobile-lang__opt" data-lang="th">TH</span>
+    </div>
   </nav>
 </dialog>
 
@@ -2023,26 +2104,25 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 
   <div class="hero__inner">
     <div class="hero__top reveal">
-      <span>Est. Bangkok</span>
-      <span>Four homes · One philosophy</span>
+      <span data-i18n="hero.top1">Est. Bangkok</span>
+      <span data-i18n="hero.top2">Four homes · One philosophy</span>
     </div>
-    <h1 class="display-1 reveal reveal-delay-1">
+    <h1 class="display-1 reveal reveal-delay-1" data-i18n="hero.title">
       Brewed<br/><em>to Perfection.</em>
     </h1>
-    <p class="hero__sub reveal reveal-delay-2">
+    <p class="hero__sub reveal reveal-delay-2" data-i18n="hero.sub">
       Specialty coffee, open sandwiches, and quiet luxury — across four locations in Bangkok.
-      <span class="hero__sub-th">กาแฟพิเศษ ขนมปังหน้าเปิด และพื้นที่สำหรับช่วงเวลาที่ดีของวัน</span>
     </p>
     <div class="hero__ctas reveal reveal-delay-3">
-      <a class="btn btn--primary" href="#locations">Find your nearest <span class="arrow">→</span></a>
-      <a class="btn btn--ghost" href="#menu">See the menu</a>
+      <a class="btn btn--primary" href="#locations" data-i18n="hero.cta1">Find your nearest <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="#menu" data-i18n="hero.cta2">See the menu</a>
     </div>
   </div>
 
   <div class="hero__meta">
     <a class="scroll-cue" href="#story" aria-label="Scroll down">
       <span class="line"></span>
-      <span>Scroll</span>
+      <span data-i18n="hero.scroll">Scroll</span>
     </a>
     <span>#AKEENSIGNATURE · @akeenhouse</span>
   </div>
@@ -2076,18 +2156,18 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   <div class="container">
     <div class="story__grid">
       <div class="story__copy reveal">
-        <span class="eyebrow">Our House</span>
-        <h2 class="display-2" style="margin-top:18px; margin-bottom:24px;">A coffee house, four homes.</h2>
-        <p class="lede">A KEEN HOUSE began as a single café on Soi Sukjai, tucked into Sukhumvit 40.</p>
-        <p>What started with a few hand-picked beans and an open kitchen has grown into four homes across Bangkok — One Bangkok, Paragon, Emsphere, and the original — but the philosophy hasn't shifted: <span class="serif-it">thoughtful coffee, thoughtful food, thoughtful spaces.</span></p>
-        <p>The Burnt Caramel Latte became the signature drink almost by accident. The Macadamia White Chocolate Hojicha Latte and the Coconut Cream Matcha keep the curious coming back. On the food side, the open sandwich format gives full attention to the ingredient — sautéed mushroom, roasted pumpkin, the Classic Brekkie. Desserts lean refined: Lemon Crème Brûlée, Red Wine Poached Pear.</p>
-        <p>Each location carries the same DNA — dark wood, warm lighting, vertical lines, a counter you can sit at and watch coffee being made — but adapts to its setting. The mall locations move faster; the Sukhumvit 40 original is where you slow down.</p>
+        <span class="eyebrow" data-i18n="story.eyebrow">Our House</span>
+        <h2 class="display-2" style="margin-top:18px; margin-bottom:24px;" data-i18n="story.title">A coffee house, four homes.</h2>
+        <p class="lede" data-i18n="story.lede">A KEEN HOUSE began as a single café on Soi Sukjai, tucked into Sukhumvit 40.</p>
+        <p data-i18n="story.p1">What started with a few hand-picked beans and an open kitchen has grown into four homes across Bangkok — One Bangkok, Paragon, Emsphere, and the original — but the philosophy hasn't shifted: <span class="serif-it">thoughtful coffee, thoughtful food, thoughtful spaces.</span></p>
+        <p data-i18n="story.p2">The Burnt Caramel Latte became the signature drink almost by accident. The Macadamia White Chocolate Hojicha Latte and the Coconut Cream Matcha keep the curious coming back. On the food side, the open sandwich format gives full attention to the ingredient — sautéed mushroom, roasted pumpkin, the Classic Brekkie. Desserts lean refined: Lemon Crème Brûlée, Red Wine Poached Pear.</p>
+        <p data-i18n="story.p3">Each location carries the same DNA — dark wood, warm lighting, vertical lines, a counter you can sit at and watch coffee being made — but adapts to its setting. The mall locations move faster; the Sukhumvit 40 original is where you slow down.</p>
         <div class="story__sign">— A KEEN HOUSE</div>
       </div>
 
       <div class="story__art reveal reveal-delay-2">
         <img src="images/story-counter.jpg" alt="Two A KEEN HOUSE baristas behind the brick-tiled counter — espresso machine, pour-over station, pastry case in view" loading="lazy" />
-        <div class="badge">Behind the counter · A KEEN HOUSE</div>
+        <div class="badge" data-i18n="story.badge">Behind the counter · A KEEN HOUSE</div>
       </div>
     </div>
   </div>
@@ -2100,11 +2180,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   <div class="container">
     <div class="book-header">
       <div class="reveal book-header__copy">
-        <span class="eyebrow">The Menu · 2026 Edition</span>
-        <h2 class="display-2" style="margin-top:18px;">Open the book.<br/><span class="serif-it">Bean to butter.</span></h2>
-        <p>The full A KEEN HOUSE menu — desserts, bread &amp; paste, salads, soups, open sandwiches, beverages, and treats. Drag a corner, swipe, or tap the arrows.</p>
+        <span class="eyebrow" data-i18n="menu.eyebrow">The Menu · 2026 Edition</span>
+        <h2 class="display-2" style="margin-top:18px;" data-i18n="menu.title">Open the book.<br/><span class="serif-it">Bean to butter.</span></h2>
+        <p data-i18n="menu.sub">The full A KEEN HOUSE menu — desserts, bread &amp; paste, salads, soups, open sandwiches, beverages, and treats. Drag a corner, swipe, or tap the arrows.</p>
       </div>
-      <a class="menu-link reveal reveal-delay-2" href="#order" style="color: var(--gold-soft); border-color: var(--gold-soft);">Order the full menu via LineMan <span class="arrow">→</span></a>
+      <a class="menu-link reveal reveal-delay-2" href="#order" style="color: var(--gold-soft); border-color: var(--gold-soft);" data-i18n="menu.cta">Order the full menu via LineMan <span class="arrow">→</span></a>
     </div>
 
     <div class="book-stage reveal reveal-delay-1">
@@ -2230,13 +2310,13 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   <div class="container">
     <div class="locations__head">
       <div class="reveal">
-        <span class="eyebrow">Four homes in Bangkok</span>
-        <h2 class="display-2" style="margin-top:18px;">Find your<br/><span class="serif-it">nearest.</span></h2>
-        <p style="margin-top: 20px;">The mall locations move faster; the Sukhumvit 40 original is where you slow down. Each carries the same DNA — dark wood, warm lighting, the counter you can sit at and watch coffee being made.</p>
+        <span class="eyebrow" data-i18n="locations.eyebrow">Four homes in Bangkok</span>
+        <h2 class="display-2" style="margin-top:18px;" data-i18n="locations.title">Find your<br/><span class="serif-it">nearest.</span></h2>
+        <p style="margin-top: 20px;" data-i18n="locations.sub">The mall locations move faster; the Sukhumvit 40 original is where you slow down. Each carries the same DNA — dark wood, warm lighting, the counter you can sit at and watch coffee being made.</p>
       </div>
       <div class="head-meta reveal reveal-delay-2">
-        <strong>Atlas · 2026</strong>
-        <span>Mapped to the half-degree.<br/>Live hours below.</span>
+        <strong data-i18n="locations.meta_label">Atlas · 2026</strong>
+        <span data-i18n="locations.meta_sub">Mapped to the half-degree.<br/>Live hours below.</span>
       </div>
     </div>
 
@@ -2246,7 +2326,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <div class="atlas-graphic">
         <span class="atlas-frame-tr"></span>
         <span class="atlas-frame-bl"></span>
-        <span class="atlas-graphic__label"><span class="arrow"></span>Central Bangkok</span>
+        <span class="atlas-graphic__label" data-i18n="locations.atlas_label"><span class="arrow"></span>Central Bangkok</span>
         <div class="atlas-graphic__compass">
           <div class="atlas-graphic__compass-arrow" aria-hidden="true"></div>
         </div>
@@ -2353,7 +2433,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           </div>
         </div>
 
-        <p class="atlas-graphic__caption">Bangkok · four addresses, one DNA.</p>
+        <p class="atlas-graphic__caption" data-i18n="locations.atlas_caption">Bangkok · four addresses, one DNA.</p>
       </div>
 
       <!-- ============ DIRECTORY (compact list) ============ -->
@@ -2365,7 +2445,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__body">
             <div class="dir-row__title">
               <h3>One Bangkok</h3>
-              <span class="dir-tag flagship">Flagship</span>
+              <span class="dir-tag flagship" data-i18n="locations.tag_flagship">Flagship</span>
             </div>
             <div class="dir-row__meta">
               <span class="district">Pathum Wan</span>
@@ -2375,11 +2455,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__actions" onclick="event.stopPropagation();">
             <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=One+Bangkok+Parade+Building+1877+Rama+IV+Rd+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to One Bangkok">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
-              <span class="dir-action__label">Directions</span>
+              <span class="dir-action__label" data-i18n="locations.action_directions">Directions</span>
             </a>
             <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+One+Bangkok" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from One Bangkok via LineMan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
-              <span class="dir-action__label">LineMan</span>
+              <span class="dir-action__label" data-i18n="locations.action_lineman">LineMan</span>
             </a>
           </div>
         </article>
@@ -2399,11 +2479,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__actions" onclick="event.stopPropagation();">
             <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=Siam+Paragon+Nextopia+5th+Floor+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Paragon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
-              <span class="dir-action__label">Directions</span>
+              <span class="dir-action__label" data-i18n="locations.action_directions">Directions</span>
             </a>
             <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Paragon" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Paragon via LineMan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
-              <span class="dir-action__label">LineMan</span>
+              <span class="dir-action__label" data-i18n="locations.action_lineman">LineMan</span>
             </a>
           </div>
         </article>
@@ -2423,11 +2503,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__actions" onclick="event.stopPropagation();">
             <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=Emsphere+628+Sukhumvit+Rd+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Emsphere">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
-              <span class="dir-action__label">Directions</span>
+              <span class="dir-action__label" data-i18n="locations.action_directions">Directions</span>
             </a>
             <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Emsphere" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Emsphere via LineMan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
-              <span class="dir-action__label">LineMan</span>
+              <span class="dir-action__label" data-i18n="locations.action_lineman">LineMan</span>
             </a>
           </div>
         </article>
@@ -2438,7 +2518,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__body">
             <div class="dir-row__title">
               <h3>Sukhumvit 40</h3>
-              <span class="dir-tag original">The Original</span>
+              <span class="dir-tag original" data-i18n="locations.tag_original">The Original</span>
             </div>
             <div class="dir-row__meta">
               <span class="district">Phra Khanong</span>
@@ -2448,18 +2528,18 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <div class="dir-row__actions" onclick="event.stopPropagation();">
             <a class="dir-action" href="https://www.google.com/maps/dir/?api=1&destination=4+Soi+Sukjai+Sukhumvit+40+Bangkok" target="_blank" rel="noopener" title="Directions" aria-label="Directions to Sukhumvit 40">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21.7 8.7l-6.4-6.4a1 1 0 0 0-1.4 0L2.3 13.9a1 1 0 0 0 0 1.4l6.4 6.4a1 1 0 0 0 1.4 0L21.7 10.1a1 1 0 0 0 0-1.4zM10 14l-3-3 3-3v2h4v2h-4v2z"/></svg>
-              <span class="dir-action__label">Directions</span>
+              <span class="dir-action__label" data-i18n="locations.action_directions">Directions</span>
             </a>
             <a class="dir-action fill" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE+Sukhumvit40" target="_blank" rel="noopener" title="Order via LineMan" aria-label="Order from Sukhumvit 40 via LineMan">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M2 3h3l3.4 12.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21.8 8H6"/></svg>
-              <span class="dir-action__label">LineMan</span>
+              <span class="dir-action__label" data-i18n="locations.action_lineman">LineMan</span>
             </a>
           </div>
         </article>
 
         <div class="atlas-foot">
-          <span><span class="stars">★★★★★</span> 4.9 average · 544+ Google reviews</span>
-          <a href="#order">Order delivery via LineMan / Grab →</a>
+          <span data-i18n="locations.review_count"><span class="stars">★★★★★</span> 4.9 average · 544+ Google reviews</span>
+          <a href="#order" data-i18n="locations.order_link">Order delivery via LineMan / Grab →</a>
         </div>
 
       </div>
@@ -2473,8 +2553,8 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 <section class="press" id="reviews">
   <div class="press__inner">
 
-    <span class="press__eyebrow reveal">What guests say</span>
-    <h2 class="press__heading reveal reveal-delay-1">Warm, inviting, comfortable —<br/><span class="serif-it">and a place to slow down.</span></h2>
+    <span class="press__eyebrow reveal" data-i18n="press.eyebrow">What guests say</span>
+    <h2 class="press__heading reveal reveal-delay-1" data-i18n="press.title">Warm, inviting, comfortable —<br/><span class="serif-it">and a place to slow down.</span></h2>
 
     <!-- The Award — Google rating hero -->
     <div class="press__award reveal reveal-delay-2">
@@ -2491,7 +2571,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
           </svg>
         </span>
-        <span>Verified on Google</span>
+        <span data-i18n="press.badge">Verified on Google</span>
       </span>
 
       <div class="press__award-score">
@@ -2502,9 +2582,9 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <div class="press__award-stars" aria-label="5 out of 5 stars">★★★★★</div>
 
       <div class="press__award-meta">
-        <span><strong>544</strong> Google reviews</span>
+        <span data-i18n="press.meta_reviews"><strong>544</strong> Google reviews</span>
         <span class="dot"></span>
-        <em>One Bangkok flagship</em>
+        <em data-i18n="press.meta_loc">One Bangkok flagship</em>
       </div>
     </div>
 
@@ -2514,9 +2594,9 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <article class="quote-card">
         <div class="quote-card__top">
           <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
-          <span class="quote-card__when">3 weeks ago</span>
+          <span class="quote-card__when" data-i18n="press.q1_when">3 weeks ago</span>
         </div>
-        <blockquote>Great coffee, many options, cozy and comfortable atmosphere — and great hospitality.</blockquote>
+        <blockquote data-i18n="press.q1">Great coffee, many options, cozy and comfortable atmosphere — and great hospitality.</blockquote>
         <div class="quote-card__attr">
           <span class="quote-card__avatar" aria-hidden="true">A</span>
           <div class="quote-card__attr-body">
@@ -2524,10 +2604,10 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
               A. K.
               <span class="quote-card__local-guide" title="Google Local Guide">
                 <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 17 5.5 21 7.5 13.5 2 9 9 9"/></svg>
-                Local Guide
+                <span data-i18n="press.local_guide">Local Guide</span>
               </span>
             </span>
-            <span class="quote-card__attr-meta">One Bangkok · 47 reviews</span>
+            <span class="quote-card__attr-meta" data-i18n="press.q1_meta">One Bangkok · 47 reviews</span>
           </div>
         </div>
       </article>
@@ -2535,9 +2615,9 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <article class="quote-card">
         <div class="quote-card__top">
           <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
-          <span class="quote-card__when">A month ago</span>
+          <span class="quote-card__when" data-i18n="press.q2_when">A month ago</span>
         </div>
-        <blockquote>Service is extraordinary, with real product knowledge from the staff. The drip pours are unhurried.</blockquote>
+        <blockquote data-i18n="press.q2">Service is extraordinary, with real product knowledge from the staff. The drip pours are unhurried.</blockquote>
         <div class="quote-card__attr">
           <span class="quote-card__avatar" aria-hidden="true">S</span>
           <div class="quote-card__attr-body">
@@ -2545,10 +2625,10 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
               S. P.
               <span class="quote-card__local-guide" title="Google Local Guide">
                 <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 17 5.5 21 7.5 13.5 2 9 9 9"/></svg>
-                Local Guide
+                <span data-i18n="press.local_guide">Local Guide</span>
               </span>
             </span>
-            <span class="quote-card__attr-meta">Sukhumvit 40 · 8 reviews</span>
+            <span class="quote-card__attr-meta" data-i18n="press.q2_meta">Sukhumvit 40 · 8 reviews</span>
           </div>
         </div>
       </article>
@@ -2556,14 +2636,14 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <article class="quote-card">
         <div class="quote-card__top">
           <span class="quote-card__stars" aria-label="5 stars">★★★★★</span>
-          <span class="quote-card__when">Editorial</span>
+          <span class="quote-card__when" data-i18n="press.q3_when">Editorial</span>
         </div>
-        <blockquote>A delightful coffee shop in the heart of Bangkok. Minimalist home-style design — warm, inviting, comfortable.</blockquote>
+        <blockquote data-i18n="press.q3">A delightful coffee shop in the heart of Bangkok. Minimalist home-style design — warm, inviting, comfortable.</blockquote>
         <div class="quote-card__attr">
           <span class="quote-card__avatar" aria-hidden="true">W</span>
           <div class="quote-card__attr-body">
             <span class="quote-card__attr-name">Wanderlog</span>
-            <span class="quote-card__attr-meta">Bangkok travel guide · 2025</span>
+            <span class="quote-card__attr-meta" data-i18n="press.q3_meta">Bangkok travel guide · 2025</span>
           </div>
         </div>
       </article>
@@ -2571,11 +2651,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
     </div>
 
     <p class="press__hint" aria-hidden="true">
-      <span class="dash"></span>Swipe for more reviews<span class="dash"></span>
+      <span class="dash"></span><span data-i18n="press.swipe_hint">Swipe for more reviews</span><span class="dash"></span>
     </p>
 
     <a class="press__cta reveal reveal-delay-4" href="https://www.google.com/maps/place/A+KEEN+HOUSE+One+Bangkok/" target="_blank" rel="noopener">
-      Read all 544 reviews on Google
+      <span data-i18n="press.cta">Read all 544 reviews on Google</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M9 7h8v8"/></svg>
     </a>
 
@@ -2589,10 +2669,10 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   <div class="container">
     <div class="order__head">
       <div class="reveal">
-        <span class="eyebrow">Bring it home</span>
-        <h2 class="display-2">Can't make it<br/><span class="serif-it">out today?</span></h2>
+        <span class="eyebrow" data-i18n="order.eyebrow">Bring it home</span>
+        <h2 class="display-2" data-i18n="order.title">Can't make it<br/><span class="serif-it">out today?</span></h2>
       </div>
-      <p class="reveal reveal-delay-2">Order in. The full menu is on LineMan and Grab — delivery hours follow each shop.</p>
+      <p class="reveal reveal-delay-2" data-i18n="order.sub">Order in. The full menu is on LineMan and Grab — delivery hours follow each shop.</p>
     </div>
 
     <div class="order-pair reveal reveal-delay-1">
@@ -2600,15 +2680,15 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <!-- 01 · LineMan (light card) -->
       <a class="order-hero" href="https://lineman.line.me/restaurant/search?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener" data-letter="L">
         <div class="order-hero__top">
-          <span class="order-hero__num">Delivery · 01</span>
-          <span class="order-hero__badge">All 4 locations</span>
+          <span class="order-hero__num" data-i18n="order.lineman.num">Delivery · 01</span>
+          <span class="order-hero__badge" data-i18n="order.lineman.badge">All 4 locations</span>
         </div>
         <div class="order-hero__body">
           <h3 class="order-hero__name">LineMan</h3>
-          <p class="order-hero__cover">All four locations · live throughout shop hours.</p>
+          <p class="order-hero__cover" data-i18n="order.lineman.cover">All four locations · live throughout shop hours.</p>
         </div>
         <div class="order-hero__foot">
-          <span class="order-hero__cta">Open in LineMan</span>
+          <span class="order-hero__cta" data-i18n="order.lineman.cta">Open in LineMan</span>
           <span class="order-hero__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </span>
@@ -2618,15 +2698,15 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       <!-- 02 · Grab (dark card for contrast) -->
       <a class="order-hero order-hero--dark" href="https://food.grab.com/th/en/restaurants?keyword=A+KEEN+HOUSE" target="_blank" rel="noopener" data-letter="G">
         <div class="order-hero__top">
-          <span class="order-hero__num">Delivery · 02</span>
-          <span class="order-hero__badge">Sukh.40 · One Bkk</span>
+          <span class="order-hero__num" data-i18n="order.grab.num">Delivery · 02</span>
+          <span class="order-hero__badge" data-i18n="order.grab.badge">Sukh.40 · One Bkk</span>
         </div>
         <div class="order-hero__body">
           <h3 class="order-hero__name">Grab Food</h3>
-          <p class="order-hero__cover">Sukhumvit 40 + One Bangkok · same menu, faster pick-up.</p>
+          <p class="order-hero__cover" data-i18n="order.grab.cover">Sukhumvit 40 + One Bangkok · same menu, faster pick-up.</p>
         </div>
         <div class="order-hero__foot">
-          <span class="order-hero__cta">Open in Grab</span>
+          <span class="order-hero__cta" data-i18n="order.grab.cta">Open in Grab</span>
           <span class="order-hero__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </span>
@@ -2636,14 +2716,14 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
     </div>
 
     <div class="order-secondary reveal reveal-delay-3">
-      <span class="order-secondary__label">Or reach us —</span>
+      <span class="order-secondary__label" data-i18n="order.sec_label">Or reach us —</span>
       <div class="order-mini-grid">
         <a class="order-mini" href="https://line.me/R/ti/p/@akeenhouse" target="_blank" rel="noopener">
           <span class="order-mini__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </span>
           <span class="order-mini__body">
-            <span class="order-mini__label">Direct chat</span>
+            <span class="order-mini__label" data-i18n="order.mini.line.label">Direct chat</span>
             <span class="order-mini__name">LINE</span>
           </span>
           <span class="order-mini__arrow" aria-hidden="true">↗</span>
@@ -2653,7 +2733,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.1 8.8 22 9.7 17 14.7 18.2 21.6 12 18.3 5.8 21.6 7 14.7 2 9.7 8.9 8.8 12 2"/></svg>
           </span>
           <span class="order-mini__body">
-            <span class="order-mini__label">Reviews · Book</span>
+            <span class="order-mini__label" data-i18n="order.mini.wong.label">Reviews · Book</span>
             <span class="order-mini__name">Wongnai</span>
           </span>
           <span class="order-mini__arrow" aria-hidden="true">↗</span>
@@ -2663,7 +2743,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
           </span>
           <span class="order-mini__body">
-            <span class="order-mini__label">All links</span>
+            <span class="order-mini__label" data-i18n="order.mini.tree.label">All links</span>
             <span class="order-mini__name">Linktree</span>
           </span>
           <span class="order-mini__arrow" aria-hidden="true">↗</span>
@@ -2680,9 +2760,9 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
   <div class="container">
     <div class="feed__head">
       <div class="reveal">
-        <span class="eyebrow">Latest from the counter</span>
-        <h2 class="display-2" style="margin-top:18px;">Follow along.</h2>
-        <p>The IG feed is the design system — pours, plates, and the spaces in between. 47K and growing.</p>
+        <span class="eyebrow" data-i18n="feed.eyebrow">Latest from the counter</span>
+        <h2 class="display-2" style="margin-top:18px;" data-i18n="feed.title">Follow along.</h2>
+        <p data-i18n="feed.sub">The IG feed is the design system — pours, plates, and the spaces in between. 47K and growing.</p>
       </div>
       <a class="feed__handle reveal reveal-delay-1" href="https://instagram.com/akeenhouse" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
@@ -2719,7 +2799,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
           <path d="M14 50 L32 12 L50 50 M22 38 L42 38" stroke="var(--cream)" stroke-width="3.5" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
         </svg>
         <h3>A KEEN HOUSE</h3>
-        <p>Specialty coffee, open sandwiches, and a quieter way to spend the afternoon — across four homes in Bangkok.</p>
+        <p data-i18n="foot.brand_blurb">Specialty coffee, open sandwiches, and a quieter way to spend the afternoon — across four homes in Bangkok.</p>
 
         <div class="socials">
           <a href="https://instagram.com/akeenhouse" target="_blank" rel="noopener" aria-label="Instagram">
@@ -2738,7 +2818,7 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       </div>
 
       <div class="foot__col">
-        <h4>Locations</h4>
+        <h4 data-i18n="foot.col_locations">Locations</h4>
         <ul>
           <li><a href="#locations">One Bangkok</a></li>
           <li><a href="#locations">Paragon</a></li>
@@ -2748,17 +2828,17 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       </div>
 
       <div class="foot__col">
-        <h4>Visit</h4>
+        <h4 data-i18n="foot.col_visit">Visit</h4>
         <ul>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#order">Order delivery</a></li>
-          <li><a href="#story">Our story</a></li>
-          <li><a href="#feed">Instagram feed</a></li>
+          <li><a href="#menu" data-i18n="foot.link_menu">Menu</a></li>
+          <li><a href="#order" data-i18n="foot.link_order">Order delivery</a></li>
+          <li><a href="#story" data-i18n="foot.link_story">Our story</a></li>
+          <li><a href="#feed" data-i18n="foot.link_feed">Instagram feed</a></li>
         </ul>
       </div>
 
       <div class="foot__col">
-        <h4>Contact</h4>
+        <h4 data-i18n="foot.col_contact">Contact</h4>
         <ul>
           <li><a href="tel:+66859090770">+66 85 909 0770</a></li>
           <li><a href="tel:+66994366535">+66 99 436 6535</a></li>
@@ -2770,11 +2850,11 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
     </div>
 
     <div class="foot__base">
-      <div>© <span id="year">2026</span> A KEEN HOUSE. All rights reserved. · <span class="serif-it">Brewed to Perfection.</span></div>
+      <div>© <span id="year">2026</span> A KEEN HOUSE. <span data-i18n="foot.copyright">All rights reserved. ·</span> <span class="serif-it" data-i18n="foot.tagline">Brewed to Perfection.</span></div>
       <div class="legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Press</a>
+        <a href="#" data-i18n="foot.privacy">Privacy</a>
+        <a href="#" data-i18n="foot.terms">Terms</a>
+        <a href="#" data-i18n="foot.press">Press</a>
       </div>
     </div>
   </div>
@@ -2839,7 +2919,18 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
       if(titleEl && !titleEl.querySelector('.dir-status-pill')){
         const pill = document.createElement('span');
         pill.className = 'dir-status-pill';
-        pill.innerHTML = `<span class="dot" aria-hidden="true"></span>${isOpen ? 'Open · ' : 'Closed · '}${fmtHrs(open)}–${fmtHrs(close)}`;
+        // i18n-aware label key
+        pill.dataset.i18n = isOpen ? 'status.open_pill' : 'status.closed_pill';
+        const lang = document.documentElement.lang || 'en';
+        const dict = (window.i18nDict && window.i18nDict[lang]) || {};
+        const labelEn = isOpen ? 'Open · ' : 'Closed · ';
+        const labelKey = isOpen ? 'status.open' : 'status.closed';
+        const labelText = (dict[labelKey] !== undefined) ? dict[labelKey] : labelEn;
+        pill.innerHTML = `<span class="dot" aria-hidden="true"></span>${labelText}${fmtHrs(open)}–${fmtHrs(close)}`;
+        // Mark hours range so refresh on lang change can re-render
+        pill.dataset.open = open;
+        pill.dataset.close = close;
+        pill.dataset.state = isOpen ? 'open' : 'closed';
         titleEl.appendChild(pill);
       }
     });
@@ -2970,6 +3061,171 @@ section.tight{ padding: clamp(56px, 7vw, 96px) 0; }
 
     if(document.readyState === 'complete') ready();
     else window.addEventListener('load', ready);
+  })();
+
+  /* =========================================================
+     i18n — EN / TH bilingual toggle
+     ========================================================= */
+  (function initI18n(){
+    // Dictionary — keys mirror data-i18n attributes. Missing keys fall back to EN.
+    window.i18nDict = {
+      en: {}, // English: original DOM content is preserved & restored
+      th: {
+        // Nav
+        'nav.story':       'เรื่องของเรา',
+        'nav.menu':        'เมนู',
+        'nav.locations':   'สาขา',
+        'nav.order':       'สั่งซื้อ',
+        'nav.feed':        'อินสตาแกรม',
+        'nav.cta':         'หาสาขาใกล้คุณ →',
+        // Hero
+        'hero.top1':       'จากกรุงเทพฯ',
+        'hero.top2':       'สี่บ้าน · หนึ่งปรัชญา',
+        'hero.title':      'ชงด้วยใจ<br/><em>พิถีพิถัน</em>',
+        'hero.sub':        'กาแฟพิเศษ ขนมปังหน้าเปิด และพื้นที่สำหรับช่วงเวลาที่ดี — สี่สาขาในกรุงเทพมหานคร',
+        'hero.cta1':       'หาสาขาใกล้คุณ <span class="arrow">→</span>',
+        'hero.cta2':       'ดูเมนู',
+        'hero.scroll':     'เลื่อนลง',
+        // Story
+        'story.eyebrow':   'บ้านของเรา',
+        'story.title':     'คาเฟ่หนึ่ง · สี่บ้านในกรุงเทพ',
+        'story.lede':      'A KEEN HOUSE เริ่มต้นจากคาเฟ่เล็ก ๆ บนซอยสุขใจ ซุกตัวอยู่ในสุขุมวิท 40',
+        'story.p1':        'จากเมล็ดกาแฟคัดมือไม่กี่เมล็ดและครัวเปิด เราเติบโตเป็นสี่บ้านในกรุงเทพ — One Bangkok, Paragon, Emsphere และสาขาแรก — แต่ปรัชญายังคงเดิม: <span class="serif-it">กาแฟพิถีพิถัน อาหารพิถีพิถัน พื้นที่พิถีพิถัน</span>',
+        'story.p2':        'Burnt Caramel Latte กลายเป็นเครื่องดื่ม Signature โดยบังเอิญ Macadamia White Chocolate Hojicha Latte และ Coconut Cream Matcha คือเหตุผลที่คอกาแฟกลับมา ส่วนอาหารนั้น Open Sandwich ให้ความสำคัญกับวัตถุดิบเต็มที่ — เห็ดผัดเนย ฟักทองอบ และ Classic Brekkie ของหวานเน้นเรียบหรู: Lemon Crème Brûlée และ Red Wine Poached Pear',
+        'story.p3':        'ทุกสาขามี DNA เดียวกัน — ไม้สีเข้ม แสงอุ่น เส้นแนวตั้ง เคาน์เตอร์ที่นั่งดูบาริสต้าชงกาแฟได้ — แต่ปรับให้เข้ากับที่ตั้ง สาขาห้างจังหวะเร็วกว่า สุขุมวิท 40 คือที่ที่คุณจะช้าลง',
+        'story.badge':     'หลังเคาน์เตอร์ · A KEEN HOUSE',
+        // Menu
+        'menu.eyebrow':    'เมนู · ฉบับปี 2026',
+        'menu.title':      'เปิดเล่มเมนู<br/><span class="serif-it">จากเมล็ดถึงเนย</span>',
+        'menu.sub':        'เมนูครบของ A KEEN HOUSE — ของหวาน Bread &amp; Paste สลัด ซุป Open Sandwich เครื่องดื่ม และของฝาก ลากมุมหน้า สไวป์ หรือกดลูกศร',
+        'menu.cta':        'สั่งเมนูเต็มผ่าน LineMan <span class="arrow">→</span>',
+        // Locations
+        'locations.eyebrow':       'สี่บ้านในกรุงเทพ',
+        'locations.title':         'หา<br/><span class="serif-it">สาขาใกล้คุณ</span>',
+        'locations.sub':           'สาขาห้างจังหวะเร็วกว่า สุขุมวิท 40 คือที่ที่คุณจะช้าลง ทุกสาขามี DNA เดียวกัน — ไม้สีเข้ม แสงอุ่น เคาน์เตอร์ที่ดูบาริสต้าชงกาแฟได้',
+        'locations.meta_label':    'แผนที่ · 2026',
+        'locations.meta_sub':      'ระบุพิกัดละเอียด<br/>เวลาเปิดด้านล่าง',
+        'locations.atlas_label':   '<span class="arrow"></span>ใจกลางกรุงเทพ',
+        'locations.atlas_caption': 'กรุงเทพ · สี่ที่อยู่ หนึ่ง DNA',
+        'locations.review_count':  '<span class="stars">★★★★★</span> เฉลี่ย 4.9 · 544+ รีวิวบน Google',
+        'locations.order_link':    'สั่งจัดส่งผ่าน LineMan / Grab →',
+        'locations.tag_flagship':  'Flagship',
+        'locations.tag_original':  'สาขาแรก',
+        'locations.action_directions': 'นำทาง',
+        'locations.action_lineman':    'LineMan',
+        'status.open':             'เปิด · ',
+        'status.closed':           'ปิด · ',
+        // Reviews / press
+        'press.eyebrow':           'รีวิวจากลูกค้า',
+        'press.title':             'อบอุ่น สบาย น่าอยู่ —<br/><span class="serif-it">และเป็นที่ให้คุณช้าลง</span>',
+        'press.badge':             'ตรวจสอบบน Google',
+        'press.meta_reviews':      '<strong>544</strong> รีวิวบน Google',
+        'press.meta_loc':          'สาขา One Bangkok',
+        'press.cta':               'อ่านรีวิวทั้ง 544 อันบน Google',
+        'press.swipe_hint':        'สไวป์ดูรีวิวเพิ่ม',
+        'press.q1':                'กาแฟดี เลือกได้หลายแบบ บรรยากาศอบอุ่น นั่งสบาย และพนักงานน่ารักมาก',
+        'press.q1_when':           '3 สัปดาห์ที่แล้ว',
+        'press.q1_meta':           'One Bangkok · 47 รีวิว',
+        'press.q2':                'บริการดีเยี่ยม พนักงานรู้เรื่องเครื่องดื่มอย่างละเอียด การชง drip ใส่ใจมาก',
+        'press.q2_when':           'เดือนที่แล้ว',
+        'press.q2_meta':           'สุขุมวิท 40 · 8 รีวิว',
+        'press.q3':                'คาเฟ่น่ารักใจกลางกรุงเทพ ดีไซน์มินิมัลแบบบ้าน — อบอุ่น สบาย น่าอยู่',
+        'press.q3_when':           'บทความ',
+        'press.q3_meta':           'Bangkok travel guide · 2025',
+        'press.local_guide':       'Local Guide',
+        // Order
+        'order.eyebrow':           'สั่งกลับบ้าน',
+        'order.title':             'มาไม่ได้วันนี้?<br/><span class="serif-it">สั่งกลับบ้านได้</span>',
+        'order.sub':                'สั่งเดลิเวอรี่ผ่าน LineMan และ Grab — เปิดตามเวลาทำการของแต่ละสาขา',
+        'order.lineman.num':       'เดลิเวอรี่ · 01',
+        'order.lineman.badge':     'ครบทุก 4 สาขา',
+        'order.lineman.cover':     'ทั้ง 4 สาขา · เปิดตลอดเวลาทำการ',
+        'order.lineman.cta':       'เปิดใน LineMan',
+        'order.grab.num':          'เดลิเวอรี่ · 02',
+        'order.grab.badge':        'สุขุมวิท 40 · One Bkk',
+        'order.grab.cover':        'สุขุมวิท 40 + One Bangkok · เมนูเหมือนกัน รับเร็วกว่า',
+        'order.grab.cta':          'เปิดใน Grab',
+        'order.sec_label':         'หรือติดต่อทาง —',
+        'order.mini.line.label':   'แชทตรง',
+        'order.mini.wong.label':   'รีวิว · จองโต๊ะ',
+        'order.mini.tree.label':   'ลิงก์ทั้งหมด',
+        // Feed
+        'feed.eyebrow':            'อัปเดตล่าสุดจากเคาน์เตอร์',
+        'feed.title':              'ติดตามเรา',
+        'feed.sub':                'IG feed คือ design system ของเรา — การชง จาน และพื้นที่ระหว่างนั้น 47K และยังเพิ่มขึ้นเรื่อย ๆ',
+        // Footer
+        'foot.brand_blurb':        'กาแฟพิเศษ ขนมปังหน้าเปิด และพื้นที่สำหรับช่วงเวลาที่ดี — สี่บ้านในกรุงเทพ',
+        'foot.col_locations':      'สาขา',
+        'foot.col_visit':          'เยี่ยมชม',
+        'foot.col_contact':        'ติดต่อ',
+        'foot.link_menu':          'เมนู',
+        'foot.link_order':         'สั่งเดลิเวอรี่',
+        'foot.link_story':         'เรื่องของเรา',
+        'foot.link_feed':          'Instagram feed',
+        'foot.copyright':          'สงวนลิขสิทธิ์ ·',
+        'foot.tagline':            'ชงด้วยใจ',
+        'foot.privacy':            'นโยบายความเป็นส่วนตัว',
+        'foot.terms':              'ข้อตกลง',
+        'foot.press':              'ข่าวสาร',
+      }
+    };
+
+    // Cache original (English) HTML once
+    const cache = new Map();
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      cache.set(el, el.innerHTML);
+    });
+
+    const STORAGE_KEY = 'akh_lang';
+    function setLang(lang){
+      if(!['en','th'].includes(lang)) lang = 'en';
+      document.documentElement.lang = lang;
+      document.body.dataset.lang = lang;
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch(e){}
+      const dict = window.i18nDict[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if(lang === 'en'){
+          el.innerHTML = cache.get(el);
+        } else if(dict[key] !== undefined){
+          el.innerHTML = dict[key];
+        } else {
+          // No TH translation — keep English fallback
+          el.innerHTML = cache.get(el);
+        }
+      });
+
+      // Re-render status pills (they have non-i18n hours but i18n labels)
+      document.querySelectorAll('.dir-status-pill').forEach(pill => {
+        const open  = pill.dataset.open;
+        const close = pill.dataset.close;
+        const state = pill.dataset.state;
+        if(!open || !close) return;
+        const labelEn = state === 'open' ? 'Open · ' : 'Closed · ';
+        const labelKey = state === 'open' ? 'status.open' : 'status.closed';
+        const label = dict[labelKey] !== undefined ? dict[labelKey] : labelEn;
+        const fmt = (s) => s.replace(/^0/, '');
+        pill.innerHTML = `<span class="dot" aria-hidden="true"></span>${label}${fmt(open)}–${fmt(close)}`;
+      });
+
+      // Update lang switcher UI states
+      document.querySelectorAll('.lang-switch__opt, .mobile-lang__opt').forEach(opt => {
+        opt.classList.toggle('is-active', opt.dataset.lang === lang);
+      });
+    }
+
+    // Wire up click handlers
+    document.querySelectorAll('.lang-switch__opt, .mobile-lang__opt').forEach(opt => {
+      opt.addEventListener('click', () => setLang(opt.dataset.lang));
+    });
+
+    // Initial lang — saved → English by default
+    let initial = 'en';
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(saved && ['en','th'].includes(saved)) initial = saved;
+    } catch(e){}
+    setLang(initial);
   })();
 </script>
 
